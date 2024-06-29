@@ -35,14 +35,14 @@ export default function ExercisesSearchInput() {
   const handleSelect = useCallback(
     (key: React.Key) => {
       if (key) {
-      key = key.toString()
-      setSelectedExercise(key)
-      const params = new URLSearchParams(searchParams)
+        key = key.toString()
+        setSelectedExercise(key)
+        const params = new URLSearchParams(searchParams)
 
-  
         params.set('exerciseId', key)
-      
-      replace(`${pathname}?${params.toString()}`, {scroll: false})}
+
+        replace(`${pathname}?${params.toString()}`, { scroll: false })
+      }
     },
     [replace, searchParams, pathname]
   )

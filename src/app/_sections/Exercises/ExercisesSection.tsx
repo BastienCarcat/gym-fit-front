@@ -1,9 +1,10 @@
 import React, { Suspense, useMemo } from 'react'
 
+import LoadingExercise from './loading'
+
 import ExercisesSearchInput from '@/app/_sections/Exercises/Components/SearchInput'
 import ExerciseCard from '@/app/_sections/Exercises/Components/Card/Card'
 import { SearchParamsHome } from '@/types/home/SearchParams'
-import LoadingExercise from './loading'
 
 export default async function ExercisesSection({
   searchParams
@@ -20,7 +21,7 @@ export default async function ExercisesSection({
         <ExercisesSearchInput />
       </div>
       <div className="w-full pt-28">
-        <Suspense key={exerciseId} fallback={<LoadingExercise/>}>
+        <Suspense key={exerciseId} fallback={<LoadingExercise />}>
           <ExerciseCard exerciseId={exerciseId} />
         </Suspense>
       </div>

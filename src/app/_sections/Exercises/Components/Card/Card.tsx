@@ -1,9 +1,10 @@
 import React from 'react'
 import { Divider } from '@nextui-org/react'
+import _ from 'lodash'
+
+import ExerciseList from './ExerciseList'
 
 import fetchApi from '@/tools/fetchApi'
-import _ from 'lodash'
-import ExerciseList from './ExerciseList'
 
 type Muscle = {
   heads: string[]
@@ -33,8 +34,6 @@ export default async function ExerciseCard({
       .value()
   }
 
-
-
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow">
       <div className="flex items-end gap-3">
@@ -45,58 +44,52 @@ export default async function ExerciseCard({
       </div>
 
       <div className="mt-1 text-xs text-gray-900">
-      {_.get(exercise, 'muscles.Target.length') > 0 && (
-   <div className="flex items-start gap-1">
-          <div className="text-nowrap font-bold">Target :</div>
-          <div>{getMuscles(_.get(exercise, 'muscles.Target'))}</div>
-        </div>
+        {_.get(exercise, 'muscles.Target.length') > 0 && (
+          <div className="flex items-start gap-1">
+            <div className="text-nowrap font-bold">Target :</div>
+            <div>{getMuscles(_.get(exercise, 'muscles.Target'))}</div>
+          </div>
         )}
-     
-     {_.get(exercise, 'muscles.Synergist.length') > 0 && (
-            <div className="flex items-start gap-1">
-          <div className="text-nowrap font-bold">Synergist :</div>
-          <div>{getMuscles(_.get(exercise, 'muscles.Synergist'))}</div>
-        </div>
+
+        {_.get(exercise, 'muscles.Synergist.length') > 0 && (
+          <div className="flex items-start gap-1">
+            <div className="text-nowrap font-bold">Synergist :</div>
+            <div>{getMuscles(_.get(exercise, 'muscles.Synergist'))}</div>
+          </div>
         )}
-      
+
         {_.get(exercise, 'muscles.Stabilizer.length') > 0 && (
-           <div className="flex items-start gap-1">
-          <div className="text-nowrap font-bold">Stabilizer :</div>
-          <div>{getMuscles(_.get(exercise, 'muscles.Stabilizer'))}</div>
-        </div>
+          <div className="flex items-start gap-1">
+            <div className="text-nowrap font-bold">Stabilizer :</div>
+            <div>{getMuscles(_.get(exercise, 'muscles.Stabilizer'))}</div>
+          </div>
         )}
-       
       </div>
 
       <Divider className="my-2" />
       <div className="mt-5 flex gap-6">
         <div className="flex gap-6">
-          <div className='min-w-48'>
+          <div className="min-w-48">
             <div className="text-lg font-bold">Alternatives</div>
 
-            {
-      exercise.alternatives.length > 0 ? (
-        <ExerciseList exercises={exercise.alternatives} />
-      ) : (
-        <div className='text-center text-gray-500 py-3'>No alternatives</div>
-      )
-
-    }
-
-          
+            {exercise.alternatives.length > 0 ? (
+              <ExerciseList exercises={exercise.alternatives} />
+            ) : (
+              <div className="py-3 text-center text-gray-500">
+                No alternatives
+              </div>
+            )}
 
             <Divider className="my-3" />
 
             <div className="text-lg font-bold">Variations</div>
-            {
-      exercise.variations.length > 0 ? (
-        <ExerciseList exercises={exercise.variations} />
-      ) : (
-        <div className='text-center text-gray-500 py-3'>No variations</div>
-      )
-
-    }
-            
+            {exercise.variations.length > 0 ? (
+              <ExerciseList exercises={exercise.variations} />
+            ) : (
+              <div className="py-3 text-center text-gray-500">
+                No variations
+              </div>
+            )}
           </div>
 
           <Divider orientation="vertical" />
@@ -113,15 +106,15 @@ export default async function ExerciseCard({
                     <div className="relative pb-8">
                       {index + 1 !== exercise.instructions.length && (
                         <span
-                          className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"
                           aria-hidden="true"
+                          className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"
                         />
                       )}
 
                       <div className="relative flex space-x-3">
                         <div>
                           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white">
-                            <div className="text-md h-5 w-5 flex items-center justify-center font-medium text-white">
+                            <div className="text-md flex h-5 w-5 items-center justify-center font-medium text-white">
                               {instruction.order}
                             </div>
                           </span>
