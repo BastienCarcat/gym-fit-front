@@ -4,7 +4,7 @@ export default function LoadingExercise() {
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow">
       <div className="flex items-end gap-3">
-        <Skeleton className="h-8 w-1/2 rounded-md" />
+        <Skeleton className="h-8 w-96 rounded-md" />
       </div>
 
       <div className="mt-3 text-xs text-gray-900">
@@ -17,9 +17,12 @@ export default function LoadingExercise() {
       </div>
 
       <Divider className="my-2" />
-      <div className="mt-5 flex gap-6">
-        <div className="flex gap-6">
-          <div className="min-w-48">
+      <div className="mt-5 flex flex-col-reverse gap-6 md:flex-row">
+        <div className='flex'>
+
+       
+          <div className="flex w-full min-w-48 flex-col sm:flex-row md:flex-col">
+          <div className="flex-1">
             <Skeleton className="h-6 w-24 rounded-md" />
 
             <div className="mt-3">
@@ -27,19 +30,25 @@ export default function LoadingExercise() {
               <Skeleton className="mt-2 h-5 w-full rounded-md" />
               <Skeleton className="mt-2 h-5 w-full rounded-md" />
             </div>
-
-            <Divider className="my-3" />
-
+            </div>
+            <hr
+              className="mx-0 my-3 h-divider w-full shrink-0 border-none bg-divider sm:mx-5 sm:my-0 sm:h-full sm:w-divider md:mx-0 md:my-3 md:h-divider md:w-full"
+              role="separator"
+            />
+<div className="flex-1">
             <Skeleton className="h-6 w-24 rounded-md" />
-
+            
             <div className="mt-3">
               <Skeleton className="h-5 w-full rounded-md" />
               <Skeleton className="mt-2 h-5 w-full rounded-md" />
             </div>
           </div>
-
-          <Divider orientation="vertical" />
-        </div>
+          </div>
+          </div>
+          <div
+          className="h-divider w-full shrink-0 border-none bg-divider md:h-auto md:w-divider"
+          role="separator"
+        />
 
         <div className="flex-1">
           <Skeleton className="h-6 w-24 rounded-md" />
@@ -47,12 +56,12 @@ export default function LoadingExercise() {
           <div className="p-3">
             <ul role="list">
               {Array.from({ length: 3 }).map((_, index) => (
-                <li key={index}>
-                  <div className="relative pb-8">
+                <li key={index} className='pb-8 last:pb-0'>
+                  <div className="relative ">
                     {index + 1 !== 3 && (
                       <span
                         aria-hidden="true"
-                        className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"
+                        className="absolute left-4 top-5 -ml-px h-full w-0.5 bg-gray-200"
                       />
                     )}
 

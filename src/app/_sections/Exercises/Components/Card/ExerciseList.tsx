@@ -33,7 +33,7 @@ export default function ExerciseList({
       {exercises.map((exercise) => (
         <div key={exercise.id} className="flex">
           <button
-            className="mt-1 w-full rounded-md px-2 text-start text-sm hover:bg-gray-100"
+            className="w-full rounded-md px-2 py-[2px] text-start text-sm hover:bg-gray-100"
             onClick={() => handleSelect(exercise.id)}
           >
             {exercise.name}

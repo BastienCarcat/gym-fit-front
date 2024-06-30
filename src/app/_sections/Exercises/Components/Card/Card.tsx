@@ -67,34 +67,42 @@ export default async function ExerciseCard({
       </div>
 
       <Divider className="my-2" />
-      <div className="mt-5 flex gap-6">
-        <div className="flex gap-6">
-          <div className="min-w-48">
-            <div className="text-lg font-bold">Alternatives</div>
+      <div className="mt-5 flex flex-col-reverse gap-6 md:flex-row">
+      <div className="flex">
+          <div className="flex w-full min-w-48 flex-col sm:flex-row md:flex-col">
+            <div className="flex-1">
+              <div className="text-lg font-bold">Alternatives</div>
 
-            {exercise.alternatives.length > 0 ? (
-              <ExerciseList exercises={exercise.alternatives} />
-            ) : (
-              <div className="py-3 text-center text-gray-500">
-                No alternatives
-              </div>
-            )}
+              {exercise.alternatives.length > 0 ? (
+                <ExerciseList exercises={exercise.alternatives} />
+              ) : (
+                <div className="py-3 text-center text-gray-500">
+                  No alternatives
+                </div>
+              )}
+            </div>
 
-            <Divider className="my-3" />
+            <hr
+              className="mx-0 my-3 h-divider w-full shrink-0 border-none bg-divider sm:mx-5 sm:my-0 sm:h-full sm:w-divider md:mx-0 md:my-3 md:h-divider md:w-full"
+              role="separator"
+            />
 
-            <div className="text-lg font-bold">Variations</div>
-            {exercise.variations.length > 0 ? (
-              <ExerciseList exercises={exercise.variations} />
-            ) : (
-              <div className="py-3 text-center text-gray-500">
-                No variations
-              </div>
-            )}
+            <div className="flex-1">
+              <div className="text-lg font-bold">Variations</div>
+              {exercise.variations.length > 0 ? (
+                <ExerciseList exercises={exercise.variations} />
+              ) : (
+                <div className="py-3 text-center text-gray-500">
+                  No variations
+                </div>
+              )}
+            </div>
           </div>
-
-          <Divider orientation="vertical" />
-        </div>
-
+          </div>
+        <div
+          className="h-divider w-full shrink-0 border-none bg-divider md:h-auto md:w-divider"
+          role="separator"
+        />
         <div className="flex-1">
           <div className="text-lg font-bold">Instructions</div>
 
@@ -102,12 +110,12 @@ export default async function ExerciseCard({
             <ul role="list">
               {exercise.instructions.map(
                 (instruction: Instruction, index: number) => (
-                  <li key={index}>
-                    <div className="relative pb-8">
+                  <li key={index} className="pb-8 last:pb-0">
+                    <div className="relative">
                       {index + 1 !== exercise.instructions.length && (
                         <span
                           aria-hidden="true"
-                          className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"
+                          className="absolute left-4 top-5 -ml-px h-full w-0.5 bg-gray-200"
                         />
                       )}
 
