@@ -68,7 +68,7 @@ export default async function ExerciseCard({
 
       <Divider className="my-2" />
       <div className="mt-5 flex flex-col-reverse gap-6 md:flex-row">
-      <div className="flex">
+        <div className="flex">
           <div className="flex w-full min-w-48 flex-col sm:flex-row md:flex-col">
             <div className="flex-1">
               <div className="text-lg font-bold">Alternatives</div>
@@ -82,10 +82,7 @@ export default async function ExerciseCard({
               )}
             </div>
 
-            <hr
-              className="mx-0 my-3 h-divider w-full shrink-0 border-none bg-divider sm:mx-5 sm:my-0 sm:h-full sm:w-divider md:mx-0 md:my-3 md:h-divider md:w-full"
-              role="separator"
-            />
+            <hr className="mx-0 my-3 h-divider w-full shrink-0 border-none bg-divider sm:mx-5 sm:my-0 sm:h-full sm:w-divider md:mx-0 md:my-3 md:h-divider md:w-full" />
 
             <div className="flex-1">
               <div className="text-lg font-bold">Variations</div>
@@ -98,7 +95,7 @@ export default async function ExerciseCard({
               )}
             </div>
           </div>
-          </div>
+        </div>
         <div
           className="h-divider w-full shrink-0 border-none bg-divider md:h-auto md:w-divider"
           role="separator"
@@ -107,7 +104,7 @@ export default async function ExerciseCard({
           <div className="text-lg font-bold">Instructions</div>
 
           <div className="p-3">
-            <ul role="list">
+            <ul>
               {exercise.instructions.map(
                 (instruction: Instruction, index: number) => (
                   <li key={index} className="pb-8 last:pb-0">

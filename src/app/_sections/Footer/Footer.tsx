@@ -3,16 +3,14 @@ import React from 'react'
 const navigation = {
   api: [
     { name: 'Calculator', href: '#' },
-    { name: 'Exercises', href: '#' },
+    { name: 'Exercises', href: '#' }
   ],
   resources: [
     { name: 'Documentation', href: '#' },
-    { name: 'Rapid API', href: '#' },
+    { name: 'Rapid API', href: '#' }
     // { name: 'Guides', href: '#' },
   ],
-  support: [
-    { name: 'Contact us', href: 'mailto:contact@gymfit-api.com' },
-  ],
+  support: [{ name: 'Contact us', href: 'mailto:contact@gymfit-api.com' }],
   legal: [
     { name: 'Privacy', href: '#' },
     { name: 'Terms', href: '#' }
@@ -71,7 +69,7 @@ export default function Footer() {
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
                   API
                 </h3>
-                <ul className="mt-4 space-y-4" role="list">
+                <ul className="mt-4 space-y-4">
                   {navigation.api.map((item) => (
                     <li key={item.name}>
                       <a
@@ -88,7 +86,7 @@ export default function Footer() {
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
                   Support
                 </h3>
-                <ul className="mt-4 space-y-4" role="list">
+                <ul className="mt-4 space-y-4">
                   {navigation.support.map((item) => (
                     <li key={item.name}>
                       <a
@@ -105,9 +103,9 @@ export default function Footer() {
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-                Resources
+                  Resources
                 </h3>
-                <ul className="mt-4 space-y-4" role="list">
+                <ul className="mt-4 space-y-4">
                   {navigation.resources.map((item) => (
                     <li key={item.name}>
                       <a
@@ -124,7 +122,7 @@ export default function Footer() {
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
                   Legal
                 </h3>
-                <ul className="mt-4 space-y-4" role="list">
+                <ul className="mt-4 space-y-4">
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
                       <a
