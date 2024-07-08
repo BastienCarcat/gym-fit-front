@@ -1,10 +1,10 @@
 import React from 'react'
 
-import PricingSection from './_sections/Pricing/PricingSection'
-
+import PricingSection from '@/app/_sections/Pricing/PricingSection'
 import CTASection from '@/app/_sections/Hero/HeroSection'
 import ExercisesSection from '@/app/_sections/Exercises/ExercisesSection'
 import { SearchParamsHome } from '@/types/home/SearchParams'
+import FAQSection from '@/app/_sections/FAQ/FAQSection'
 
 export default function HomePage({
   searchParams
@@ -16,6 +16,7 @@ export default function HomePage({
       <CTASection />
       <ExercisesSection searchParams={searchParams} />
       <PricingSection />
+      <FAQSection />
     </>
   )
 }
