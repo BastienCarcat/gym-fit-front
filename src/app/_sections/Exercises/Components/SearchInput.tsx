@@ -47,8 +47,6 @@ export default function ExercisesSearchInput() {
     [replace, searchParams, pathname]
   )
 
-  useEffect
-
   return (
     <Autocomplete
       allowsCustomValue
