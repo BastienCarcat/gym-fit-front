@@ -33,7 +33,7 @@ export default function ExercisesSearchInput() {
   )
 
   const handleSelect = useCallback(
-    (key: React.Key | null) => {
+    (key: any) => {
       if (key) {
         key = key.toString()
         setSelectedExercise(key)
