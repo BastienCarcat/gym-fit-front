@@ -31,14 +31,13 @@ export default function ExerciseList({
   return (
     <>
       {exercises.map((exercise) => (
-        <div key={exercise.id} className="flex">
-          <button
-            className="w-full rounded-md px-2 py-[2px] text-start text-sm hover:bg-gray-100"
-            onClick={() => handleSelect(exercise.id)}
-          >
-            {exercise.name}
-          </button>
-        </div>
+        <button
+          key={exercise.id}
+          className="w-full rounded-md px-2 py-[2px] text-start text-sm hover:bg-gray-100"
+          onClick={() => handleSelect(exercise.id)}
+        >
+          {exercise.name}
+        </button>
       ))}
     </>
   )

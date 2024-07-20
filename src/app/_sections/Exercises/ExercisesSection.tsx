@@ -16,11 +16,14 @@ export default async function ExercisesSection({
   }, [searchParams])
 
   return (
-    <section className="mx-auto flex max-w-5xl flex-col items-center px-4 sm:px-6 lg:px-8">
+    <section
+      className="mx-auto flex max-w-5xl flex-col items-center px-4 sm:px-6 lg:px-8"
+      id="search"
+    >
       <div className="w-full max-w-xl px-4 pt-20 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
         <ExercisesSearchInput />
       </div>
-      <div className="w-full pt-28">
+      <div className="z-10 w-full pt-28">
         <Suspense key={exerciseId} fallback={<LoadingExercise />}>
           <ExerciseCard exerciseId={exerciseId} />
         </Suspense>

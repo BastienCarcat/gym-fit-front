@@ -2,7 +2,7 @@ import { Divider, Skeleton } from '@nextui-org/react'
 
 export default function LoadingExercise() {
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-6 shadow">
+    <div className="flex h-[550px] flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-md">
       <div className="flex items-end gap-3">
         <Skeleton className="h-8 w-96 rounded-md" />
       </div>
@@ -11,41 +11,46 @@ export default function LoadingExercise() {
         <div className="flex items-start gap-1">
           <Skeleton className="h-4 w-64 rounded-md" />
         </div>
-        <div className="mt-2 flex items-start gap-1">
-          <Skeleton className="h-4 w-80 rounded-md" />
-        </div>
       </div>
 
       <Divider className="my-2" />
-      <div className="mt-5 flex flex-col-reverse gap-6 md:flex-row">
-        <div className="flex">
-          <div className="flex w-full min-w-48 flex-col sm:flex-row md:flex-col">
-            <div className="flex-1">
-              <Skeleton className="h-6 w-24 rounded-md" />
+      <div className="flex flex-col-reverse gap-6 overflow-hidden md:h-full md:flex-row">
+        <div className="hidden w-48 flex-col md:flex">
+          <Skeleton className="h-6 w-24 rounded-md" />
+          <div className="min-h-[50%] flex-1 overflow-auto">
+            <Skeleton className="mt-2 h-5 w-full rounded-md" />
+            <Skeleton className="mt-2 h-5 w-1/2 rounded-md" />
+            <Skeleton className="mt-2 h-5 w-3/5 rounded-md" />
+            <Skeleton className="mt-2 h-5 w-3/5 rounded-md" />
+            <Skeleton className="mt-2 h-5 w-full rounded-md" />
+            <Skeleton className="mt-2 h-5 w-3/4 rounded-md" />
+          </div>
+          <Skeleton className="h-6 w-24 rounded-md" />
+          <Skeleton className="mt-2 h-5 w-full rounded-md" />
+          <Skeleton className="mt-2 h-5 w-3/4 rounded-md" />
+        </div>
 
-              <div className="mt-3">
-                <Skeleton className="h-5 w-full rounded-md" />
-                <Skeleton className="mt-2 h-5 w-full rounded-md" />
-                <Skeleton className="mt-2 h-5 w-full rounded-md" />
-              </div>
-            </div>
-            <hr className="mx-0 my-3 h-divider w-full shrink-0 border-none bg-divider sm:mx-5 sm:my-0 sm:h-full sm:w-divider md:mx-0 md:my-3 md:h-divider md:w-full" />
-            <div className="flex-1">
-              <Skeleton className="h-6 w-24 rounded-md" />
-
-              <div className="mt-3">
-                <Skeleton className="h-5 w-full rounded-md" />
-                <Skeleton className="mt-2 h-5 w-full rounded-md" />
-              </div>
-            </div>
+        <div className="flex max-h-[174px] gap-x-3 overflow-auto md:hidden">
+          <div className="flex-1 overflow-auto">
+            <Skeleton className="h-6 w-24 rounded-md" />
+            <Skeleton className="mt-2 h-5 w-1/2 rounded-md" />
+            <Skeleton className="mt-2 h-5 w-full rounded-md" />
+            <Skeleton className="mt-2 h-5 w-3/4 rounded-md" />
+            <Skeleton className="mt-2 h-5 w-full rounded-md" />
+          </div>
+          <div className="flex-1 overflow-auto">
+            <Skeleton className="h-6 w-24 rounded-md" />
+            <Skeleton className="mt-2 h-5 w-full rounded-md" />
+            <Skeleton className="mt-2 h-5 w-full rounded-md" />
           </div>
         </div>
+
         <div
-          className="h-divider w-full shrink-0 border-none bg-divider md:h-auto md:w-divider"
+          className="h-divider w-full shrink-0 border-none bg-divider md:mt-5 md:h-auto md:w-divider"
           role="separator"
         />
 
-        <div className="flex-1">
+        <div className="max-h-52 flex-1 overflow-auto md:max-h-none">
           <Skeleton className="h-6 w-24 rounded-md" />
 
           <div className="p-3">

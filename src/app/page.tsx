@@ -5,6 +5,7 @@ import CTASection from '@/app/_sections/Hero/HeroSection'
 import ExercisesSection from '@/app/_sections/Exercises/ExercisesSection'
 import { SearchParamsHome } from '@/types/home/SearchParams'
 import FAQSection from '@/app/_sections/FAQ/FAQSection'
+import RapidAPISection from '@/app/_sections/RapidAPI/RapidAPISection'
 
 export default function HomePage({
   searchParams
@@ -15,6 +16,7 @@ export default function HomePage({
     <>
       <CTASection />
       <ExercisesSection searchParams={searchParams} />
+      <RapidAPISection />
       <PricingSection />
       <FAQSection />
     </>

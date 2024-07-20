@@ -2,6 +2,7 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import _ from 'lodash'
+import { Button, Link } from '@nextui-org/react'
 
 enum Billing {
   Yearly = 'YEARLY',
@@ -119,7 +120,7 @@ export default function PricingSection() {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative" id="pricing">
         {/* Overlapping background */}
         <div
           aria-hidden="true"
@@ -129,28 +130,27 @@ export default function PricingSection() {
         <div className="relative mx-auto max-w-2xl px-4 pt-16 text-center sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             <span className="block text-gray-900 lg:inline">
-              Simple pricing,
+              Choose the plan
             </span>
-            <span className="block text-gray-900 lg:inline">
-              no commitment.
+            <span className="block text-gray-900 lg:inline lg:pl-3">
+              that’s right for <span className="text-sky-500">you</span>
             </span>
           </h1>
-          <p className="mt-4 text-xl text-gray-900">
-            Everything you need, nothing you don't. Pick a plan that best suits
-            your business.
-          </p>
+          {/* <p className="mt-4 text-xl text-gray-900">
+            Start for free, update later
+          </p> */}
         </div>
 
         <h2 className="sr-only">Plans</h2>
 
         {/* Toggle */}
         <div className="relative mt-12 flex items-center justify-center sm:mt-16">
-          <div className="flex rounded-lg bg-indigo-700 p-0.5">
+          <div className="flex rounded-lg bg-sky-500 p-0.5">
             <button
               className={classNames(
                 billing === Billing.Monthly
-                  ? 'border-indigo-700 bg-white text-indigo-700 hover:bg-indigo-50'
-                  : 'border border-transparent text-indigo-100 hover:bg-indigo-800',
+                  ? 'border-sky-500 bg-white text-sky-500 hover:bg-sky-50'
+                  : 'border border-transparent text-sky-100 hover:bg-sky-600',
                 'relative whitespace-nowrap rounded-md px-6 py-2 text-sm font-medium shadow-sm'
               )}
               type="button"
@@ -161,8 +161,8 @@ export default function PricingSection() {
             <button
               className={classNames(
                 billing === Billing.Yearly
-                  ? 'border-indigo-700 bg-white text-indigo-700 hover:bg-indigo-50'
-                  : 'border border-transparent text-indigo-100 hover:bg-indigo-800',
+                  ? 'border-sky-500 bg-white text-sky-500 hover:bg-sky-50'
+                  : 'border border-transparent text-sky-100 hover:bg-sky-600',
                 'relative ml-0.5 whitespace-nowrap rounded-md px-6 py-2 text-sm font-medium shadow-sm'
               )}
               type="button"
@@ -191,13 +191,13 @@ export default function PricingSection() {
             <div key={mobilePlanIndex} className="border-t border-gray-200">
               <div
                 className={classNames(
-                  plan.featured ? 'border-indigo-600' : 'border-transparent',
+                  plan.featured ? 'border-sky-500' : 'border-transparent',
                   '-mt-px border-t-2 pt-6 sm:w-1/2'
                 )}
               >
                 <h3
                   className={classNames(
-                    plan.featured ? 'text-indigo-600' : 'text-gray-900',
+                    plan.featured ? 'text-sky-500' : 'text-gray-900',
                     'text-sm font-bold'
                   )}
                 >
@@ -230,9 +230,6 @@ export default function PricingSection() {
                   )}
                 </div>
               </div>
-              <h4 className="mt-10 text-sm font-bold text-gray-900">
-                Catered for business
-              </h4>
 
               <div className="relative mt-6">
                 {/* Fake card background */}
@@ -251,7 +248,7 @@ export default function PricingSection() {
                 <div
                   className={classNames(
                     plan.featured
-                      ? 'shadow-md ring-2 ring-indigo-600'
+                      ? 'shadow-md ring-2 ring-sky-500'
                       : 'shadow ring-1 ring-black ring-opacity-5',
                     'relative rounded-lg bg-white px-4 py-3 sm:rounded-none sm:bg-transparent sm:p-0 sm:shadow-none sm:ring-0'
                   )}
@@ -271,7 +268,7 @@ export default function PricingSection() {
                             <span
                               className={classNames(
                                 feature.tiers[mobilePlanIndex].featured
-                                  ? 'text-indigo-600'
+                                  ? 'text-sky-500'
                                   : 'text-gray-900',
                                 'text-sm font-medium'
                               )}
@@ -283,7 +280,7 @@ export default function PricingSection() {
                               {feature.tiers[mobilePlanIndex].value === true ? (
                                 <CheckIcon
                                   aria-hidden="true"
-                                  className="mx-auto h-5 w-5 text-indigo-600"
+                                  className="mx-auto h-5 w-5 text-sky-500"
                                 />
                               ) : (
                                 <XMarkIcon
@@ -303,6 +300,38 @@ export default function PricingSection() {
                       </div>
                     ))}
                   </dl>
+
+                  <div className="flex items-center justify-center py-3 sm:grid sm:grid-cols-2">
+                    <dt />
+                    <dd className="flex w-full items-center sm:px-4">
+                      {plan.featured ? (
+                        <>
+                          <Button
+                            fullWidth
+                            as={Link}
+                            color="primary"
+                            href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+                            radius="sm"
+                            target="_blank"
+                          >
+                            {plan.buttonText}
+                          </Button>
+                        </>
+                      ) : (
+                        <Button
+                          fullWidth
+                          as={Link}
+                          color="primary"
+                          href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+                          radius="sm"
+                          target="_blank"
+                          variant="ghost"
+                        >
+                          {plan.buttonText}
+                        </Button>
+                      )}
+                    </dd>
+                  </div>
                 </div>
 
                 {/* Fake card border */}
@@ -313,7 +342,7 @@ export default function PricingSection() {
                   <div
                     className={classNames(
                       plan.featured
-                        ? 'ring-2 ring-indigo-600'
+                        ? 'ring-2 ring-sky-500'
                         : 'ring-1 ring-black ring-opacity-5',
                       'absolute right-0 h-full w-1/2 rounded-lg'
                     )}
@@ -381,11 +410,7 @@ export default function PricingSection() {
 
         <div className="mx-auto max-w-7xl px-8 py-24">
           <div className="flex w-full items-stretch border-t border-gray-200">
-            <div className="-mt-px flex w-1/4 items-end py-6 pr-4">
-              <h3 className="mt-auto text-sm font-bold text-gray-900">
-                Catered for business
-              </h3>
-            </div>
+            <div className="-mt-px flex w-1/4 items-end py-6 pr-4" />
             {plans.map((plan, planIdx) => (
               <div
                 key={planIdx}
@@ -397,13 +422,13 @@ export default function PricingSection() {
               >
                 <div
                   className={classNames(
-                    plan.featured ? 'border-indigo-600' : 'border-transparent',
+                    plan.featured ? 'border-sky-500' : 'border-transparent',
                     'border-t-2 py-6'
                   )}
                 >
                   <p
                     className={classNames(
-                      plan.featured ? 'text-indigo-600' : 'text-gray-900',
+                      plan.featured ? 'text-sky-500' : 'text-gray-900',
                       'text-sm font-bold'
                     )}
                   >
@@ -500,7 +525,7 @@ export default function PricingSection() {
                             <span
                               className={classNames(
                                 tier.featured
-                                  ? 'text-indigo-600'
+                                  ? 'text-sky-500'
                                   : 'text-gray-900',
                                 'text-sm font-medium'
                               )}
@@ -512,7 +537,7 @@ export default function PricingSection() {
                               {tier.value === true ? (
                                 <CheckIcon
                                   aria-hidden="true"
-                                  className="mx-auto h-5 w-5 text-indigo-600"
+                                  className="mx-auto h-5 w-5 text-sky-500"
                                 />
                               ) : (
                                 <XMarkIcon
@@ -547,20 +572,30 @@ export default function PricingSection() {
                     >
                       <div className="mx-3">
                         {plan.featured ? (
-                          <button
-                            className="w-full items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            type="button"
-                          >
-                            {plan.buttonText}
-                          </button>
+                          <>
+                            <Button
+                              fullWidth
+                              as={Link}
+                              color="primary"
+                              href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+                              radius="sm"
+                              target="_blank"
+                            >
+                              {plan.buttonText}
+                            </Button>
+                          </>
                         ) : (
-                          <button
-                            className="w-full items-center rounded-md border border-indigo-600 px-4 py-2 text-center text-sm font-medium text-indigo-600 shadow-sm hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-                            type="button"
+                          <Button
+                            fullWidth
+                            as={Link}
+                            color="primary"
+                            href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+                            radius="sm"
+                            target="_blank"
+                            variant="ghost"
                           >
-                            {' '}
                             {plan.buttonText}
-                          </button>
+                          </Button>
                         )}
                       </div>
                     </td>
@@ -582,7 +617,7 @@ export default function PricingSection() {
                 <div className="h-full w-full rounded-lg ring-1 ring-black ring-opacity-5" />
               </div>
               <div className="w-1/5 px-4">
-                <div className="h-full w-full rounded-lg ring-2 ring-indigo-600 ring-opacity-100" />
+                <div className="h-full w-full rounded-lg ring-2 ring-sky-500 ring-opacity-100" />
               </div>
 
               <div className="w-1/5 pl-4">
@@ -674,18 +709,25 @@ export default function PricingSection() {
           <p className="mb-3 text-xl font-bold text-gray-900">
             Have a custom need ?
           </p>
-
-          <a
-            className="inline-block w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          <Button
+            fullWidth
+            as={Link}
+            color="primary"
             href="mailto:contact@gymfit-api.com"
+            variant="flat"
           >
             Get in touch
-          </a>
+          </Button>
         </div>
         <div>
           <p className="text-18 sm:text-20 mb-2">
             Not sure what plan you need?
-            <a className="pl-2 font-bold underline" href="#">
+            <a
+              className="pl-2 font-bold underline"
+              href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+              rel="noreferrer"
+              target="_blank"
+            >
               Try for free in Basic plan
             </a>
           </p>

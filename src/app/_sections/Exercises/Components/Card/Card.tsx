@@ -35,7 +35,7 @@ export default async function ExerciseCard({
   }
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-6 shadow">
+    <div className="flex h-[550px] flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-md">
       <div className="flex items-end gap-3">
         <h2 className="text-2xl font-bold">{exercise.name}</h2>
         <p className="text-lg font-semibold text-gray-500">
@@ -67,40 +67,59 @@ export default async function ExerciseCard({
       </div>
 
       <Divider className="my-2" />
-      <div className="mt-5 flex flex-col-reverse gap-6 md:flex-row">
-        <div className="flex">
-          <div className="flex w-full min-w-48 flex-col sm:flex-row md:flex-col">
-            <div className="flex-1">
-              <div className="text-lg font-bold">Alternatives</div>
+      <div className="flex flex-col-reverse gap-6 overflow-hidden md:h-full md:flex-row">
+        <div className="hidden w-48 flex-col md:flex">
+          <span className="text-lg font-bold">Alternatives</span>
+          <div className="min-h-[50%] flex-1 overflow-auto">
+            {exercise.alternatives.length > 0 ? (
+              <ExerciseList exercises={exercise.alternatives} />
+            ) : (
+              <div className="py-3 text-center text-gray-500">
+                No alternatives
+              </div>
+            )}
+          </div>
 
-              {exercise.alternatives.length > 0 ? (
-                <ExerciseList exercises={exercise.alternatives} />
-              ) : (
-                <div className="py-3 text-center text-gray-500">
-                  No alternatives
-                </div>
-              )}
-            </div>
-
-            <hr className="mx-0 my-3 h-divider w-full shrink-0 border-none bg-divider sm:mx-5 sm:my-0 sm:h-full sm:w-divider md:mx-0 md:my-3 md:h-divider md:w-full" />
-
-            <div className="flex-1">
-              <div className="text-lg font-bold">Variations</div>
-              {exercise.variations.length > 0 ? (
-                <ExerciseList exercises={exercise.variations} />
-              ) : (
-                <div className="py-3 text-center text-gray-500">
-                  No variations
-                </div>
-              )}
-            </div>
+          <span className="pt-3 text-lg font-bold">Variations</span>
+          <div className="overflow-auto">
+            {exercise.variations.length > 0 ? (
+              <ExerciseList exercises={exercise.variations} />
+            ) : (
+              <div className="py-3 text-center text-gray-500">
+                No variations
+              </div>
+            )}
           </div>
         </div>
+
+        <div className="flex max-h-[174px] gap-x-3 overflow-auto md:hidden">
+          <div className="flex-1 overflow-auto">
+            <span className="text-lg font-bold">Alternatives</span>
+            {exercise.alternatives.length > 0 ? (
+              <ExerciseList exercises={exercise.alternatives} />
+            ) : (
+              <div className="py-3 text-center text-gray-500">
+                No alternatives
+              </div>
+            )}
+          </div>
+          <div className="flex-1 overflow-auto">
+            <span className="text-lg font-bold">Variations</span>
+            {exercise.variations.length > 0 ? (
+              <ExerciseList exercises={exercise.variations} />
+            ) : (
+              <div className="py-3 text-center text-gray-500">
+                No variations
+              </div>
+            )}
+          </div>
+        </div>
+
         <div
-          className="h-divider w-full shrink-0 border-none bg-divider md:h-auto md:w-divider"
+          className="h-divider w-full shrink-0 border-none bg-divider md:mt-5 md:h-auto md:w-divider"
           role="separator"
         />
-        <div className="flex-1">
+        <div className="max-h-52 flex-1 overflow-auto md:max-h-none">
           <div className="text-lg font-bold">Instructions</div>
 
           <div className="p-3">

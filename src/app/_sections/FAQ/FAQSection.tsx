@@ -25,7 +25,10 @@ export default function FAQSection() {
   )
 
   return (
-    <section className="mx-auto flex max-w-7xl flex-col items-center px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+    <section
+      className="mx-auto flex max-w-7xl flex-col items-center px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32"
+      id="faq"
+    >
       <div className="mx-auto mb-20 max-w-2xl px-4 pt-16 text-center sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
           Frequently Asked Questions
