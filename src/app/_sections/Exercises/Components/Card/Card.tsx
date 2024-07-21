@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { use } from 'react'
 import { Divider } from '@nextui-org/react'
 import _ from 'lodash'
 
-import ExerciseList from './ExerciseList'
+import ExerciseList, { ExerciseSearch } from './ExerciseList'
 
 import fetchApi from '@/tools/fetchApi'
 
@@ -17,15 +17,19 @@ type Instruction = {
   description: string
 }
 
+type Exercise = {
+  name: string
+  bodyPart: string
+  muscles: Record<string, Muscle[]>
+  alternatives: ExerciseSearch[]
+  variations: ExerciseSearch[]
+  instructions: Instruction[]
+}
+
 const DEFAULT_EXERCISE_ID = 'c2b6fccf-2c2c-43e1-aca3-a3cb73caa78b' // Id for Bench Press
 
-export default async function ExerciseCard({
-  exerciseId = DEFAULT_EXERCISE_ID
-}: {
-  exerciseId?: string
-}) {
-  // TODO: type from api
-  const exercise = await fetchApi(`v1/exercises/${exerciseId}`)
+export default function ExerciseCard({ exerciseId }: { exerciseId?: string }) {
+  const exercise = use(getExercise(exerciseId))
 
   const getMuscles = (muscles: Muscle[]) => {
     return _.chain(muscles)
@@ -161,4 +165,12 @@ export default async function ExerciseCard({
       </div>
     </div>
   )
+}
+
+async function getExercise(
+  exerciseId: string = DEFAULT_EXERCISE_ID
+): Promise<Exercise> {
+  // TODO: type from api
+  const exercise = await fetchApi(`v1/exercises/${exerciseId}`)
+  return exercise
 }

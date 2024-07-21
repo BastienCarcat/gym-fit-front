@@ -1,7 +1,7 @@
 'use client'
 import type { ExerciseSearch } from '@/types/exercise/ExerciseSearch'
 
-import React, { Key, useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useDebouncedCallback } from 'use-debounce'
@@ -15,7 +15,7 @@ export default function ExercisesSearchInput() {
   const [exercises, setExercises] = useState([] as ExerciseSearch[])
   const [isLoading, setIsLoading] = useState(false)
   const [selectedExercise, setSelectedExercise] = useState(
-    searchParams.get('exerciseId') || 'c2b6fccf-2c2c-43e1-aca3-a3cb73caa78b'
+    searchParams.get('exerciseId')
   )
 
   const handleChangeInput = useDebouncedCallback(
@@ -33,7 +33,7 @@ export default function ExercisesSearchInput() {
   )
 
   const handleSelect = useCallback(
-    (key: Key) => {
+    (key: React.Key | null) => {
       if (key) {
         key = key.toString()
         setSelectedExercise(key)

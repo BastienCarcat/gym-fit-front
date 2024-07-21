@@ -6,7 +6,7 @@ import ExercisesSearchInput from '@/app/_sections/Exercises/Components/SearchInp
 import ExerciseCard from '@/app/_sections/Exercises/Components/Card/Card'
 import { SearchParamsHome } from '@/types/home/SearchParams'
 
-export default async function ExercisesSection({
+export default function ExercisesSection({
   searchParams
 }: {
   searchParams: SearchParamsHome

@@ -3,7 +3,7 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React, { useCallback } from 'react'
 
-type ExerciseSearch = {
+export type ExerciseSearch = {
   name: string
   id: string
 }
