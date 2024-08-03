@@ -7,6 +7,7 @@ import {
   NavbarContent,
   NavbarItem
 } from '@nextui-org/react'
+import { siteConfig } from '@/config/site'
 
 export default function Navbar() {
   return (
@@ -22,7 +23,12 @@ export default function Navbar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link isBlock color="foreground" href="#">
+          <Link
+            isBlock
+            color="foreground"
+            href={siteConfig.documentation_url}
+            target="_blank"
+          >
             Documentation
           </Link>
         </NavbarItem>
@@ -42,7 +48,7 @@ export default function Navbar() {
           <Button
             as={Link}
             color="primary"
-            href="https://rapidapi.com/BastienCarcat/api/gym-fit/playground/apiendpoint_707ee9ea-69f3-4394-9975-d0e33165414b"
+            href={siteConfig.rapid_playground_url}
             target="_blank"
             variant="flat"
           >

@@ -1,3 +1,4 @@
+import { siteConfig } from '@/config/site'
 import React, { useMemo } from 'react'
 
 export default function Footer() {
@@ -12,10 +13,14 @@ export default function Footer() {
         { name: 'Search exercise', href: '#search', blank: false },
         {
           name: 'Try endpoints',
-          href: 'https://rapidapi.com/BastienCarcat/api/gym-fit/playground/apiendpoint_707ee9ea-69f3-4394-9975-d0e33165414b',
+          href: siteConfig.rapid_playground_url,
           blank: true
         },
-        { name: 'Documentation', href: '#', blank: false }
+        {
+          name: 'Documentation',
+          href: siteConfig.documentation_url,
+          blank: true
+        }
       ],
       social: [
         {

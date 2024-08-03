@@ -1,3 +1,4 @@
+import { siteConfig } from '@/config/site'
 import { Button, Link } from '@nextui-org/react'
 
 export default function CTASection() {
@@ -21,7 +22,8 @@ export default function CTASection() {
               as={Link}
               className="transition delay-100 duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl hover:shadow-sky-300"
               color="primary"
-              href="#"
+              href={siteConfig.documentation_url}
+              target="_blank"
             >
               See documentation
             </Button>

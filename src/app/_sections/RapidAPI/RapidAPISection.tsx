@@ -3,6 +3,7 @@ import { Button, Link } from '@nextui-org/react'
 import React from 'react'
 
 import RapidIcon from '@/app/_ui/icons/RapidIcon'
+import { siteConfig } from '@/config/site'
 const features = [
   {
     name: 'Easy integration',
@@ -84,7 +85,7 @@ export default function RapidAPISection() {
             as={Link}
             className="bg-sky-600 shadow-sm hover:bg-sky-800"
             color="primary"
-            href="https://rapidapi.com/BastienCarcat/api/gym-fit/playground/apiendpoint_707ee9ea-69f3-4394-9975-d0e33165414b"
+            href={siteConfig.rapid_playground_url}
             target="_blank"
           >
             Open in Rapid

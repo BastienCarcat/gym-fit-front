@@ -3,6 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import _ from 'lodash'
 import { Button, Link } from '@nextui-org/react'
+import { siteConfig } from '@/config/site'
 
 enum Billing {
   Yearly = 'YEARLY',
@@ -310,7 +311,7 @@ export default function PricingSection() {
                             fullWidth
                             as={Link}
                             color="primary"
-                            href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+                            href={siteConfig.rapid_plans_url}
                             radius="sm"
                             target="_blank"
                           >
@@ -322,7 +323,7 @@ export default function PricingSection() {
                           fullWidth
                           as={Link}
                           color="primary"
-                          href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+                          href={siteConfig.rapid_plans_url}
                           radius="sm"
                           target="_blank"
                           variant="ghost"
@@ -577,7 +578,7 @@ export default function PricingSection() {
                               fullWidth
                               as={Link}
                               color="primary"
-                              href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+                              href={siteConfig.rapid_plans_url}
                               radius="sm"
                               target="_blank"
                             >
@@ -589,7 +590,7 @@ export default function PricingSection() {
                             fullWidth
                             as={Link}
                             color="primary"
-                            href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+                            href={siteConfig.rapid_plans_url}
                             radius="sm"
                             target="_blank"
                             variant="ghost"
@@ -724,7 +725,7 @@ export default function PricingSection() {
             Not sure what plan you need?
             <a
               className="pl-2 font-bold underline"
-              href="https://rapidapi.com/BastienCarcat/api/gym-fit/pricing"
+              href={siteConfig.rapid_plans_url}
               rel="noreferrer"
               target="_blank"
             >
