@@ -5,6 +5,7 @@ import _ from 'lodash'
 import ExerciseList, { ExerciseSearch } from './ExerciseList'
 
 import fetchApi from '@/tools/fetchApi'
+import { ClockIcon } from '@heroicons/react/24/outline'
 
 type Muscle = {
   heads: string[]
@@ -40,34 +41,45 @@ export default function ExerciseCard({ exerciseId }: { exerciseId?: string }) {
 
   return (
     <div className="flex h-[550px] flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-md">
-      <div className="flex items-end gap-3">
-        <h2 className="text-2xl font-bold">{exercise.name}</h2>
-        <p className="text-lg font-semibold text-gray-500">
-          {exercise.bodyPart}
-        </p>
-      </div>
-
-      <div className="mt-1 text-xs text-gray-900">
-        {_.get(exercise, 'muscles.Target.length') > 0 && (
-          <div className="flex items-start gap-1">
-            <div className="text-nowrap font-bold">Target :</div>
-            <div>{getMuscles(_.get(exercise, 'muscles.Target'))}</div>
+      <div className="flex items-start gap-2">
+        <div className="flex flex-1 flex-col">
+          <div className="flex items-end gap-3">
+            <h2 className="text-2xl font-bold">{exercise.name}</h2>
+            <p className="text-lg font-semibold text-gray-500">
+              {exercise.bodyPart}
+            </p>
           </div>
-        )}
 
-        {_.get(exercise, 'muscles.Synergist.length') > 0 && (
-          <div className="flex items-start gap-1">
-            <div className="text-nowrap font-bold">Synergist :</div>
-            <div>{getMuscles(_.get(exercise, 'muscles.Synergist'))}</div>
-          </div>
-        )}
+          <div className="mt-1 text-xs text-gray-900">
+            {_.get(exercise, 'muscles.Target.length') > 0 && (
+              <div className="flex items-start gap-1">
+                <div className="text-nowrap font-bold">Target :</div>
+                <div>{getMuscles(_.get(exercise, 'muscles.Target'))}</div>
+              </div>
+            )}
 
-        {_.get(exercise, 'muscles.Stabilizer.length') > 0 && (
-          <div className="flex items-start gap-1">
-            <div className="text-nowrap font-bold">Stabilizer :</div>
-            <div>{getMuscles(_.get(exercise, 'muscles.Stabilizer'))}</div>
+            {_.get(exercise, 'muscles.Synergist.length') > 0 && (
+              <div className="flex items-start gap-1">
+                <div className="text-nowrap font-bold">Synergist :</div>
+                <div>{getMuscles(_.get(exercise, 'muscles.Synergist'))}</div>
+              </div>
+            )}
+
+            {_.get(exercise, 'muscles.Stabilizer.length') > 0 && (
+              <div className="flex items-start gap-1">
+                <div className="text-nowrap font-bold">Stabilizer :</div>
+                <div>{getMuscles(_.get(exercise, 'muscles.Stabilizer'))}</div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
+        <div className="rounded-md border border-sky-300 bg-sky-100 p-1 text-center text-xs text-sky-600">
+          <div>Exercise video</div>
+          <div className="inline-flex">
+            <ClockIcon className="mr-1 h-4 w-4" />
+            coming soon
+          </div>
+        </div>
       </div>
 
       <Divider className="my-2" />

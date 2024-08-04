@@ -90,6 +90,15 @@ export default function PricingSection() {
         ]
       },
       {
+        title: 'Exercise video',
+        tiers: [
+          { featured: true, value: 'coming soon' },
+          { featured: true, value: 'coming soon' },
+          { featured: true, value: 'coming soon' },
+          { featured: true, value: 'coming soon' }
+        ]
+      },
+      {
         title: 'Priority support',
         tiers: [
           { value: false },

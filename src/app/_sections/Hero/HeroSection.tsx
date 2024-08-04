@@ -10,7 +10,7 @@ export default function CTASection() {
           API
         </h2>
         <p className="pt-8 text-xl text-gray-900 sm:text-2xl">
-          Access to over 500+{' '}
+          Access to all{' '}
           <span className="font-bold text-sky-500">gym exercises</span> with
           complete informations and many fitness{' '}
           <span className="font-bold text-sky-500">calculators</span> like TDEE,
