@@ -8,6 +8,7 @@ import { siteConfig } from '@/config/site'
 import { fontSans } from '@/config/fonts'
 import Navbar from '@/app/_sections/Navbar/Navbar'
 import Footer from '@/app/_sections/Footer/Footer'
+import { Analytics } from '@vercel/analytics/react'
 
 export const metadata: Metadata = {
   title: {
@@ -48,6 +49,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   )
