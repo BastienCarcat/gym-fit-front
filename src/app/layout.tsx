@@ -9,6 +9,7 @@ import { fontSans } from '@/config/fonts'
 import Navbar from '@/app/_sections/Navbar/Navbar'
 import Footer from '@/app/_sections/Footer/Footer'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   title: {
@@ -50,6 +51,7 @@ export default function RootLayout({
           <Footer />
         </Providers>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
