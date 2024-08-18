@@ -13,12 +13,43 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`
+    default: siteConfig.default_title,
+    template: `%s | ${siteConfig.name}`
   },
   description: siteConfig.description,
   icons: {
     icon: '/favicon.ico'
+  },
+  keywords: [
+    'fitness',
+    'exercise',
+    'database',
+    'exercise database',
+    'calculators',
+    'bmi',
+    'bmr',
+    'tdee',
+    'muscle'
+  ],
+  openGraph: {
+    title: siteConfig.default_title,
+    description: siteConfig.description,
+    url: siteConfig.landing_url,
+    images: [
+      {
+        url: '/logo.png',
+        width: 800,
+        height: 600,
+        alt: 'Gym Fit API logo'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@BastienCrct',
+    title: siteConfig.default_title,
+    description: siteConfig.description,
+    images: ['/logo.png']
   }
 }
 

@@ -138,14 +138,14 @@ export default function PricingSection() {
         />
 
         <div className="relative mx-auto max-w-2xl px-4 pt-16 text-center sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
+          <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             <span className="block text-gray-900 lg:inline">
               Choose the plan
             </span>
             <span className="block text-gray-900 lg:inline lg:pl-3">
               that’s right for <span className="text-sky-500">you</span>
             </span>
-          </h1>
+          </h2>
           {/* <p className="mt-4 text-xl text-gray-900">
             Start for free, update later
           </p> */}

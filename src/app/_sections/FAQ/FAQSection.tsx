@@ -30,9 +30,9 @@ export default function FAQSection() {
       id="faq"
     >
       <div className="mx-auto mb-20 max-w-2xl px-4 pt-16 text-center sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
-        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
           Frequently Asked Questions
-        </h1>
+        </h2>
       </div>
 
       <Accordion className="w-2/3" selectionMode="multiple" variant="bordered">
