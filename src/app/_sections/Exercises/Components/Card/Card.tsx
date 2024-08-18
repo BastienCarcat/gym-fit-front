@@ -44,7 +44,7 @@ export default function ExerciseCard({ exerciseId }: { exerciseId?: string }) {
       <div className="flex items-start gap-2">
         <div className="flex flex-1 flex-col">
           <div className="flex items-end gap-3">
-            <h2 className="text-2xl font-bold">{exercise.name}</h2>
+            <h1 className="text-2xl font-bold">{exercise.name}</h1>
             <p className="text-lg font-semibold text-gray-500">
               {exercise.bodyPart}
             </p>

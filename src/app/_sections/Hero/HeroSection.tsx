@@ -5,16 +5,16 @@ export default function CTASection() {
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl px-4 pt-20 text-center sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
-        <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-          The all in <span className="text-sky-500">ONE</span> <br /> fitness
-          API
-        </h2>
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+          The all in one <br />
+          <strong className="text-sky-500"> fitness API</strong>
+        </h1>
         <p className="pt-8 text-xl text-gray-900 sm:text-2xl">
           Access to all{' '}
-          <span className="font-bold text-sky-500">gym exercises</span> with
+          <strong className="font-bold text-sky-500">gym exercises</strong> with
           complete informations and many fitness{' '}
-          <span className="font-bold text-sky-500">calculators</span> like TDEE,
-          BMR, BMI or IBW
+          <strong className="font-bold text-sky-500">calculators</strong> like
+          TDEE, BMR, BMI or IBW
         </p>
         <div className="mt-8 flex justify-center">
           <div className="inline-flex">
