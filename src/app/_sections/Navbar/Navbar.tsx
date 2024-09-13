@@ -8,13 +8,20 @@ import {
   NavbarItem
 } from '@nextui-org/react'
 import { siteConfig } from '@/config/site'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import Image from 'next/image'
 
 export default function Navbar() {
   return (
     <NavbarUI shouldHideOnScroll>
       <NavbarBrand>
-        <div>gym</div>
-        <p className="font-bold text-inherit">FIT</p>
+        <Image
+          className="rounded-full"
+          src="/logo.png"
+          alt="gymfit-logo"
+          width={40}
+          height={40}
+        ></Image>
       </NavbarBrand>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem>
@@ -54,6 +61,14 @@ export default function Navbar() {
           >
             Try API
           </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </NavbarItem>
       </NavbarContent>
     </NavbarUI>
