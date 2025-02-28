@@ -1,6 +1,6 @@
 import React, { Suspense, useMemo } from 'react'
 
-import LoadingExercise from './loading'
+// import LoadingExercise from './loading'
 
 import ExercisesSearchInput from '@/app/_sections/Exercises/Components/SearchInput'
 import ExerciseCard from '@/app/_sections/Exercises/Components/Card/Card'
@@ -24,9 +24,9 @@ export default function ExercisesSection({
         <ExercisesSearchInput />
       </div>
       <div className="z-10 w-full pt-28">
-        <Suspense key={exerciseId} fallback={<LoadingExercise />}>
-          <ExerciseCard exerciseId={exerciseId} />
-        </Suspense>
+        {/* <Suspense key={exerciseId} fallback={<LoadingExercise />}> */}
+        <ExerciseCard exerciseId={exerciseId} />
+        {/* </Suspense> */}
       </div>
     </section>
   )

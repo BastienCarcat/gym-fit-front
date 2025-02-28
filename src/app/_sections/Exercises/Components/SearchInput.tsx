@@ -2,8 +2,8 @@
 import type { ExerciseSearch } from '@/types/exercise/ExerciseSearch'
 
 import React, { useCallback, useState } from 'react'
-import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+// import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
+// import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { useDebouncedCallback } from 'use-debounce'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
@@ -48,27 +48,27 @@ export default function ExercisesSearchInput() {
   )
 
   return (
-    <Autocomplete
-      allowsCustomValue
-      aria-label="Search for an exercise"
-      defaultItems={exercises}
-      isLoading={isLoading}
-      selectedKey={selectedExercise}
-      startContent={
-        <MagnifyingGlassIcon className="h-5 w-5 text-default-400" />
-      }
-      variant="bordered"
-      onInputChange={handleChangeInput}
-      onSelectionChange={handleSelect}
-      placeholder="Search for an exercise"
-      // endContent={<Kbd keys={['command']}>K</Kbd>}
-      radius="md"
-    >
-      {(item) => (
-        <AutocompleteItem key={item.id} textValue={item.name}>
-          {item.name}
-        </AutocompleteItem>
-      )}
-    </Autocomplete>
+    // <Autocomplete
+    //   allowsCustomValue
+    //   aria-label="Search for an exercise"
+    //   defaultItems={exercises}
+    //   isLoading={isLoading}
+    //   selectedKey={selectedExercise}
+    //   startContent={
+    //     <MagnifyingGlassIcon className="h-5 w-5 text-default-400" />
+    //   }
+    //   variant="bordered"
+    //   onInputChange={handleChangeInput}
+    //   onSelectionChange={handleSelect}
+    //   placeholder="Search for an exercise"
+    //   // endContent={<Kbd keys={['command']}>K</Kbd>}
+    //   radius="md"
+    // >
+    //   {(item) => (
+    //     <AutocompleteItem key={item.id} textValue={item.name}>
+    //       {item.name}
+    //     </AutocompleteItem>
+    //   )}
+    // </Autocomplete>
   )
 }
