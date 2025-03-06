@@ -3,6 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { siteConfig } from '@/config/site'
 import { Button } from '@/components/ui/button'
 import { CheckIcon, XIcon } from 'lucide-react'
+import { TextAnimate } from '@/components/ui/text-animate'
 
 enum Billing {
   Yearly = 'YEARLY',
@@ -128,13 +129,9 @@ export default function PricingSection() {
     <>
       <div className="relative" id="pricing">
         {/* Overlapping background */}
-        <div
-          aria-hidden="true"
-          className="absolute bottom-0 hidden h-6 w-full lg:block"
-        />
 
-        <div className="relative mx-auto max-w-2xl px-4 pt-16 text-center sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
-          <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
+        {/* <div className="relative mx-auto max-w-2xl px-4 pt-16 text-center sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
+          <h2 className="text-4xl font-extrabold tracking-tight sm:text-6xl">
             <span className="block text-gray-900 lg:inline">
               Choose the plan
             </span>
@@ -142,10 +139,20 @@ export default function PricingSection() {
               that’s right for <span className="text-sky-500">you</span>
             </span>
           </h2>
-          {/* <p className="mt-4 text-xl text-gray-900">
-            Start for free, update later
-          </p> */}
-        </div>
+        </div> */}
+
+        <TextAnimate
+          delay={0.2}
+          duration={0.4}
+          animation="fadeIn"
+          once
+          className="mx-auto max-w-2xl px-4 pt-16 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:pt-32 sm:text-6xl lg:max-w-7xl lg:px-8"
+          segmentClassName={{
+            'you-12': 'text-sky-500'
+          }}
+        >
+          Choose the plan that’s right for you
+        </TextAnimate>
 
         <h2 className="sr-only">Plans</h2>
 
