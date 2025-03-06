@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 export default function CTASection() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
-      <div className="relative max-w-3xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-        <div className="z-20">
+    <section className="relative mx-auto my-12 max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
+      <div className="flex items-center justify-between">
+        <div className="relative z-20 max-w-2xl">
           <h1 className="text-4xl text-gray-900 sm:text-6xl">
             Start building your next
             <br />
@@ -32,17 +32,16 @@ export default function CTASection() {
             </button>
           </div>
         </div>
-
-        <div className="absolute inset-0 z-10 flex translate-x-96 transform items-center justify-center">
-          <div className="relative h-full w-full">
+        <div className="absolute right-0 top-0 h-full w-[45%] overflow-hidden">
+          <div className="relative h-full w-full rounded-[2.5rem]">
             <Image
-              src="/hero_image.png"
+              src="/hero_image_2.jpg"
               alt="Hero image"
               layout="fill"
-              objectFit="contain"
+              objectFit="cover"
               quality={100}
+              className="rounded-[2.5rem] [mask-image:linear-gradient(to_right,transparent,#000_25%)]"
             />
-            {/* <div className="absolute inset-0 bg-gradient-to-r from-white to-transparent" /> */}
           </div>
         </div>
       </div>

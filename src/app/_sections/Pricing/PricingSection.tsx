@@ -1,9 +1,8 @@
 'use client'
 import React, { useCallback, useMemo, useState } from 'react'
-import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
-import _ from 'lodash'
-import { Button, Link } from '@nextui-org/react'
 import { siteConfig } from '@/config/site'
+import { Button } from '@/components/ui/button'
+import { CheckIcon, XIcon } from 'lucide-react'
 
 enum Billing {
   Yearly = 'YEARLY',
@@ -28,24 +27,21 @@ export default function PricingSection() {
         featured: false,
         free: false,
         priceMonthly: 5,
-        priceYearly: 60,
-        buttonText: 'Start now'
+        buttonText: 'Try For Free'
       },
       {
         title: 'Ultra',
         featured: true,
         free: false,
         priceMonthly: 9,
-        priceYearly: 108,
-        buttonText: 'Start now'
+        buttonText: 'Try For Free'
       },
       {
         title: 'Mega',
         featured: false,
         free: false,
         priceMonthly: 11,
-        priceYearly: 132,
-        buttonText: 'Start now'
+        buttonText: 'Try For Free'
       }
     ],
     []
@@ -90,12 +86,12 @@ export default function PricingSection() {
         ]
       },
       {
-        title: 'Exercise video',
+        title: 'High quality images',
         tiers: [
-          { featured: true, value: 'coming soon' },
-          { featured: true, value: 'coming soon' },
-          { featured: true, value: 'coming soon' },
-          { featured: true, value: 'coming soon' }
+          { value: true },
+          { value: true },
+          { featured: true, value: true },
+          { value: true }
         ]
       },
       {
@@ -122,11 +118,11 @@ export default function PricingSection() {
     return classes.filter(Boolean).join(' ')
   }, [])
 
-  const getDiscount = useCallback((pricing: number) => {
-    const discount = _.floor(_.multiply(pricing, 0.1))
+  // const getDiscount = useCallback((pricing: number) => {
+  //   const discount = _.floor(_.multiply(pricing, 0.1))
 
-    return _.subtract(pricing, discount)
-  }, [])
+  //   return _.subtract(pricing, discount)
+  // }, [])
 
   return (
     <>
@@ -154,7 +150,7 @@ export default function PricingSection() {
         <h2 className="sr-only">Plans</h2>
 
         {/* Toggle */}
-        <div className="relative mt-12 flex items-center justify-center sm:mt-16">
+        {/* <div className="relative mt-12 flex items-center justify-center sm:mt-16">
           <div className="flex rounded-lg bg-sky-500 p-0.5">
             <button
               className={classNames(
@@ -184,7 +180,7 @@ export default function PricingSection() {
           <div className="relative ml-4 rounded-md border border-green-600 bg-green-200 px-2 py-1 text-xs text-green-900 after:absolute after:left-0 after:top-1/2 after:h-3 after:w-3 after:-translate-x-[7px] after:-translate-y-1/2 after:rotate-45 after:border-b after:border-l after:border-green-600 after:bg-green-200">
             SAVE 10%
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Feature comparison (up to lg) */}
@@ -220,22 +216,24 @@ export default function PricingSection() {
                     <>
                       <span className="text-3xl font-bold">
                         $
-                        {billing === Billing.Monthly
+                        {/* {billing === Billing.Monthly
                           ? plan.priceMonthly
-                          : getDiscount(plan.priceYearly)}
+                          : getDiscount(plan.priceYearly)} */}
+                        {plan.priceMonthly}
                       </span>
                       <span className="text-lg font-medium">
-                        /{billing === Billing.Monthly ? 'mo' : 'yo'}
+                        {/* /{billing === Billing.Monthly ? 'mo' : 'yo'} */}
+                        /mo
                       </span>
 
-                      {billing === Billing.Yearly && (
+                      {/* {billing === Billing.Yearly && (
                         <span className="ml-3 text-gray-600 line-through">
                           <span className="text-lg font-bold">
                             ${plan.priceYearly}
                           </span>
                           <span className="text-md font-medium">/yo</span>
                         </span>
-                      )}
+                      )} */}
                     </>
                   )}
                 </div>
@@ -290,12 +288,17 @@ export default function PricingSection() {
                               {feature.tiers[mobilePlanIndex].value === true ? (
                                 <CheckIcon
                                   aria-hidden="true"
-                                  className="mx-auto h-5 w-5 text-sky-500"
+                                  className={classNames(
+                                    'mx-auto h-5 w-5',
+                                    feature.tiers[mobilePlanIndex].featured
+                                      ? 'text-sky-500'
+                                      : 'text-gray-900'
+                                  )}
                                 />
                               ) : (
-                                <XMarkIcon
+                                <XIcon
                                   aria-hidden="true"
-                                  className="mx-auto h-5 w-5 text-gray-400"
+                                  className="mx-auto h-5 w-5 text-gray-900"
                                 />
                               )}
 
@@ -316,8 +319,7 @@ export default function PricingSection() {
                     <dd className="flex w-full items-center sm:px-4">
                       {plan.featured ? (
                         <>
-                          <Button
-                            fullWidth
+                          {/* <Button
                             as={Link}
                             color="primary"
                             href={siteConfig.rapid_plans_url}
@@ -325,17 +327,28 @@ export default function PricingSection() {
                             target="_blank"
                           >
                             {plan.buttonText}
+                          </Button> */}
+                          <Button
+                            variant="outline"
+                            className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
+                          >
+                            {plan.buttonText}
                           </Button>
                         </>
                       ) : (
+                        // <Button
+                        //   as={Link}
+                        //   color="primary"
+                        //   href={siteConfig.rapid_plans_url}
+                        //   radius="sm"
+                        //   target="_blank"
+                        //   variant="ghost"
+                        // >
+                        //   {plan.buttonText}
+                        // </Button>
                         <Button
-                          fullWidth
-                          as={Link}
-                          color="primary"
-                          href={siteConfig.rapid_plans_url}
-                          radius="sm"
-                          target="_blank"
-                          variant="ghost"
+                          variant="outline"
+                          className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                         >
                           {plan.buttonText}
                         </Button>
@@ -451,22 +464,24 @@ export default function PricingSection() {
                       <>
                         <span className="text-3xl font-bold">
                           $
-                          {billing === Billing.Monthly
+                          {/* {billing === Billing.Monthly
                             ? plan.priceMonthly
-                            : getDiscount(plan.priceYearly)}
+                            : getDiscount(plan.priceYearly)} */}
+                          {plan.priceMonthly}
                         </span>
                         <span className="text-lg font-medium">
-                          /{billing === Billing.Monthly ? 'mo' : 'yo'}
+                          {/* /{billing === Billing.Monthly ? 'mo' : 'yo'} */}
+                          /mo
                         </span>
 
-                        {billing === Billing.Yearly && (
+                        {/* {billing === Billing.Yearly && (
                           <span className="ml-3 text-gray-600 line-through">
                             <span className="text-lg font-bold">
                               ${plan.priceYearly}
                             </span>
                             <span className="text-md font-medium">/yo</span>
                           </span>
-                        )}
+                        )} */}
                       </>
                     )}
                   </div>
@@ -547,12 +562,17 @@ export default function PricingSection() {
                               {tier.value === true ? (
                                 <CheckIcon
                                   aria-hidden="true"
-                                  className="mx-auto h-5 w-5 text-sky-500"
+                                  className={classNames(
+                                    'mx-auto h-5 w-5',
+                                    tier.featured
+                                      ? 'text-sky-500'
+                                      : 'text-gray-900'
+                                  )}
                                 />
                               ) : (
-                                <XMarkIcon
+                                <XIcon
                                   aria-hidden="true"
-                                  className="mx-auto h-5 w-5 text-gray-400"
+                                  className="mx-auto h-5 w-5 text-gray-900"
                                 />
                               )}
 
@@ -583,8 +603,7 @@ export default function PricingSection() {
                       <div className="mx-3">
                         {plan.featured ? (
                           <>
-                            <Button
-                              fullWidth
+                            {/* <Button
                               as={Link}
                               color="primary"
                               href={siteConfig.rapid_plans_url}
@@ -592,17 +611,28 @@ export default function PricingSection() {
                               target="_blank"
                             >
                               {plan.buttonText}
+                            </Button> */}
+                            <Button
+                              variant="outline"
+                              className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
+                            >
+                              {plan.buttonText}
                             </Button>
                           </>
                         ) : (
+                          // <Button
+                          //   as={Link}
+                          //   color="primary"
+                          //   href={siteConfig.rapid_plans_url}
+                          //   radius="sm"
+                          //   target="_blank"
+                          //   variant="ghost"
+                          // >
+                          //   {plan.buttonText}
+                          // </Button>
                           <Button
-                            fullWidth
-                            as={Link}
-                            color="primary"
-                            href={siteConfig.rapid_plans_url}
-                            radius="sm"
-                            target="_blank"
-                            variant="ghost"
+                            variant="outline"
+                            className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                           >
                             {plan.buttonText}
                           </Button>
@@ -719,15 +749,15 @@ export default function PricingSection() {
           <p className="mb-3 text-xl font-bold text-gray-900">
             Have a custom need ?
           </p>
-          <Button
-            fullWidth
+          {/* <Button
             as={Link}
             color="primary"
             href="mailto:contact@gymfit-api.com"
             variant="flat"
           >
             Get in touch
-          </Button>
+          </Button> */}
+          <Button variant="outline">Get in touch</Button>
         </div>
         <div>
           <p className="text-18 sm:text-20 mb-2">

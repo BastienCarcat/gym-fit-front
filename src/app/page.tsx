@@ -18,9 +18,9 @@ export default function HomePage({
       <CTASection />
       <FeaturesSection />
       {/* <ExercisesSection searchParams={searchParams} />
-      <RapidAPISection />
+      <RapidAPISection /> */}
       <PricingSection />
-      <FAQSection /> */}
+      {/* <FAQSection /> */}
     </>
   )
 }
