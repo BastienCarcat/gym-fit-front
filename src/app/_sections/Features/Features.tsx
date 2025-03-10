@@ -297,7 +297,6 @@ const HeaderCalculators = () => {
             'w-1/2 whitespace-nowrap text-lg font-semibold slashed-zero lining-nums tracking-tight text-gray-500'
           )}
         >
-          {/* BMR = 6.25 x height + 10 x weight - 5 x age - 161 */}
           BMI = weight (kg) / height<sup>2</sup> (m)
         </p>
         <div className="relative flex h-40 w-1/2 items-center justify-end overflow-hidden [mask-image:linear-gradient(to_left,#000_50%,transparent)]">

@@ -7,6 +7,7 @@ import { SearchParamsHome } from '@/types/home/SearchParams'
 // import FAQSection from '@/app/_sections/FAQ/FAQSection'
 // import RapidAPISection from '@/app/_sections/RapidAPI/RapidAPISection'
 import FeaturesSection from './_sections/Features/Features'
+import FAQSection from './_sections/FAQ/FAQSection'
 
 export default function HomePage({
   searchParams
@@ -20,7 +21,7 @@ export default function HomePage({
       {/* <ExercisesSection searchParams={searchParams} />
       <RapidAPISection /> */}
       <PricingSection />
-      {/* <FAQSection /> */}
+      <FAQSection />
     </>
   )
 }
