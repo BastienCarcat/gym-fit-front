@@ -141,18 +141,20 @@ export default function PricingSection() {
           </h2>
         </div> */}
 
-        <TextAnimate
-          delay={0.2}
-          duration={0.4}
-          animation="fadeIn"
-          once
-          className="mx-auto max-w-2xl px-4 pt-16 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:pt-32 sm:text-6xl lg:max-w-7xl lg:px-8"
-          segmentClassName={{
-            'you-12': 'text-sky-500'
-          }}
-        >
-          Choose the plan that’s right for you
-        </TextAnimate>
+        <div className="pb-20 sm:pb-28 lg:pb-48">
+          <TextAnimate
+            delay={0.2}
+            duration={0.4}
+            animation="fadeIn"
+            once
+            className="mx-auto max-w-2xl px-4 pt-16 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:pt-32 sm:text-6xl lg:max-w-7xl lg:px-8"
+            segmentClassName={{
+              'you-12': 'text-sky-500'
+            }}
+          >
+            Choose the plan that’s right for you
+          </TextAnimate>
+        </div>
 
         <h2 className="sr-only">Plans</h2>
 
@@ -438,7 +440,7 @@ export default function PricingSection() {
           Feature comparison
         </h2>
 
-        <div className="mx-auto max-w-7xl px-8 py-24">
+        <div className="mx-auto max-w-7xl px-8 pb-24">
           <div className="flex w-full items-stretch border-t border-gray-200">
             <div className="-mt-px flex w-1/4 items-end py-6 pr-4" />
             {plans.map((plan, planIdx) => (

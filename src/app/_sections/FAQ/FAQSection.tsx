@@ -27,13 +27,16 @@ export default function FAQSection() {
       className="mx-auto flex max-w-7xl flex-col items-center px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32"
       id="faq"
     >
-      <div className="mx-auto mb-20 max-w-2xl px-4 pt-16 text-center sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
+      <div className="pb-20 sm:pb-28 lg:pb-48">
         <TextAnimate
           delay={0.2}
           duration={0.4}
           animation="fadeIn"
           once
           className="mx-auto max-w-2xl px-4 pt-16 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:pt-32 sm:text-6xl lg:max-w-7xl lg:px-8"
+          segmentClassName={{
+            'Questions-4': 'text-sky-500'
+          }}
         >
           Frequently Asked Questions
         </TextAnimate>

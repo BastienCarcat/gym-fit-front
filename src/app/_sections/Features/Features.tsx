@@ -7,6 +7,7 @@ import {
   ImageIcon,
   MoveRightIcon,
   RedoIcon,
+  SearchIcon,
   Share2Icon,
   UndoIcon
 } from 'lucide-react'
@@ -16,35 +17,84 @@ import Image from 'next/image'
 import { Marquee } from '@/components/ui/marquee'
 import { DotPattern } from '@/components/ui/dot-pattern'
 import { SparklesCore } from '@/components/ui/sparkles'
+import { TextAnimate } from '@/components/ui/text-animate'
+import { TypingAnimation } from '@/components/ui/typing-animation'
 
-const Skeleton = () => {
+const HeaderSearchEndpoint = () => {
+  const exercises = [
+    {
+      img: '/ex_bicep_curl_image.png',
+      name: 'Bicep curl',
+      type: 'Arms'
+    },
+    {
+      img: '/ex_leg_curl_image.png',
+      name: 'Seated leg curl',
+      type: 'Legs'
+    }
+  ]
+
   const variants = {
     initial: {
-      backgroundPosition: '0 50%'
+      opacity: 100
     },
     animate: {
-      backgroundPosition: ['0, 50%', '100% 50%', '0 50%']
+      opacity: 0
+    }
+  }
+
+  const card = {
+    initial: {
+      opacity: 0
+    },
+    animate: {
+      opacity: 100
     }
   }
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={variants}
-      transition={{
-        duration: 5,
-        repeat: Number.POSITIVE_INFINITY,
-        repeatType: 'reverse'
-      }}
-      className="bg-dot-black/[0.2] flex h-full min-h-[6rem] w-full flex-1 flex-col space-y-2 rounded-lg"
-      style={{
-        background:
-          'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
-        backgroundSize: '400% 400%'
-      }}
-    >
-      <motion.div className="size-full rounded-lg"></motion.div>
-    </motion.div>
+    <div className="h-full overflow-hidden">
+      <div className="flex items-center rounded-lg border border-gray-200 bg-gray-50 p-2">
+        <SearchIcon className="mr-2 h-4 w-4 text-gray-500" />
+        <TypingAnimation as="p" startOnView delay={1} duration={80}>
+          Curl
+        </TypingAnimation>
+        <motion.p
+          initial="initial"
+          animate="animate"
+          variants={variants}
+          transition={{
+            duration: 0.8,
+            delay: 2,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: 'loop'
+          }}
+        >
+          |
+        </motion.p>
+      </div>
+
+      {exercises.map((ex, idx) => (
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={card}
+          transition={{
+            duration: 0.1,
+            delay: 0.2 + (idx + 1) * 0.2
+          }}
+          className="mt-2 flex w-full gap-4 rounded-lg border bg-gray-50 p-2"
+        >
+          <div className="relative w-16">
+            <Image src={ex.img} alt="image" layout="fill" objectFit="contain" />
+          </div>
+
+          <div>
+            <p className="text-md font-semibold text-gray-500">{ex.name}</p>
+            <p className="text-xs text-gray-500">{ex.type}</p>
+          </div>
+        </motion.div>
+      ))}
+    </div>
   )
 }
 
@@ -87,7 +137,7 @@ const HeaderRelationships = () => {
         >
           <div className="relative size-full">
             <Image
-              src="/ex_plank_image.png"
+              src="/ex_front_squat_image.png"
               alt="avatar"
               layout="fill"
               objectFit="contain"
@@ -95,7 +145,7 @@ const HeaderRelationships = () => {
           </div>
 
           <p className="text-center text-xs font-semibold text-neutral-500 sm:text-base">
-            Plank
+            Front squat
           </p>
           <p className="mt-2 rounded-full border border-gray-500 bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
             Variation
@@ -122,7 +172,7 @@ const HeaderRelationships = () => {
         >
           <div className="relative size-full">
             <Image
-              src="/ex_bench_press_image.png"
+              src="/ex_leg_press_image.png"
               alt="avatar"
               layout="fill"
               objectFit="contain"
@@ -130,17 +180,17 @@ const HeaderRelationships = () => {
           </div>
 
           <p className="text-center text-xs font-semibold text-neutral-500 sm:text-base">
-            Bench press
+            Leg Press
           </p>
           <p className="mt-2 rounded-full border border-gray-500 bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
             Alternative
           </p>
         </motion.div>
       </div>
-      <div className="absolute right-1/2 top-10 z-10 flex translate-x-[6.75rem] transform items-center justify-center">
+      <div className="absolute right-1/2 top-8 z-10 flex translate-x-[7.75rem] transform items-center justify-center">
         <RedoIcon className="h-8 w-8 rotate-12 text-neutral-500" />
       </div>
-      <div className="absolute left-1/2 top-10 z-10 flex -translate-x-[6.75rem] transform items-center justify-center">
+      <div className="absolute left-1/2 top-8 z-10 flex -translate-x-[7.75rem] transform items-center justify-center">
         <UndoIcon className="h-8 w-8 -rotate-12 text-neutral-500" />
       </div>
     </motion.div>
@@ -156,10 +206,10 @@ const HeaderImages = () => {
       src: '/ex_bench_press_image.png'
     },
     {
-      src: '/ex_plank_image.png'
+      src: '/ex_front_squat_image.png'
     },
     {
-      src: '/ex_bench_press_image.png'
+      src: '/ex_leg_curl_image.png'
     },
     {
       src: '/ex_plank_image.png'
@@ -175,7 +225,6 @@ const HeaderImages = () => {
               'relative w-40 cursor-pointer overflow-hidden rounded-xl border px-1',
               'border-neutral-200 bg-neutral-50',
               'transform-gpu transition-all duration-300 ease-out hover:scale-[1.1]'
-              //   '[mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] hover:[mask-image:none]'
             )}
           >
             <div className="relative size-full">
@@ -212,7 +261,7 @@ const HeaderLibrary = () => {
       name: 'Squat'
     },
     {
-      name: 'Bulgarian split squat'
+      name: 'Standing calf raise'
     }
   ]
   return (
@@ -338,7 +387,7 @@ const features = [
     title: 'Comprehensive Exercise Library',
     description: (
       <span className="text-sm">
-        Import thousands of exercises into your app without building your own
+        Import hundreds of exercises into your app without building your own
         database. Save months of content creation time.
       </span>
     ),
@@ -350,8 +399,8 @@ const features = [
     title: 'Ready-to-Use Calculators',
     description: (
       <span className="text-sm">
-        Implement essential fitness metrics (BMR, BMI, TDEE) without writing
-        complex formulas.
+        Implement essential fitness metrics (BMR, BMI, TDEE, IBW, ...) without
+        writing complex formulas.
       </span>
     ),
     header: <HeaderCalculators />,
@@ -391,7 +440,7 @@ const features = [
         endpoint. Build advanced filters in your app with minimal code.
       </span>
     ),
-    header: <Skeleton />,
+    header: <HeaderSearchEndpoint />,
     className: 'md:col-span-5',
     icon: <ImageIcon className="h-4 w-4 text-neutral-500" />
   }
@@ -400,6 +449,34 @@ const features = [
 export default function FeaturesSection() {
   return (
     <section className="mx-auto flex max-w-7xl flex-col items-center px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36">
+      {/* Fitness Development, Simplified */}
+      <div className="pb-20 sm:pb-28 lg:pb-48">
+        <TextAnimate
+          delay={0.2}
+          duration={0.4}
+          animation="fadeIn"
+          once
+          className="mx-auto max-w-2xl px-4 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:text-6xl lg:max-w-7xl lg:px-8"
+          segmentClassName={{
+            'Ready-6': 'text-sky-500',
+            'to-8': 'text-sky-500',
+            'Go-10': 'text-sky-500'
+          }}
+        >
+          Your Fitness Backend, Ready to Go
+        </TextAnimate>
+        <TextAnimate
+          delay={0.3}
+          duration={0.4}
+          animation="fadeIn"
+          once
+          className="mx-auto max-w-2xl px-4 pt-2 text-center text-2xl tracking-tight text-gray-500 sm:px-6 sm:pt-4 sm:text-xl lg:max-w-7xl lg:px-8"
+        >
+          Focus on your app's unique features while our API handles the exercise
+          data and calculations.
+        </TextAnimate>
+      </div>
+
       <BentoGrid className="md:auto-rows-[20rem]">
         {features.map((item, i) => (
           <BentoGridItem
