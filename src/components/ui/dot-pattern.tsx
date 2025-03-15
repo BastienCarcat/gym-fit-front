@@ -1,8 +1,9 @@
 'use client'
 
-import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import React, { useEffect, useId, useRef, useState } from 'react'
+
+import { cn } from '@/lib/utils'
 
 /**
  *  DotPattern Component Props
@@ -63,8 +64,6 @@ interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
 export function DotPattern({
   width = 16,
   height = 16,
-  x = 0,
-  y = 0,
   cx = 1,
   cy = 1,
   cr = 1,
@@ -80,12 +79,14 @@ export function DotPattern({
     const updateDimensions = () => {
       if (containerRef.current) {
         const { width, height } = containerRef.current.getBoundingClientRect()
+
         setDimensions({ width, height })
       }
     }
 
     updateDimensions()
     window.addEventListener('resize', updateDimensions)
+
     return () => window.removeEventListener('resize', updateDimensions)
   }, [])
 
@@ -98,6 +99,7 @@ export function DotPattern({
     (_, i) => {
       const col = i % Math.ceil(dimensions.width / width)
       const row = Math.floor(i / Math.ceil(dimensions.width / width))
+
       return {
         x: col * width + cx,
         y: row * height + cy,
@@ -123,15 +125,9 @@ export function DotPattern({
           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </radialGradient>
       </defs>
-      {dots.map((dot, index) => (
+      {dots.map((dot) => (
         <motion.circle
           key={`${dot.x}-${dot.y}`}
-          cx={dot.x}
-          cy={dot.y}
-          r={cr}
-          fill={glow ? `url(#${id}-gradient)` : 'currentColor'}
-          className="text-neutral-400/80"
-          initial={glow ? { opacity: 0.4, scale: 1 } : {}}
           animate={
             glow
               ? {
@@ -140,6 +136,12 @@ export function DotPattern({
                 }
               : {}
           }
+          className="text-neutral-400/80"
+          cx={dot.x}
+          cy={dot.y}
+          fill={glow ? `url(#${id}-gradient)` : 'currentColor'}
+          initial={glow ? { opacity: 0.4, scale: 1 } : {}}
+          r={cr}
           transition={
             glow
               ? {

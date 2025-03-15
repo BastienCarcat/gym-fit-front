@@ -1,7 +1,8 @@
 'use client'
-import { TextAnimate } from '@/components/ui/text-animate'
-import { useMemo } from 'react'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
+
+import { TextAnimate } from '@/components/ui/text-animate'
 
 export default function FAQSection() {
   const faqs = useMemo(
@@ -64,11 +65,11 @@ export default function FAQSection() {
     >
       <div className="pb-20 sm:pb-28 lg:pb-48">
         <TextAnimate
+          once
+          animation="fadeIn"
+          className="mx-auto max-w-2xl px-4 pt-16 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:pt-32 sm:text-6xl lg:max-w-7xl lg:px-8"
           delay={0.2}
           duration={0.4}
-          animation="fadeIn"
-          once
-          className="mx-auto max-w-2xl px-4 pt-16 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:pt-32 sm:text-6xl lg:max-w-7xl lg:px-8"
           segmentClassName={{
             'Questions-4': 'text-sky-500'
           }}
@@ -78,11 +79,11 @@ export default function FAQSection() {
       </div>
 
       <motion.dl
-        variants={showSection}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
         className="divide-y"
+        initial="hidden"
+        variants={showSection}
+        viewport={{ once: true }}
+        whileInView="show"
       >
         {faqs.map((faq, idx) => (
           <div

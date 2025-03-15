@@ -1,9 +1,10 @@
 'use client'
 import React, { useCallback, useMemo } from 'react'
-import { siteConfig } from '@/config/site'
-import { Button } from '@/components/ui/button'
 import { CheckIcon, XIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
+
+import { siteConfig } from '@/config/site'
+import { Button } from '@/components/ui/button'
 import { TextAnimate } from '@/components/ui/text-animate'
 
 // enum Billing {
@@ -145,11 +146,11 @@ export default function PricingSection() {
 
         <div className="pb-20 sm:pb-28 lg:pb-48">
           <TextAnimate
+            once
+            animation="fadeIn"
+            className="mx-auto max-w-2xl px-4 pt-16 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:pt-32 sm:text-6xl lg:max-w-7xl lg:px-8"
             delay={0.2}
             duration={0.4}
-            animation="fadeIn"
-            once
-            className="mx-auto max-w-2xl px-4 pt-16 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:pt-32 sm:text-6xl lg:max-w-7xl lg:px-8"
             segmentClassName={{
               'you-12': 'text-sky-500'
             }}
@@ -204,11 +205,11 @@ export default function PricingSection() {
         </h2>
 
         <motion.div
-          variants={showSection}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
           className="mx-auto max-w-2xl space-y-16 px-4 py-16 sm:px-6"
+          initial="hidden"
+          variants={showSection}
+          viewport={{ once: true }}
+          whileInView="show"
         >
           {plans.map((plan, mobilePlanIndex) => (
             <div key={mobilePlanIndex} className="border-t border-gray-200">
@@ -337,28 +338,28 @@ export default function PricingSection() {
                       {plan.featured ? (
                         <>
                           <Button
+                            className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
+                            variant="outline"
                             onClick={() => {
                               window.open(
                                 siteConfig.rapid_playground_url,
                                 '_blank'
                               )
                             }}
-                            variant="outline"
-                            className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
                           >
                             {plan.buttonText}
                           </Button>
                         </>
                       ) : (
                         <Button
+                          className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
+                          variant="outline"
                           onClick={() => {
                             window.open(
                               siteConfig.rapid_playground_url,
                               '_blank'
                             )
                           }}
-                          variant="outline"
-                          className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                         >
                           {plan.buttonText}
                         </Button>
@@ -442,11 +443,11 @@ export default function PricingSection() {
         </h2>
 
         <motion.div
-          variants={showSection}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
           className="mx-auto max-w-7xl px-8 pb-24"
+          initial="hidden"
+          variants={showSection}
+          viewport={{ once: true }}
+          whileInView="show"
         >
           <div className="flex w-full items-stretch border-t border-gray-200">
             <div className="-mt-px flex w-1/4 items-end py-6 pr-4" />
@@ -620,28 +621,28 @@ export default function PricingSection() {
                         {plan.featured ? (
                           <>
                             <Button
+                              className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
+                              variant="outline"
                               onClick={() => {
                                 window.open(
                                   siteConfig.rapid_playground_url,
                                   '_blank'
                                 )
                               }}
-                              variant="outline"
-                              className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
                             >
                               {plan.buttonText}
                             </Button>
                           </>
                         ) : (
                           <Button
+                            className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
+                            variant="outline"
                             onClick={() => {
                               window.open(
                                 siteConfig.rapid_playground_url,
                                 '_blank'
                               )
                             }}
-                            variant="outline"
-                            className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                           >
                             {plan.buttonText}
                           </Button>
@@ -754,21 +755,21 @@ export default function PricingSection() {
       </section>
 
       <motion.div
-        variants={showSection}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
         className="mx-auto flex max-w-2xl flex-col items-center gap-10 px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8"
+        initial="hidden"
+        variants={showSection}
+        viewport={{ once: true }}
+        whileInView="show"
       >
         <div className="w-full sm:w-1/2 lg:w-1/3">
           <p className="mb-3 text-xl font-bold text-gray-900">
             Have a custom need ?
           </p>
           <Button
+            variant="outline"
             onClick={() => {
               window.open('mailto:contact@gymfit-api.com', '_blank')
             }}
-            variant="outline"
           >
             Get in touch
           </Button>

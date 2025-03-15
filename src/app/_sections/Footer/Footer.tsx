@@ -1,5 +1,6 @@
-import { siteConfig } from '@/config/site'
 import React, { useMemo } from 'react'
+
+import { siteConfig } from '@/config/site'
 
 export default function Footer() {
   const navigation = useMemo(

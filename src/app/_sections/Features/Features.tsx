@@ -1,13 +1,15 @@
 'use client'
-import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { TextAnimate } from '@/components/ui/text-animate'
+
 import SearchEndpointFeature from './SearchEndpoint'
 import RelationshipsFeature from './Relationships'
 import ImagesFeature from './Images'
 import LibraryFeature from './Library'
 import CalculatorsFeature from './Calculators'
+
+import { TextAnimate } from '@/components/ui/text-animate'
+import { cn } from '@/lib/utils'
+import { BentoGrid, BentoGridItem } from '@/components/ui/bento-grid'
 
 const features = [
   {
@@ -80,19 +82,20 @@ export default function FeaturesSection() {
       }
     }
   }
+
   return (
     <section
-      id="features"
       className="mx-auto flex max-w-7xl flex-col items-center px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-36"
+      id="features"
     >
       {/* Fitness Development, Simplified */}
       <div className="pb-20 sm:pb-28 lg:pb-48">
         <TextAnimate
+          once
+          animation="fadeIn"
+          className="mx-auto max-w-2xl px-4 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:text-6xl lg:max-w-7xl lg:px-8"
           delay={0.2}
           duration={0.4}
-          animation="fadeIn"
-          once
-          className="mx-auto max-w-2xl px-4 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:text-6xl lg:max-w-7xl lg:px-8"
           segmentClassName={{
             'Ready-6': 'text-sky-500',
             'to-8': 'text-sky-500',
@@ -102,31 +105,31 @@ export default function FeaturesSection() {
           Your Fitness Backend, Ready to Go
         </TextAnimate>
         <TextAnimate
+          once
+          animation="fadeIn"
+          className="mx-auto max-w-2xl px-4 pt-2 text-center text-2xl tracking-tight text-gray-500 sm:px-6 sm:pt-4 sm:text-xl lg:max-w-7xl lg:px-8"
           delay={0.3}
           duration={0.4}
-          animation="fadeIn"
-          once
-          className="mx-auto max-w-2xl px-4 pt-2 text-center text-2xl tracking-tight text-gray-500 sm:px-6 sm:pt-4 sm:text-xl lg:max-w-7xl lg:px-8"
         >
-          Focus on your app's unique features while our API handles the exercise
-          data and calculations.
+          Focus on your app&apos;s unique features while our API handles the
+          exercise data and calculations.
         </TextAnimate>
       </div>
 
       <motion.div
-        variants={bentoGridVariants}
         initial="hidden"
-        whileInView="show"
+        variants={bentoGridVariants}
         viewport={{ once: true }}
+        whileInView="show"
       >
         <BentoGrid className="md:auto-rows-[20rem]">
           {features.map((item, i) => (
             <BentoGridItem
               key={i}
-              title={item.title}
+              className={cn('[&>p:text-lg]', item.className)}
               description={item.description}
               header={item.header}
-              className={cn('[&>p:text-lg]', item.className)}
+              title={item.title}
             />
           ))}
         </BentoGrid>

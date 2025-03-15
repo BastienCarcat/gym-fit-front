@@ -28,24 +28,25 @@ export default function RelationshipsFeature() {
       rotate: 15
     }
   }
+
   return (
     <motion.div
-      initial="initial"
       animate="animate"
-      whileHover="hover"
       className="relative mb-2 h-full min-h-[9rem] w-full"
+      initial="initial"
+      whileHover="hover"
     >
       <div className="bg-dot-black/[0.2] flex h-full flex-1 flex-row justify-center space-x-2">
         <motion.div
-          variants={first}
           className="z-20 flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-50 px-1 pb-4 sm:w-1/4"
+          variants={first}
         >
           <div className="relative size-full">
             <Image
-              src="/ex_front_squat_image.png"
               alt="avatar"
               layout="fill"
               objectFit="contain"
+              src="/ex_front_squat_image.png"
             />
           </div>
 
@@ -59,10 +60,10 @@ export default function RelationshipsFeature() {
         <div className="z-30 flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-50 p-4 sm:w-1/4">
           <div className="relative size-full">
             <Image
-              src="/ex_squat_image.png"
               alt="avatar"
               layout="fill"
               objectFit="contain"
+              src="/ex_squat_image.png"
             />
           </div>
 
@@ -72,15 +73,15 @@ export default function RelationshipsFeature() {
         </div>
 
         <motion.div
-          variants={second}
           className="z-20 flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-50 p-4 sm:w-1/4"
+          variants={second}
         >
           <div className="relative size-full">
             <Image
-              src="/ex_leg_press_image.png"
               alt="avatar"
               layout="fill"
               objectFit="contain"
+              src="/ex_leg_press_image.png"
             />
           </div>
 

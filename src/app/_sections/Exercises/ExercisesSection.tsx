@@ -1,33 +1,33 @@
-import React, { Suspense, useMemo } from 'react'
+// import React, { useMemo } from 'react'
 
-// import LoadingExercise from './loading'
+// // import LoadingExercise from './loading'
 
-import ExercisesSearchInput from '@/app/_sections/Exercises/Components/SearchInput'
-import ExerciseCard from '@/app/_sections/Exercises/Components/Card/Card'
-import { SearchParamsHome } from '@/types/home/SearchParams'
+// import ExercisesSearchInput from '@/app/_sections/Exercises/Components/SearchInput'
+// import ExerciseCard from '@/app/_sections/Exercises/Components/Card/Card'
+// import { SearchParamsHome } from '@/types/home/SearchParams'
 
-export default function ExercisesSection({
-  searchParams
-}: {
-  searchParams: SearchParamsHome
-}) {
-  const exerciseId = useMemo(() => {
-    return searchParams.exerciseId
-  }, [searchParams])
+// export default function ExercisesSection({
+//   searchParams
+// }: {
+//   searchParams: SearchParamsHome
+// }) {
+//   const exerciseId = useMemo(() => {
+//     return searchParams.exerciseId
+//   }, [searchParams])
 
-  return (
-    <section
-      className="mx-auto flex max-w-5xl flex-col items-center px-4 sm:px-6 lg:px-8"
-      id="search"
-    >
-      <div className="w-full max-w-xl px-4 pt-20 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
-        <ExercisesSearchInput />
-      </div>
-      <div className="z-10 w-full pt-28">
-        {/* <Suspense key={exerciseId} fallback={<LoadingExercise />}> */}
-        <ExerciseCard exerciseId={exerciseId} />
-        {/* </Suspense> */}
-      </div>
-    </section>
-  )
-}
+//   return (
+//     <section
+//       className="mx-auto flex max-w-5xl flex-col items-center px-4 sm:px-6 lg:px-8"
+//       id="search"
+//     >
+//       <div className="w-full max-w-xl px-4 pt-20 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
+//         <ExercisesSearchInput />
+//       </div>
+//       <div className="z-10 w-full pt-28">
+//         {/* <Suspense key={exerciseId} fallback={<LoadingExercise />}> */}
+//         <ExerciseCard exerciseId={exerciseId} />
+//         {/* </Suspense> */}
+//       </div>
+//     </section>
+//   )
+// }

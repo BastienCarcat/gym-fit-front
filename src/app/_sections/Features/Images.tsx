@@ -1,7 +1,8 @@
-import { Marquee } from '@/components/ui/marquee'
-import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { useMemo } from 'react'
+
+import { Marquee } from '@/components/ui/marquee'
+import { cn } from '@/lib/utils'
 
 export default function ImagesFeature() {
   const images = useMemo(
@@ -24,6 +25,7 @@ export default function ImagesFeature() {
     ],
     []
   )
+
   return (
     <div className="relative h-full min-h-[9rem] w-full overflow-hidden">
       <Marquee pauseOnHover className="absolute top-0 h-full [--duration:20s]">
@@ -38,10 +40,10 @@ export default function ImagesFeature() {
           >
             <div className="relative size-full">
               <Image
-                src={img.src}
                 alt="avatar"
                 layout="fill"
                 objectFit="contain"
+                src={img.src}
               />
             </div>
           </div>

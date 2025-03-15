@@ -1,37 +1,38 @@
+import { MoveRightIcon } from 'lucide-react'
+
 import { DotPattern } from '@/components/ui/dot-pattern'
 import { SparklesCore } from '@/components/ui/sparkles'
 import { cn } from '@/lib/utils'
-import { MoveRightIcon } from 'lucide-react'
 
 export default function CalculatorsFeature() {
   return (
     <div className="relative flex size-full min-h-[9rem] items-center justify-center">
       <DotPattern
-        width={20}
-        height={20}
-        cx={1}
-        cy={1}
-        cr={1}
         className={cn(
           '[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]'
         )}
+        cr={1}
+        cx={1}
+        cy={1}
+        height={20}
+        width={20}
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="relative h-32">
           <div className="absolute -left-10 top-0 h-1/2 w-10 translate-y-1/2">
             <SparklesCore
               background="transparent"
-              minSize={0.4}
-              maxSize={1}
-              particleDensity={800}
               className="h-full w-full"
+              maxSize={1}
+              minSize={0.4}
               particleColor="#000000"
+              particleDensity={800}
             />
           </div>
           <div className="absolute left-0 top-0 h-1/2 w-[2px] translate-y-1/2 bg-gradient-to-b from-transparent via-indigo-500 to-transparent blur-sm" />
           <div className="absolute left-0 top-0 h-1/2 w-px translate-y-1/2 bg-gradient-to-b from-transparent via-indigo-500 to-transparent" />
           <div className="absolute left-0 top-0 h-1/3 w-[3px] translate-y-full bg-gradient-to-b from-transparent via-sky-500 to-transparent blur-sm" />
-          <div className="absolute left-0 top-0 h-1/3 w-px translate-y-full bg-gradient-to-b from-transparent via-sky-500 to-transparent"></div>
+          <div className="absolute left-0 top-0 h-1/3 w-px translate-y-full bg-gradient-to-b from-transparent via-sky-500 to-transparent" />
         </div>
       </div>
 
@@ -59,7 +60,7 @@ export default function CalculatorsFeature() {
                   'w-px bg-gray-500',
                   idx % 2 === 0 ? 'h-full' : 'h-1/2'
                 )}
-              ></div>
+              />
             ))}
           </div>
           <div className="absolute right-0 top-0 flex -translate-x-10 translate-y-1/2 flex-col items-center">
