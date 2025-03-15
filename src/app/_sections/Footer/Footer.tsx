@@ -10,9 +10,9 @@ export default function Footer() {
           href: 'mailto:contact@gymfit-api.com',
           blank: false
         },
-        { name: 'Search exercise', href: '#search', blank: false },
+        // { name: 'Search exercise', href: '#search', blank: false },
         {
-          name: 'Try endpoints',
+          name: 'Try API',
           href: siteConfig.rapid_playground_url,
           blank: true
         },
@@ -71,7 +71,7 @@ export default function Footer() {
           ))}
         </div>
         <p className="mt-8 text-center text-base text-gray-400">
-          &copy; 2024 Gym Fit. All rights reserved.
+          &copy; 2025 Gym Fit. All rights reserved.
         </p>
       </div>
     </footer>

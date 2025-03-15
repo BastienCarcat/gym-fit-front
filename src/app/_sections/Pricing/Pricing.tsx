@@ -1,17 +1,18 @@
 'use client'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { siteConfig } from '@/config/site'
 import { Button } from '@/components/ui/button'
 import { CheckIcon, XIcon } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { TextAnimate } from '@/components/ui/text-animate'
 
-enum Billing {
-  Yearly = 'YEARLY',
-  Monthly = 'MONTHLY'
-}
+// enum Billing {
+//   Yearly = 'YEARLY',
+//   Monthly = 'MONTHLY'
+// }
 
 export default function PricingSection() {
-  const [billing, setBilling] = useState(Billing.Yearly)
+  // const [billing, setBilling] = useState(Billing.Yearly)
 
   const plans = useMemo(
     () => [
@@ -108,12 +109,24 @@ export default function PricingSection() {
     []
   )
 
-  const handleSwitchBilling = useCallback(
-    (billing: Billing) => {
-      setBilling(billing)
-    },
-    [setBilling]
-  )
+  const showSection = {
+    hidden: { opacity: 0, y: 20 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        delay: 0.4
+      }
+    }
+  }
+
+  // const handleSwitchBilling = useCallback(
+  //   (billing: Billing) => {
+  //     setBilling(billing)
+  //   },
+  //   [setBilling]
+  // )
 
   const classNames = useCallback((...classes: any) => {
     return classes.filter(Boolean).join(' ')
@@ -129,17 +142,6 @@ export default function PricingSection() {
     <>
       <div className="relative" id="pricing">
         {/* Overlapping background */}
-
-        {/* <div className="relative mx-auto max-w-2xl px-4 pt-16 text-center sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8">
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-6xl">
-            <span className="block text-gray-900 lg:inline">
-              Choose the plan
-            </span>
-            <span className="block text-gray-900 lg:inline lg:pl-3">
-              that’s right for <span className="text-sky-500">you</span>
-            </span>
-          </h2>
-        </div> */}
 
         <div className="pb-20 sm:pb-28 lg:pb-48">
           <TextAnimate
@@ -201,7 +203,13 @@ export default function PricingSection() {
           Feature comparison
         </h2>
 
-        <div className="mx-auto max-w-2xl space-y-16 px-4 py-16 sm:px-6">
+        <motion.div
+          variants={showSection}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="mx-auto max-w-2xl space-y-16 px-4 py-16 sm:px-6"
+        >
           {plans.map((plan, mobilePlanIndex) => (
             <div key={mobilePlanIndex} className="border-t border-gray-200">
               <div
@@ -328,16 +336,13 @@ export default function PricingSection() {
                     <dd className="flex w-full items-center sm:px-4">
                       {plan.featured ? (
                         <>
-                          {/* <Button
-                            as={Link}
-                            color="primary"
-                            href={siteConfig.rapid_plans_url}
-                            radius="sm"
-                            target="_blank"
-                          >
-                            {plan.buttonText}
-                          </Button> */}
                           <Button
+                            onClick={() => {
+                              window.open(
+                                siteConfig.rapid_playground_url,
+                                '_blank'
+                              )
+                            }}
                             variant="outline"
                             className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
                           >
@@ -345,17 +350,13 @@ export default function PricingSection() {
                           </Button>
                         </>
                       ) : (
-                        // <Button
-                        //   as={Link}
-                        //   color="primary"
-                        //   href={siteConfig.rapid_plans_url}
-                        //   radius="sm"
-                        //   target="_blank"
-                        //   variant="ghost"
-                        // >
-                        //   {plan.buttonText}
-                        // </Button>
                         <Button
+                          onClick={() => {
+                            window.open(
+                              siteConfig.rapid_playground_url,
+                              '_blank'
+                            )
+                          }}
                           variant="outline"
                           className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                         >
@@ -384,7 +385,7 @@ export default function PricingSection() {
 
               {/*  <h4 className="mt-10 text-sm font-bold text-gray-900">Other perks</h4>
 
-              <div className="mt-6 relative">
+              <motion.div className="mt-6 relative">
                 {/* Fake card background */}
               {/*  <div aria-hidden="true" className="hidden absolute inset-0 pointer-events-none sm:block">
                   <div
@@ -431,7 +432,7 @@ export default function PricingSection() {
               </div>*/}
             </div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* Feature comparison (lg+) */}
@@ -440,7 +441,13 @@ export default function PricingSection() {
           Feature comparison
         </h2>
 
-        <div className="mx-auto max-w-7xl px-8 pb-24">
+        <motion.div
+          variants={showSection}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="mx-auto max-w-7xl px-8 pb-24"
+        >
           <div className="flex w-full items-stretch border-t border-gray-200">
             <div className="-mt-px flex w-1/4 items-end py-6 pr-4" />
             {plans.map((plan, planIdx) => (
@@ -612,16 +619,13 @@ export default function PricingSection() {
                       <div className="mx-3">
                         {plan.featured ? (
                           <>
-                            {/* <Button
-                              as={Link}
-                              color="primary"
-                              href={siteConfig.rapid_plans_url}
-                              radius="sm"
-                              target="_blank"
-                            >
-                              {plan.buttonText}
-                            </Button> */}
                             <Button
+                              onClick={() => {
+                                window.open(
+                                  siteConfig.rapid_playground_url,
+                                  '_blank'
+                                )
+                              }}
                               variant="outline"
                               className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
                             >
@@ -629,17 +633,13 @@ export default function PricingSection() {
                             </Button>
                           </>
                         ) : (
-                          // <Button
-                          //   as={Link}
-                          //   color="primary"
-                          //   href={siteConfig.rapid_plans_url}
-                          //   radius="sm"
-                          //   target="_blank"
-                          //   variant="ghost"
-                          // >
-                          //   {plan.buttonText}
-                          // </Button>
                           <Button
+                            onClick={() => {
+                              window.open(
+                                siteConfig.rapid_playground_url,
+                                '_blank'
+                              )
+                            }}
                             variant="outline"
                             className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                           >
@@ -750,30 +750,35 @@ export default function PricingSection() {
               </div>
             </div>
           </div>*/}
-        </div>
+        </motion.div>
       </section>
 
-      <div className="mx-auto flex max-w-2xl flex-col items-center gap-10 px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
+      <motion.div
+        variants={showSection}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="mx-auto flex max-w-2xl flex-col items-center gap-10 px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8"
+      >
         <div className="w-full sm:w-1/2 lg:w-1/3">
           <p className="mb-3 text-xl font-bold text-gray-900">
             Have a custom need ?
           </p>
-          {/* <Button
-            as={Link}
-            color="primary"
-            href="mailto:contact@gymfit-api.com"
-            variant="flat"
+          <Button
+            onClick={() => {
+              window.open('mailto:contact@gymfit-api.com', '_blank')
+            }}
+            variant="outline"
           >
             Get in touch
-          </Button> */}
-          <Button variant="outline">Get in touch</Button>
+          </Button>
         </div>
         <div>
           <p className="text-18 sm:text-20 mb-2">
             Not sure what plan you need?
             <a
               className="pl-2 font-bold underline"
-              href={siteConfig.rapid_plans_url}
+              href={siteConfig.rapid_playground_url}
               rel="noreferrer"
               target="_blank"
             >
@@ -784,7 +789,7 @@ export default function PricingSection() {
             (No credit card required)
           </p>
         </div>
-      </div>
+      </motion.div>
     </>
   )
 }

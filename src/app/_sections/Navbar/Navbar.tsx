@@ -1,89 +1,18 @@
-// import React from 'react'
-// import {
-//   Button,
-//   Link,
-//   Navbar as NavbarUI,
-//   NavbarBrand,
-//   NavbarContent,
-//   NavbarItem
-// } from '@nextui-org/react'
-// import { siteConfig } from '@/config/site'
-// import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-// import Image from 'next/image'
-
-// export default function Navbar() {
-//   return (
-//     <NavbarUI shouldHideOnScroll>
-//       <NavbarBrand>
-//         <Image
-//           className="rounded-full"
-//           src="/logo.png"
-//           alt="gymfit-logo"
-//           width={40}
-//           height={40}
-//         ></Image>
-//       </NavbarBrand>
-//       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
-//         <NavbarItem>
-//           <Link isBlock color="foreground" href="#search">
-//             Search exercise
-//           </Link>
-//         </NavbarItem>
-//         <NavbarItem>
-//           <Link
-//             isBlock
-//             color="foreground"
-//             href={siteConfig.documentation_url}
-//             target="_blank"
-//           >
-//             Documentation
-//           </Link>
-//         </NavbarItem>
-//         <NavbarItem>
-//           <Link isBlock color="foreground" href="#pricing">
-//             Pricing
-//           </Link>
-//         </NavbarItem>
-//         <NavbarItem>
-//           <Link isBlock color="foreground" href="#faq">
-//             FAQ
-//           </Link>
-//         </NavbarItem>
-//       </NavbarContent>
-//       <NavbarContent justify="end">
-//         <NavbarItem>
-//           <Button
-//             as={Link}
-//             color="primary"
-//             href={siteConfig.rapid_playground_url}
-//             target="_blank"
-//             variant="flat"
-//           >
-//             Try API
-//           </Button>
-//         </NavbarItem>
-//         <NavbarItem>
-//           <SignedOut>
-//             <SignInButton />
-//           </SignedOut>
-//           <SignedIn>
-//             <UserButton />
-//           </SignedIn>
-//         </NavbarItem>
-//       </NavbarContent>
-//     </NavbarUI>
-//   )
-// }
 'use client'
 
+import { siteConfig } from '@/config/site'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
 
 const navItems = [
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'Features', href: '/features' },
-  { name: 'Documentation', href: '/docs' }
+  { name: 'Pricing', href: siteConfig.rapid_plans_url, target: '_blank' },
+  { name: 'Features', href: '#features', target: '_self' },
+  {
+    name: 'Documentation',
+    href: siteConfig.documentation_url,
+    target: '_blank'
+  }
 ]
 
 export default function Navbar() {
@@ -115,6 +44,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
+                target={item.target}
                 className="mx-1 rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
@@ -136,6 +66,13 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      <Link
+        className="absolute right-4 top-4 rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-600"
+        href={siteConfig.rapid_playground_url}
+        target="_blank"
+      >
+        Try For Free
+      </Link>
     </nav>
   )
 }

@@ -1,13 +1,12 @@
 import React from 'react'
 
-import PricingSection from '@/app/_sections/Pricing/PricingSection'
-import CTASection from '@/app/_sections/Hero/HeroSection'
-import ExercisesSection from '@/app/_sections/Exercises/ExercisesSection'
+import Pricing from '@/app/_sections/Pricing/Pricing'
+import HeroSection from '@/app/_sections/Hero/Hero'
 import { SearchParamsHome } from '@/types/home/SearchParams'
 // import FAQSection from '@/app/_sections/FAQ/FAQSection'
 // import RapidAPISection from '@/app/_sections/RapidAPI/RapidAPISection'
-import FeaturesSection from './_sections/Features/Features'
-import FAQSection from './_sections/FAQ/FAQSection'
+import Features from './_sections/Features/Features'
+import FAQ from './_sections/FAQ/FAQ'
 
 export default function HomePage({
   searchParams
@@ -16,12 +15,12 @@ export default function HomePage({
 }) {
   return (
     <>
-      <CTASection />
-      <FeaturesSection />
+      <HeroSection />
+      <Features />
       {/* <ExercisesSection searchParams={searchParams} />
       <RapidAPISection /> */}
-      <PricingSection />
-      <FAQSection />
+      <Pricing />
+      <FAQ />
     </>
   )
 }
