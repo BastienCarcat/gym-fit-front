@@ -100,7 +100,7 @@ export default function HeroSection() {
         {/* Image container - positioned below text on mobile, to the right on desktop */}
         <motion.div
           animate="show"
-          className="relative mt-12 h-[300px] w-full overflow-hidden sm:h-[400px] md:h-[500px] lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:h-full lg:w-[60%] xl:w-[70%]"
+          className="relative mt-12 h-[300px] w-full overflow-hidden pr-4 sm:h-[400px] sm:pr-6 md:h-[500px] lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:h-full lg:w-[75%] lg:pr-8 xl:w-[80%]"
           initial="hidden"
           variants={fadeInUp(0.1)}
         >
@@ -114,7 +114,7 @@ export default function HeroSection() {
               )}
               quality={100}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 70vw"
-              src="/hero_image.jpg"
+              src="/hero_image.png"
               style={{ objectFit: 'cover' }}
             />
           </div>
