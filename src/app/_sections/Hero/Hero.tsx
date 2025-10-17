@@ -22,7 +22,15 @@ export default function HeroSection() {
   })
 
   return (
-    <section className="relative mx-auto my-12 max-w-7xl px-4 py-10 sm:my-24 sm:px-6 sm:py-16 md:my-36 lg:my-48 lg:px-8 lg:py-36">
+    <section className="relative mx-auto flex min-h-screen items-center justify-center overflow-hidden px-4 py-10 sm:px-6 sm:py-16 lg:my-48 lg:block lg:min-h-0 lg:max-w-7xl lg:px-8 lg:py-36">
+      {/* Mobile background effect - hidden on desktop */}
+      <div className="absolute inset-0 -z-10 lg:hidden">
+        <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-sky-400 opacity-20 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-[400px] w-[400px] translate-x-1/4 translate-y-1/4 rounded-full bg-blue-500 opacity-15 blur-3xl" />
+        <div className="absolute left-0 top-1/2 h-[350px] w-[350px] -translate-x-1/4 -translate-y-1/2 rounded-full bg-cyan-400 opacity-20 blur-3xl" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white" />
+      </div>
+
       <div className="flex flex-col items-center lg:flex-row lg:items-start lg:justify-between">
         {/* Text content - full width on mobile, constrained on desktop */}
         <div className="relative z-20 w-full text-center lg:max-w-2xl lg:text-left">
@@ -89,7 +97,7 @@ export default function HeroSection() {
               <NumberTicker
                 className="font-semibold"
                 startValue={150}
-                value={900}
+                value={1100}
               />{' '}
               developers
             </p>
@@ -100,7 +108,7 @@ export default function HeroSection() {
         {/* Image container - positioned below text on mobile, to the right on desktop */}
         <motion.div
           animate="show"
-          className="relative mt-12 h-[300px] w-full overflow-hidden pr-4 sm:h-[400px] sm:pr-6 md:h-[500px] lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:h-full lg:w-[75%] lg:pr-8 xl:w-[80%]"
+          className="relative mt-12 hidden h-[300px] w-full overflow-hidden pr-4 sm:h-[400px] sm:pr-6 md:h-[500px] lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:block lg:h-full lg:w-[75%] lg:pr-8 xl:w-[80%]"
           initial="hidden"
           variants={fadeInUp(0.1)}
         >

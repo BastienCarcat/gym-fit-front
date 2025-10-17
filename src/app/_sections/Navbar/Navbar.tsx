@@ -19,6 +19,7 @@ const navItems = [
 export default function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [backgroundStyles, setBackgroundStyles] = useState({})
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -39,41 +40,96 @@ export default function Navbar() {
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 bg-white bg-opacity-70 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-center">
-          <div ref={navRef} className="relative flex items-center">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.name}
-                className="mx-1 rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
-                href={item.href}
-                target={item.target}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <AnimatePresence>
-              {hoveredIndex !== null && (
-                <motion.span
-                  animate={{ ...backgroundStyles, opacity: 1 }}
-                  className="absolute -z-10 rounded-md bg-gray-200"
-                  exit={{ opacity: 0 }}
-                  initial={{ opacity: 0 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                />
-              )}
-            </AnimatePresence>
+        <div className="flex h-16 items-center justify-between">
+          {/* Desktop Navigation - Hidden on mobile */}
+          <div className="hidden flex-1 justify-center md:flex">
+            <div ref={navRef} className="relative flex items-center">
+              {navItems.map((item, index) => (
+                <Link
+                  key={item.name}
+                  className="mx-1 rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
+                  href={item.href}
+                  target={item.target}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <AnimatePresence>
+                {hoveredIndex !== null && (
+                  <motion.span
+                    animate={{ ...backgroundStyles, opacity: 1 }}
+                    className="absolute -z-10 rounded-md bg-gray-200"
+                    exit={{ opacity: 0 }}
+                    initial={{ opacity: 0 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            className="inline-flex items-center justify-center rounded-md p-2 text-gray-900 hover:bg-gray-200 hover:text-gray-900 focus:outline-none md:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isMobileMenuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
+          {/* Try For Free button - Desktop */}
+          <Link
+            className="rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-600"
+            href={siteConfig.rapid_playground_url}
+            target="_blank"
+          >
+            Try For Free
+          </Link>
         </div>
       </div>
-      <Link
-        className="absolute right-4 top-4 rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-600"
-        href={siteConfig.rapid_playground_url}
-        target="_blank"
-      >
-        Try For Free
-      </Link>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 0.7, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden md:hidden"
+          >
+            <div className="space-y-1 px-4 pb-3 pt-2 backdrop-blur-xl">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-200 hover:text-gray-900"
+                  href={item.href}
+                  target={item.target}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }
