@@ -24,9 +24,9 @@ export default function TermsOfUsePage() {
             </h2>
             <p className="mt-4">
               By subscribing to any of the GymFit API plans offered on our
-              website or through our distribution partners, you ("the
-              subscriber") confirm that you have read, understood, and agree to
-              the Terms of Use outlined below.
+              website or through our distribution partners, you (&quot;the
+              subscriber&quot;) confirm that you have read, understood, and
+              agree to the Terms of Use outlined below.
             </p>
             <p className="mt-4">
               Failure to comply with these terms may result in the suspension or
@@ -134,7 +134,7 @@ export default function TermsOfUsePage() {
               and/or daily request quotas). These limits are enforced to ensure
               fair usage and service stability for all subscribers.
             </p>
-            <p className="mt-4">If you exceed your plan's rate limits:</p>
+            <p className="mt-4">If you exceed your plan&apos;s rate limits:</p>
             <ul className="mt-4 list-disc space-y-2 pl-6">
               <li>
                 Your requests may be throttled or temporarily blocked until the
@@ -256,10 +256,11 @@ export default function TermsOfUsePage() {
             </p>
             <p className="mt-4">
               However, refund requests may be reviewed on a case-by-case basis
-              at GymFit's sole discretion. To request a refund, please contact{' '}
+              at GymFit&apos;s sole discretion. To request a refund, please
+              contact{' '}
               <Link
-                href="mailto:contact@gymfit-api.com"
                 className="font-medium text-blue-600 hover:text-blue-800"
+                href="mailto:contact@gymfit-api.com"
               >
                 contact@gymfit-api.com
               </Link>{' '}
@@ -281,9 +282,10 @@ export default function TermsOfUsePage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900">Disclaimer</h2>
             <p className="mt-4">
-              The GymFit API and its data are provided "as is", "with all
-              faults", and "as available". While GymFit strives for accuracy and
-              reliability, we make no warranties or guarantees regarding:
+              The GymFit API and its data are provided &quot;as is&quot;,
+              &quot;with all faults&quot;, and &quot;as available&quot;. While
+              GymFit strives for accuracy and reliability, we make no warranties
+              or guarantees regarding:
             </p>
             <ul className="mt-4 list-disc space-y-2 pl-6">
               <li>The completeness, accuracy, or reliability of the data,</li>
@@ -397,8 +399,8 @@ export default function TermsOfUsePage() {
             </p>
             <p className="mt-4">
               <Link
-                href="mailto:contact@gymfit-api.com"
                 className="font-medium text-blue-600 hover:text-blue-800"
+                href="mailto:contact@gymfit-api.com"
               >
                 contact@gymfit-api.com
               </Link>

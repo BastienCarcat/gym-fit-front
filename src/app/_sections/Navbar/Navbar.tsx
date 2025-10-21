@@ -72,18 +72,18 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <button
+            aria-label="Toggle menu"
             className="inline-flex items-center justify-center rounded-md p-2 text-gray-900 hover:bg-gray-200 hover:text-gray-900 focus:outline-none md:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
           >
             <svg
               className="h-6 w-6"
               fill="none"
+              stroke="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
               viewBox="0 0 24 24"
-              stroke="currentColor"
             >
               {isMobileMenuOpen ? (
                 <path d="M6 18L18 6M6 6l12 12" />
@@ -108,11 +108,11 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 0.7, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
             className="overflow-hidden md:hidden"
+            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
           >
             <div className="space-y-1 px-4 pb-3 pt-2 backdrop-blur-xl">
               {navItems.map((item) => (
