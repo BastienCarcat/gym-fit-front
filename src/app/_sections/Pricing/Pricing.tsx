@@ -2,6 +2,7 @@
 import React, { useCallback, useMemo } from 'react'
 import { CheckIcon, XIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 import { siteConfig } from '@/config/site'
 import { Button } from '@/components/ui/button'
@@ -777,14 +778,14 @@ export default function PricingSection() {
         <div>
           <p className="text-18 sm:text-20 mb-2">
             Not sure what plan you need?
-            <a
+            <Link
               className="pl-2 font-bold underline"
               href={siteConfig.rapid_playground_url}
               rel="noreferrer"
               target="_blank"
             >
               Try for free in Basic plan
-            </a>
+            </Link>
           </p>
           <p className="text-16 sm:text-18 text-gray-500">
             (No credit card required)
