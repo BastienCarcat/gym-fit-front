@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(redirectTo)
     }
 
-    redirectTo.searchParams.set('error', error.message)
+    redirectTo.searchParams.set('error', error?.message || 'Unknown error')
     return NextResponse.redirect(redirectTo)
   }
 

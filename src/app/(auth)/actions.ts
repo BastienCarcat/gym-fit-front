@@ -22,7 +22,7 @@ export async function login(formData: FormData) {
   redirect('/dashboard')
 }
 
-export async function signup(formData: FormData) {
+export async function signup(formData: FormData): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient()
 
   const data = {
@@ -30,7 +30,7 @@ export async function signup(formData: FormData) {
     password: formData.get('password') as string
   }
 
-  const { error } = await supabase.auth.signUp({
+  const { data: authData, error } = await supabase.auth.signUp({
     ...data,
     options: {
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/confirm`
@@ -38,10 +38,34 @@ export async function signup(formData: FormData) {
   })
 
   if (error) {
-    redirect('/signup?error=' + encodeURIComponent(error.message))
+    return { success: false, error: error.message }
   }
 
-  redirect('/signup?message=Check your email to confirm your account')
+  // When "Confirm email" is enabled and user already exists,
+  // Supabase returns a fake user with empty identities array
+  if (authData.user && authData.user.identities?.length === 0) {
+    return { success: false, error: 'An account with this email already exists' }
+  }
+
+  return { success: true }
+}
+
+export async function resendConfirmationEmail(email: string): Promise<{ success: boolean; error?: string }> {
+  const supabase = await createClient()
+
+  const { error } = await supabase.auth.resend({
+    type: 'signup',
+    email,
+    options: {
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/confirm`
+    }
+  })
+
+  if (error) {
+    return { success: false, error: error.message }
+  }
+
+  return { success: true }
 }
 
 export async function signout() {

@@ -9,12 +9,7 @@ export default function TermsOfUsePage() {
           GymFit API — Terms of Use
         </h1>
         <p className="mt-6 text-lg text-gray-500">
-          Last updated:{' '}
-          {new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
+          Last updated: January 12, 2025
         </p>
 
         <div className="mt-10 space-y-10 text-base leading-7 text-gray-700">

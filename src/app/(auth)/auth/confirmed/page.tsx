@@ -22,13 +22,13 @@ export default async function ConfirmedPage({
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Email confirmed!</h1>
               <p className="mt-2 text-sm text-gray-500">
-                Your email has been successfully verified. You can now sign in to
-                your account.
+                Your email has been successfully verified. You can now access
+                your dashboard.
               </p>
             </div>
 
             <Button asChild className="w-full bg-sky-500 hover:bg-sky-600" size="lg">
-              <Link href="/login">Sign in to your account</Link>
+              <Link href="/dashboard">Go to dashboard</Link>
             </Button>
           </>
         ) : (

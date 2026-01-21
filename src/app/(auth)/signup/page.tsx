@@ -1,14 +1,92 @@
-import Link from 'next/link'
-import { signup, signInWithGithub } from '../actions'
-import { Button } from '@/components/ui/button'
-import { IconBrandGithub } from '@tabler/icons-react'
+'use client'
 
-export default async function SignupPage({
-  searchParams
-}: {
-  searchParams: Promise<{ error?: string; message?: string }>
-}) {
-  const { error, message } = await searchParams
+import { useState } from 'react'
+import Link from 'next/link'
+import { signup, signInWithGithub, resendConfirmationEmail } from '../actions'
+import { Button } from '@/components/ui/button'
+import { IconBrandGithub, IconMail } from '@tabler/icons-react'
+
+export default function SignupPage() {
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [email, setEmail] = useState('')
+  const [isResending, setIsResending] = useState(false)
+  const [resendMessage, setResendMessage] = useState<string | null>(null)
+
+  async function handleSubmit(formData: FormData) {
+    setIsLoading(true)
+    setError(null)
+
+    const emailValue = formData.get('email') as string
+    setEmail(emailValue)
+
+    const result = await signup(formData)
+
+    if (result.success) {
+      setIsSuccess(true)
+    } else {
+      setError(result.error || 'An error occurred')
+    }
+
+    setIsLoading(false)
+  }
+
+  async function handleResend() {
+    setIsResending(true)
+    setResendMessage(null)
+
+    const result = await resendConfirmationEmail(email)
+
+    if (result.success) {
+      setResendMessage('Email sent! Check your inbox.')
+    } else {
+      setResendMessage(result.error || 'Failed to resend email')
+    }
+
+    setIsResending(false)
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="w-full max-w-md space-y-6 rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-sky-100">
+            <IconMail className="h-8 w-8 text-sky-600" />
+          </div>
+
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Check your email</h1>
+            <p className="mt-2 text-sm text-gray-500">
+              We&apos;ve sent a confirmation link to <span className="font-medium text-gray-700">{email}</span>.
+              Please check your inbox and click the link to activate your account.
+            </p>
+          </div>
+
+          {resendMessage && (
+            <div className={`rounded-md p-3 text-sm ${
+              resendMessage.includes('sent')
+                ? 'bg-green-50 text-green-600'
+                : 'bg-red-50 text-red-600'
+            }`}>
+              {resendMessage}
+            </div>
+          )}
+
+          <div className="rounded-md bg-gray-50 p-4 text-sm text-gray-600">
+            Didn&apos;t receive the email? Check your spam folder or{' '}
+            <button
+              onClick={handleResend}
+              disabled={isResending}
+              className="text-sky-500 hover:underline disabled:opacity-50"
+            >
+              {isResending ? 'sending...' : 'resend email'}
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
@@ -26,13 +104,7 @@ export default async function SignupPage({
           </div>
         )}
 
-        {message && (
-          <div className="rounded-md bg-green-50 p-3 text-sm text-green-600">
-            {message}
-          </div>
-        )}
-
-        <form className="space-y-4">
+        <form action={handleSubmit} className="space-y-4">
           <div>
             <label
               htmlFor="email"
@@ -71,8 +143,13 @@ export default async function SignupPage({
             </p>
           </div>
 
-          <Button formAction={signup} className="w-full bg-sky-500 hover:bg-sky-600" size="lg">
-            Create account
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-sky-500 hover:bg-sky-600"
+            size="lg"
+          >
+            {isLoading ? 'Creating account...' : 'Create account'}
           </Button>
         </form>
 
@@ -85,9 +162,9 @@ export default async function SignupPage({
           </div>
         </div>
 
-        <form>
+        <form action={signInWithGithub}>
           <Button
-            formAction={signInWithGithub}
+            type="submit"
             variant="outline"
             className="w-full"
             size="lg"
