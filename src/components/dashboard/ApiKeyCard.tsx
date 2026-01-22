@@ -3,6 +3,14 @@
 import { useState, useTransition } from 'react'
 import { Button } from '@/components/ui/button'
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from '@/components/ui/dialog'
+import {
   getApiKey,
   generateApiKey,
   regenerateApiKey,
@@ -14,7 +22,8 @@ import {
   IconEyeOff,
   IconKey,
   IconRefresh,
-  IconTrash
+  IconTrash,
+  IconAlertCircle
 } from '@tabler/icons-react'
 
 interface ApiKeyData {
@@ -41,6 +50,7 @@ export function ApiKeyCard({ initialData }: ApiKeyCardProps) {
   const [isRevealed, setIsRevealed] = useState(false)
   const [copied, setCopied] = useState(false)
   const [isPending, startTransition] = useTransition()
+  const [showRegenerateDialog, setShowRegenerateDialog] = useState(false)
 
   const handleReveal = () => {
     if (isRevealed) {
@@ -99,6 +109,7 @@ export function ApiKeyCard({ initialData }: ApiKeyCardProps) {
         const newData = await regenerateApiKey()
         setData(newData)
         setIsRevealed(true)
+        setShowRegenerateDialog(true)
       } catch (error) {
         console.error('Failed to regenerate API key:', error)
       }
@@ -226,8 +237,8 @@ export function ApiKeyCard({ initialData }: ApiKeyCardProps) {
                     >
                       Expires: {new Date(key.expiresOn).toLocaleDateString()}
                     </span>
-                  )} 
-    
+                  )}
+
                 </div>
                 <Button
                   variant="ghost"
@@ -243,6 +254,33 @@ export function ApiKeyCard({ initialData }: ApiKeyCardProps) {
           </div>
         </div>
       )} */}
+
+      <Dialog open={showRegenerateDialog} onOpenChange={setShowRegenerateDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <IconAlertCircle className="h-5 w-5 text-amber-500" />
+              API Key Regenerated
+            </DialogTitle>
+            <DialogDescription className="pt-2">
+              Your new API key has been generated and is now active. For security
+              reasons, your <strong>previous key will remain functional for 5
+              minutes</strong> to allow any in-flight requests to complete.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="rounded-md border border-amber-200 bg-amber-50 p-3">
+            <p className="text-sm text-amber-800">
+              Make sure to update your applications with the new key before the
+              grace period expires.
+            </p>
+          </div>
+          <DialogFooter>
+            <Button onClick={() => setShowRegenerateDialog(false)}>
+              Got it
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
