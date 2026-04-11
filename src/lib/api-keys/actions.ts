@@ -19,6 +19,12 @@ interface ApiKeyResponse {
     expiresOn?: string
     description?: string
   }>
+  // Stripe subscription fields
+  stripeCustomerId?: string
+  stripeSubscriptionId?: string | null
+  subscriptionStatus?: string
+  currentPeriodEnd?: string | null
+  cancelAtPeriodEnd?: boolean
 }
 
 async function getAuthenticatedUser() {

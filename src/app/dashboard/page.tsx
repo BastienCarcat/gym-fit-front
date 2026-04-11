@@ -7,6 +7,7 @@ import { IconArrowLeft } from '@tabler/icons-react'
 import { ApiKeyCard } from '@/components/dashboard/ApiKeyCard'
 import { PlanCard } from '@/components/dashboard/PlanCard'
 import { getApiKey } from '@/lib/api-keys/actions'
+import { getSubscription } from '@/lib/billing/actions'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -18,7 +19,12 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  const apiKeyData = await getApiKey(false)
+  // Fetch API key and subscription data in parallel
+  // Both calls have error handling to prevent page crashes
+  const [apiKeyData, subscriptionData] = await Promise.all([
+    getApiKey(false).catch(() => null),
+    getSubscription().catch(() => null)
+  ])
 
   return (
     <div className="min-h-screen bg-white">
@@ -51,7 +57,12 @@ export default async function DashboardPage() {
       <main className="p-6">
         <div className="grid gap-6 lg:grid-cols-3">
           <ApiKeyCard initialData={apiKeyData} />
-          {/* <PlanCard plan={apiKeyData?.plan || 'free'} requestsUsed={0} /> */}
+          <PlanCard
+            plan={subscriptionData?.plan || apiKeyData?.plan || 'free'}
+            requestsUsed={0}
+            cancelAtPeriodEnd={subscriptionData?.cancelAtPeriodEnd || false}
+            currentPeriodEnd={subscriptionData?.activeTo || null}
+          />
         </div>
       </main>
     </div>
