@@ -195,7 +195,7 @@ export default function PlansPage() {
           {canceled && (
             <div className="mx-auto mt-6 max-w-md rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="text-center text-sm text-amber-800">
-                Checkout was canceled. You can try again when you're ready.
+                Checkout was canceled. You can try again when you&apos;re ready.
               </p>
             </div>
           )}

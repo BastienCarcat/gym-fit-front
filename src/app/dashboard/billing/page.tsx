@@ -272,7 +272,7 @@ export default function BillingPage() {
           {!isPaid && (
             <div className="mt-6 rounded-xl border border-gray-200 p-6 text-center">
               <p className="text-gray-500">
-                You're on the free plan. Upgrade to unlock more features and higher limits.
+                You&apos;re on the free plan. Upgrade to unlock more features and higher limits.
               </p>
               <Link href="/dashboard/plans">
                 <Button className="mt-4 bg-sky-500 hover:bg-sky-600">

@@ -17,7 +17,7 @@ import {
 import { KeyRoundIcon } from 'lucide-react'
 
 const navItems = [
-  { name: 'Pricing', href: siteConfig.rapid_plans_url, target: '_blank' },
+  { name: 'Pricing', href: siteConfig.plans_url, target: '_self' },
   { name: 'Features', href: '#features', target: '_self' },
   {
     name: 'Documentation',
@@ -179,8 +179,7 @@ export default function Navbar() {
             {!user && (
               <Link
                 className="rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-600"
-                href={siteConfig.rapid_playground_url}
-                target="_blank"
+                href="/signup"
               >
                 Try For Free
               </Link>

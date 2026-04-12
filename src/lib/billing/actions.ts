@@ -270,3 +270,41 @@ export async function changePlan(newPlan: SubscriptionPlan): Promise<{
 
   return response.json()
 }
+
+interface UsageResponse {
+  usage: number
+  included: number
+  overage: number
+  isSoftLimit: boolean
+  periodStart: string | null
+  periodEnd: string | null
+}
+
+/**
+ * Get current billing period usage from OpenMeter
+ */
+export async function getUsage(): Promise<UsageResponse> {
+  const user = await getAuthenticatedUser()
+
+  if (!API_BASE_URL || !WEBHOOK_SECRET) {
+    throw new Error('API configuration missing')
+  }
+
+  const response = await fetch(
+    `${API_BASE_URL}/v1/api-keys/${user.id}/usage`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-webhook-secret': WEBHOOK_SECRET
+      }
+    }
+  )
+
+  if (!response.ok) {
+    const error = await response.text()
+    throw new Error(`Failed to get usage: ${error}`)
+  }
+
+  return response.json()
+}

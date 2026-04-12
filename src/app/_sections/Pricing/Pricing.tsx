@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react'
 import { CheckIcon, XIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { siteConfig } from '@/config/site'
 import { Button } from '@/components/ui/button'
@@ -15,11 +16,12 @@ import { TextAnimate } from '@/components/ui/text-animate'
 
 export default function PricingSection() {
   // const [billing, setBilling] = useState(Billing.Yearly)
+  const router = useRouter()
 
   const plans = useMemo(
     () => [
       {
-        title: 'Basic',
+        title: 'Free',
         featured: false,
         free: true,
         priceMonthly: 0,
@@ -31,21 +33,21 @@ export default function PricingSection() {
         featured: false,
         free: false,
         priceMonthly: 5,
-        buttonText: 'Try For Free'
-      },
-      {
-        title: 'Ultra',
-        featured: true,
-        free: false,
-        priceMonthly: 9,
-        buttonText: 'Try For Free'
+        buttonText: 'Get started'
       },
       {
         title: 'Mega',
+        featured: true,
+        free: false,
+        priceMonthly: 9,
+        buttonText: 'Get started'
+      },
+      {
+        title: 'Ultra',
         featured: false,
         free: false,
         priceMonthly: 11,
-        buttonText: 'Try For Free'
+        buttonText: 'Get started'
       }
     ],
     []
@@ -54,7 +56,7 @@ export default function PricingSection() {
   const features = useMemo(
     () => [
       {
-        title: 'Requests',
+        title: 'Requests / month',
         tiers: [
           { value: '500' },
           { value: '5,000' },
@@ -63,25 +65,16 @@ export default function PricingSection() {
         ]
       },
       {
-        title: 'Requests limit',
+        title: 'Overage',
         tiers: [
           { value: 'Hard limit' },
-          { value: '$0.003 each' },
-          { featured: true, value: '$0.003 each' },
-          { value: '$0.001 each' }
+          { value: '$0.003/req' },
+          { featured: true, value: '$0.003/req' },
+          { value: '$0.001/req' }
         ]
       },
       {
-        title: 'Rate limit',
-        tiers: [
-          { value: '1,000 req/h' },
-          { value: '60 req/min' },
-          { featured: true, value: '60 req/min' },
-          { value: '120 req/min' }
-        ]
-      },
-      {
-        title: 'Include calculators',
+        title: 'Calculators',
         tiers: [
           { value: true },
           { value: true },
@@ -102,7 +95,7 @@ export default function PricingSection() {
         title: 'Priority support',
         tiers: [
           { value: false },
-          { value: true },
+          { value: false },
           { featured: true, value: true },
           { value: true }
         ]
@@ -337,30 +330,18 @@ export default function PricingSection() {
                     <dt />
                     <dd className="flex w-full items-center sm:px-4">
                       {plan.featured ? (
-                        <>
-                          <Button
-                            className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
-                            variant="outline"
-                            onClick={() => {
-                              window.open(
-                                siteConfig.rapid_playground_url,
-                                '_blank'
-                              )
-                            }}
-                          >
-                            {plan.buttonText}
-                          </Button>
-                        </>
+                        <Button
+                          className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
+                          variant="outline"
+                          onClick={() => router.push(siteConfig.plans_url)}
+                        >
+                          {plan.buttonText}
+                        </Button>
                       ) : (
                         <Button
                           className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                           variant="outline"
-                          onClick={() => {
-                            window.open(
-                              siteConfig.rapid_playground_url,
-                              '_blank'
-                            )
-                          }}
+                          onClick={() => router.push(siteConfig.plans_url)}
                         >
                           {plan.buttonText}
                         </Button>
@@ -620,30 +601,18 @@ export default function PricingSection() {
                     >
                       <div className="mx-3">
                         {plan.featured ? (
-                          <>
-                            <Button
-                              className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
-                              variant="outline"
-                              onClick={() => {
-                                window.open(
-                                  siteConfig.rapid_playground_url,
-                                  '_blank'
-                                )
-                              }}
-                            >
-                              {plan.buttonText}
-                            </Button>
-                          </>
+                          <Button
+                            className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
+                            variant="outline"
+                            onClick={() => router.push(siteConfig.plans_url)}
+                          >
+                            {plan.buttonText}
+                          </Button>
                         ) : (
                           <Button
                             className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                             variant="outline"
-                            onClick={() => {
-                              window.open(
-                                siteConfig.rapid_playground_url,
-                                '_blank'
-                              )
-                            }}
+                            onClick={() => router.push(siteConfig.plans_url)}
                           >
                             {plan.buttonText}
                           </Button>
@@ -780,11 +749,9 @@ export default function PricingSection() {
             Not sure what plan you need?
             <Link
               className="pl-2 font-bold underline"
-              href={siteConfig.rapid_playground_url}
-              rel="noreferrer"
-              target="_blank"
+              href="/signup"
             >
-              Try for free in Basic plan
+              Try for free
             </Link>
           </p>
           <p className="text-16 sm:text-18 text-gray-500">
