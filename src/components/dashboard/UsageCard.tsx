@@ -21,7 +21,7 @@ export function UsageCard({
         <h2 className="text-lg font-semibold text-gray-900">
           Usage this month
         </h2>
-        <p className="text-xs text-gray-400">Updated every 5 minutes</p>
+        <p className="text-xs text-gray-400">Live</p>
       </div>
 
       <dl className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
