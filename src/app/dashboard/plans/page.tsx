@@ -1,21 +1,38 @@
 import { IconCheck } from '@tabler/icons-react'
+import {
+  ManageBillingButton,
+  PlanButton
+} from '@/components/dashboard/BillingButtons'
 import { Button } from '@/components/ui/button'
 import { PLAN_ORDER, PLANS } from '@/config/plans'
 import { siteConfig } from '@/config/site'
 import { apiFetch } from '@/lib/api/server'
-import { CurrentUsage } from '@/lib/api/types'
-import { formatNumber } from '@/lib/format'
+import { CurrentUsage, PlanId } from '@/lib/api/types'
+import { formatDate, formatNumber } from '@/lib/format'
 
 export default async function PlansPage() {
   const current = await apiFetch<CurrentUsage>('/v1/me/usage/current')
+  const subscribed = current.status !== null
 
   return (
     <main className="mx-auto max-w-6xl p-6">
-      <h1 className="text-2xl font-semibold text-gray-900">Plans</h1>
-      <p className="mt-1 text-gray-500">
-        Paid plans are coming soon. Until then, enjoy{' '}
-        {formatNumber(PLANS.free.quota)} free requests every month.
-      </p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">Plans</h1>
+          <p className="mt-1 text-gray-500">
+            Prices exclude taxes, calculated at checkout for your country.
+            Payments are handled by Stripe.
+          </p>
+        </div>
+        {subscribed && <ManageBillingButton />}
+      </div>
+
+      {current.cancelAtPeriodEnd && (
+        <p className="mt-6 rounded-md bg-amber-50 p-3 text-sm text-amber-700">
+          Your subscription ends on {formatDate(current.periodEnd)}. You can
+          resume it from Manage billing.
+        </p>
+      )}
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {PLAN_ORDER.map((id) => {
@@ -57,13 +74,11 @@ export default async function PlansPage() {
                 <Feature>{plan.rateLimitPerMinute} requests / minute</Feature>
               </ul>
               <div className="mt-auto pt-6">
-                <Button
-                  disabled
-                  variant={isCurrent ? 'outline' : 'default'}
-                  className="w-full"
-                >
-                  {isCurrent ? 'Current plan' : 'Available soon'}
-                </Button>
+                <PlanAction
+                  id={id}
+                  isCurrent={isCurrent}
+                  subscribed={subscribed}
+                />
               </div>
             </div>
           )
@@ -73,16 +88,43 @@ export default async function PlansPage() {
       <p className="mt-8 text-sm text-gray-500">
         Subscribed through RapidAPI? Your RapidAPI plan keeps working as before.{' '}
         <a
-          href={siteConfig.rapid_plans_url}
-          target="_blank"
-          rel="noreferrer"
           className="text-sky-600 hover:underline"
+          href={siteConfig.rapid_plans_url}
+          rel="noreferrer"
+          target="_blank"
         >
           See the RapidAPI plans
         </a>
       </p>
     </main>
   )
+}
+
+function PlanAction({
+  id,
+  isCurrent,
+  subscribed
+}: {
+  id: PlanId
+  isCurrent: boolean
+  subscribed: boolean
+}) {
+  if (isCurrent) {
+    return (
+      <Button disabled className="w-full" variant="outline">
+        Current plan
+      </Button>
+    )
+  }
+
+  if (id === 'free') {
+    // Going back to free means cancelling the subscription
+    return (
+      <ManageBillingButton className="w-full" label="Cancel subscription" />
+    )
+  }
+
+  return <PlanButton mode={subscribed ? 'switch' : 'subscribe'} plan={id} />
 }
 
 function Feature({ children }: { children: React.ReactNode }) {

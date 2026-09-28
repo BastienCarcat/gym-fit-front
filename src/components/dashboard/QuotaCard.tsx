@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { IconArrowRight } from '@tabler/icons-react'
+import { ManageBillingButton } from '@/components/dashboard/BillingButtons'
 import { PLANS } from '@/config/plans'
 import { CurrentUsage } from '@/lib/api/types'
 import { formatDate, formatNumber } from '@/lib/format'
@@ -58,11 +59,18 @@ export function QuotaCard({ usage }: { usage: CurrentUsage }) {
       )}
       {usage.overage > 0 && !usage.hardLimit && (
         <p className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-700">
-          {formatNumber(usage.overage)} requests beyond your quota this month.
+          {formatNumber(usage.overage)} requests beyond your quota this month,
+          about ${usage.overageCostUsd.toFixed(2)} so far.
         </p>
       )}
 
-      <div className="mt-auto pt-6">
+      {usage.cancelAtPeriodEnd && (
+        <p className="mt-4 rounded-md bg-amber-50 p-3 text-sm text-amber-700">
+          Your subscription ends on {formatDate(usage.periodEnd)}.
+        </p>
+      )}
+
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-6">
         <Link
           href="/dashboard/plans"
           className="inline-flex items-center gap-1 text-sm font-medium text-sky-600 hover:underline"
@@ -70,6 +78,7 @@ export function QuotaCard({ usage }: { usage: CurrentUsage }) {
           Compare plans
           <IconArrowRight className="h-4 w-4" />
         </Link>
+        {usage.status && <ManageBillingButton />}
       </div>
     </section>
   )

@@ -29,8 +29,13 @@ export interface CurrentUsage {
   remaining: number
   overage: number
   hardLimit: boolean
+  /** Estimated cost of the overage so far, in USD */
+  overageCostUsd: number
   periodStart: string
   periodEnd: string
+  /** Stripe subscription status, null on the free plan */
+  status: string | null
+  cancelAtPeriodEnd: boolean
 }
 
 export interface UsageEntry {

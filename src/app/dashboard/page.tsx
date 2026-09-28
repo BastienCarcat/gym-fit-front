@@ -4,7 +4,11 @@ import { UsageCard } from '@/components/dashboard/UsageCard'
 import { apiFetch } from '@/lib/api/server'
 import { ApiKeySummary, CurrentUsage, UsageReport } from '@/lib/api/types'
 
-export default async function DashboardPage() {
+export default async function DashboardPage({
+  searchParams
+}: {
+  searchParams: { checkout?: string }
+}) {
   const [keys, current, daily, endpoints] = await Promise.all([
     apiFetch<ApiKeySummary[]>('/v1/me/api-keys'),
     apiFetch<CurrentUsage>('/v1/me/usage/current'),
@@ -14,6 +18,12 @@ export default async function DashboardPage() {
 
   return (
     <main className="mx-auto max-w-6xl space-y-6 p-6">
+      {searchParams.checkout === 'success' && (
+        <p className="rounded-md bg-green-50 p-3 text-sm text-green-700">
+          Thanks for subscribing! Your plan is activated within a few seconds:
+          refresh the page if it still shows the previous one.
+        </p>
+      )}
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <ApiKeysCard keys={keys} />
