@@ -1,4 +1,5 @@
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
+import { visitorHeaders } from './visitor'
 
 export class ApiError extends Error {
   constructor(
@@ -12,7 +13,8 @@ export class ApiError extends Error {
 
 /**
  * Server-side call to the GymFit API on behalf of the signed-in user:
- * forwards the session cookie. Only usable in server components and actions.
+ * forwards the session cookie and the visitor's IP (see visitor.ts). Only
+ * usable in server components and actions.
  */
 export async function apiFetch<T>(
   path: string,
@@ -24,6 +26,7 @@ export async function apiFetch<T>(
     headers: {
       'Content-Type': 'application/json',
       cookie: cookies().toString(),
+      ...visitorHeaders(headers()),
       ...init.headers
     },
     cache: 'no-store'
