@@ -3,12 +3,11 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { User } from '@supabase/supabase-js'
+import { usePathname, useRouter } from 'next/navigation'
 import { IconUser, IconChartBar, IconLogout } from '@tabler/icons-react'
 
 import { siteConfig } from '@/config/site'
-import { createClient } from '@/lib/supabase/client'
+import { authClient } from '@/lib/auth-client'
 import {
   Popover,
   PopoverContent,
@@ -30,30 +29,15 @@ export default function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [backgroundStyles, setBackgroundStyles] = useState({})
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [user, setUser] = useState<User | null>(null)
+  const { data: session } = authClient.useSession()
+  const user = session?.user ?? null
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
-
-  useEffect(() => {
-    const supabase = createClient()
-
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user)
-    })
-
-    const {
-      data: { subscription }
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
+  const pathname = usePathname()
 
   const handleSignOut = async () => {
-    const supabase = createClient()
-    await supabase.auth.signOut()
+    await authClient.signOut()
     setIsPopoverOpen(false)
     router.push('/')
     router.refresh()
@@ -73,6 +57,11 @@ export default function Navbar() {
       })
     }
   }, [hoveredIndex])
+
+  // The dashboard has its own header
+  if (pathname?.startsWith('/dashboard')) {
+    return null
+  }
 
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 bg-white bg-opacity-70 backdrop-blur-xl">

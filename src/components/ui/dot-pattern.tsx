@@ -90,7 +90,9 @@ export function DotPattern({
     return () => window.removeEventListener('resize', updateDimensions)
   }, [])
 
-  const [dots, setDots] = useState<Array<{ x: number; y: number; delay: number; duration: number }>>([])
+  const [dots, setDots] = useState<
+    Array<{ x: number; y: number; delay: number; duration: number }>
+  >([])
 
   useEffect(() => {
     if (dimensions.width === 0 || dimensions.height === 0) return

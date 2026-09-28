@@ -747,10 +747,7 @@ export default function PricingSection() {
         <div>
           <p className="text-18 sm:text-20 mb-2">
             Not sure what plan you need?
-            <Link
-              className="pl-2 font-bold underline"
-              href="/signup"
-            >
+            <Link className="pl-2 font-bold underline" href="/signup">
               Try for free
             </Link>
           </p>
