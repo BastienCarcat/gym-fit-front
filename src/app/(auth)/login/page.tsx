@@ -13,7 +13,9 @@ function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
-  const [info, setInfo] = useState<string | null>(null)
+  const [info, setInfo] = useState<string | null>(
+    searchParams.get('deleted') ? 'Your account has been deleted.' : null
+  )
   const [needsVerification, setNeedsVerification] = useState(false)
   const [pending, setPending] = useState(false)
 

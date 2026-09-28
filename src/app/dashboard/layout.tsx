@@ -24,14 +24,15 @@ export default async function DashboardLayout({
   return (
     <div className="min-h-screen bg-white">
       <header className="border-b border-gray-200 bg-white">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6">
-          <div className="flex items-center gap-6">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+          <div className="flex items-center gap-4 sm:gap-6">
             <Link
               href="/"
+              aria-label="Home"
               className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900"
             >
               <IconArrowLeft className="h-4 w-4" />
-              Home
+              <span className="hidden sm:inline">Home</span>
             </Link>
             <nav className="flex items-center gap-4 text-sm font-medium">
               <Link
@@ -45,6 +46,12 @@ export default async function DashboardLayout({
                 className="text-gray-900 hover:text-sky-600"
               >
                 Plans
+              </Link>
+              <Link
+                href="/dashboard/settings"
+                className="text-gray-900 hover:text-sky-600"
+              >
+                Settings
               </Link>
             </nav>
           </div>
