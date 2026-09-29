@@ -5,10 +5,19 @@ import {
   FRONTEND_PROXY_SECRET_HEADER,
   visitorHeaders
 } from '@/lib/api/visitor'
+import { safeRedirect } from '@/lib/redirect'
 
-export function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith('/api/auth/')) {
+const GUEST_ONLY_PATHS = ['/login', '/signup']
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  if (pathname.startsWith('/api/auth/')) {
     return withVisitorHeaders(request)
+  }
+
+  if (GUEST_ONLY_PATHS.includes(pathname)) {
+    return redirectSignedIn(request)
   }
 
   // Cheap check on the presence of the session cookie. The session itself is
@@ -38,6 +47,40 @@ function withVisitorHeaders(request: NextRequest) {
   return NextResponse.next({ request: { headers } })
 }
 
+/** Signed-in visitors skip the sign-in and sign-up pages */
+async function redirectSignedIn(request: NextRequest) {
+  if (getSessionCookie(request) && (await hasSession(request))) {
+    const target = safeRedirect(request.nextUrl.searchParams.get('redirect'))
+    return NextResponse.redirect(new URL(target, request.url))
+  }
+
+  return NextResponse.next()
+}
+
+/**
+ * The cookie can outlive its session (expired, revoked, account deleted):
+ * ask the API, and show the page when it cannot answer.
+ */
+async function hasSession(request: NextRequest): Promise<boolean> {
+  try {
+    const response = await fetch(
+      `${process.env.GYM_FIT_BASE_URL}/api/auth/get-session`,
+      {
+        headers: {
+          cookie: request.headers.get('cookie') ?? '',
+          ...visitorHeaders(request.headers)
+        },
+        cache: 'no-store'
+      }
+    )
+    const body = response.ok ? await response.json() : null
+
+    return Boolean(body?.session)
+  } catch {
+    return false
+  }
+}
+
 export const config = {
-  matcher: ['/dashboard/:path*', '/api/auth/:path*']
+  matcher: ['/dashboard/:path*', '/api/auth/:path*', '/login', '/signup']
 }
