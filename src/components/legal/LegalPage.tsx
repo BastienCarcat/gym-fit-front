@@ -4,19 +4,31 @@ import { legal } from '@/config/legal'
 
 export function LegalPage({
   title,
+  lang = 'en',
+  alternate,
   children
 }: {
   title: string
+  lang?: 'en' | 'fr'
+  /** The same page in the other language */
+  alternate: string
   children: ReactNode
 }) {
   return (
-    <div className="bg-white px-4 py-32 sm:px-6 lg:px-8">
+    <div lang={lang} className="bg-white px-4 py-32 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
+        <p className="mb-6 text-sm">
+          <TextLink href={alternate}>
+            {lang === 'fr' ? 'English version' : 'Version française'}
+          </TextLink>
+        </p>
         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
           {title}
         </h1>
         <p className="mt-6 text-lg text-gray-500">
-          Last updated: {legal.updated}
+          {lang === 'fr'
+            ? `Dernière mise à jour : ${legal.updatedFr}`
+            : `Last updated: ${legal.updated}`}
         </p>
         <div className="mt-10 space-y-10 text-base leading-7 text-gray-700">
           {children}

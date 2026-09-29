@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: 'Privacy policy' }
 
 export default function PrivacyPolicyPage() {
   return (
-    <LegalPage title="Privacy policy">
+    <LegalPage title="Privacy policy" alternate="/fr/confidentialite">
       <Section title="Who we are">
         <p>
           The data controller is {legal.publisher} ({legal.tradeName}),{' '}

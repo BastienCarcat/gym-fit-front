@@ -10,8 +10,10 @@ export const legal = {
   siret: '993 172 873 00016',
   ape: '6201Z',
   vat: 'FR89993172873',
-  phone: '+33 6 43 77 51 18',
+  /** Required by the LCEN for an individual publisher: set a business number */
+  phone: null as string | null,
   email: siteConfig.contact_email,
   director: 'Bastien Carcat',
-  updated: 'September 29, 2026'
+  updated: 'September 29, 2026',
+  updatedFr: '29 septembre 2026'
 }

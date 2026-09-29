@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: 'Terms of use' }
 
 export default function TermsOfUsePage() {
   return (
-    <LegalPage title="GymFit API — Terms of Use">
+    <LegalPage title="GymFit API — Terms of Use" alternate="/fr/cgu">
       <Section title="Who we are and acceptance">
         <p>
           The GymFit API (“GymFit”, “we”) is operated by {legal.publisher} (
@@ -265,7 +265,8 @@ export default function TermsOfUsePage() {
           any dispute falls under the exclusive jurisdiction of the courts of
           Paris. If you are a consumer, you keep the protection of the mandatory
           rules and the courts of your country of residence. If any provision is
-          found invalid, the others remain in force.
+          found invalid, the others remain in force. These terms also exist in
+          French; in case of discrepancy, the French version prevails.
         </p>
       </Section>
 
