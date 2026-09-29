@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { FormEvent, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { AuthCard, Field, FormMessage } from '@/components/auth/AuthCard'
+import { useRedirectWhenSignedIn } from '@/components/auth/useRedirectWhenSignedIn'
 import { authClient } from '@/lib/auth-client'
 
 export default function SignupPage() {
@@ -14,6 +15,9 @@ export default function SignupPage() {
   const [info, setInfo] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
   const [sent, setSent] = useState(false)
+
+  // Also moves this tab to the dashboard once the email is confirmed elsewhere
+  useRedirectWhenSignedIn('/dashboard')
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()

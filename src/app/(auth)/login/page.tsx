@@ -5,7 +5,9 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { FormEvent, Suspense, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { AuthCard, Field, FormMessage } from '@/components/auth/AuthCard'
-import { authClient, safeRedirect } from '@/lib/auth-client'
+import { useRedirectWhenSignedIn } from '@/components/auth/useRedirectWhenSignedIn'
+import { authClient } from '@/lib/auth-client'
+import { safeRedirect } from '@/lib/redirect'
 
 function LoginForm() {
   const router = useRouter()
@@ -18,6 +20,8 @@ function LoginForm() {
   )
   const [needsVerification, setNeedsVerification] = useState(false)
   const [pending, setPending] = useState(false)
+
+  useRedirectWhenSignedIn(safeRedirect(searchParams.get('redirect')))
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
