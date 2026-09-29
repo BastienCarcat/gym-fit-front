@@ -6,7 +6,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { siteConfig } from '@/config/site'
+import { PLAN_ORDER, PLANS } from '@/config/plans'
 import { Button } from '@/components/ui/button'
+import { authClient } from '@/lib/auth-client'
 import { TextAnimate } from '@/components/ui/text-animate'
 
 // enum Billing {
@@ -17,6 +19,9 @@ import { TextAnimate } from '@/components/ui/text-animate'
 export default function PricingSection() {
   // const [billing, setBilling] = useState(Billing.Yearly)
   const router = useRouter()
+  const { data: session } = authClient.useSession()
+  // Visitors create an account first; signed-in users pick their plan
+  const ctaHref = session ? siteConfig.plans_url : '/signup'
 
   const plans = useMemo(
     () => [
@@ -32,21 +37,21 @@ export default function PricingSection() {
         title: 'Pro',
         featured: false,
         free: false,
-        priceMonthly: 5,
+        priceMonthly: PLANS.pro.monthlyPrice,
         buttonText: 'Get started'
       },
       {
         title: 'Mega',
         featured: true,
         free: false,
-        priceMonthly: 9,
+        priceMonthly: PLANS.mega.monthlyPrice,
         buttonText: 'Get started'
       },
       {
         title: 'Ultra',
         featured: false,
         free: false,
-        priceMonthly: 11,
+        priceMonthly: PLANS.ultra.monthlyPrice,
         buttonText: 'Get started'
       }
     ],
@@ -57,21 +62,28 @@ export default function PricingSection() {
     () => [
       {
         title: 'Requests / month',
-        tiers: [
-          { value: '500' },
-          { value: '5,000' },
-          { featured: true, value: '10,000' },
-          { value: '20,000' }
-        ]
+        tiers: PLAN_ORDER.map((id) => ({
+          featured: id === 'mega',
+          value: PLANS[id].quota.toLocaleString('en-US')
+        }))
       },
       {
-        title: 'Overage',
-        tiers: [
-          { value: 'Hard limit' },
-          { value: '$0.003/req' },
-          { featured: true, value: '$0.003/req' },
-          { value: '$0.001/req' }
-        ]
+        title: 'Requests / minute',
+        tiers: PLAN_ORDER.map((id) => ({
+          featured: id === 'mega',
+          value: String(PLANS[id].rateLimitPerMinute)
+        }))
+      },
+      {
+        title: 'Extra requests',
+        tiers: PLAN_ORDER.map((id) => {
+          const price = PLANS[id].overagePrice
+
+          return {
+            featured: id === 'mega',
+            value: price === null ? 'Hard limit' : `$${price}/req`
+          }
+        })
       },
       {
         title: 'Calculators',
@@ -333,7 +345,7 @@ export default function PricingSection() {
                         <Button
                           className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
                           variant="outline"
-                          onClick={() => router.push(siteConfig.plans_url)}
+                          onClick={() => router.push(ctaHref)}
                         >
                           {plan.buttonText}
                         </Button>
@@ -341,7 +353,7 @@ export default function PricingSection() {
                         <Button
                           className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                           variant="outline"
-                          onClick={() => router.push(siteConfig.plans_url)}
+                          onClick={() => router.push(ctaHref)}
                         >
                           {plan.buttonText}
                         </Button>
@@ -604,7 +616,7 @@ export default function PricingSection() {
                           <Button
                             className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
                             variant="outline"
-                            onClick={() => router.push(siteConfig.plans_url)}
+                            onClick={() => router.push(ctaHref)}
                           >
                             {plan.buttonText}
                           </Button>
@@ -612,7 +624,7 @@ export default function PricingSection() {
                           <Button
                             className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                             variant="outline"
-                            onClick={() => router.push(siteConfig.plans_url)}
+                            onClick={() => router.push(ctaHref)}
                           >
                             {plan.buttonText}
                           </Button>

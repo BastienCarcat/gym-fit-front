@@ -14,9 +14,9 @@ export default function Footer() {
         },
         // { name: 'Search exercise', href: '#search', blank: false },
         {
-          name: 'Try API',
-          href: siteConfig.rapid_playground_url,
-          blank: true
+          name: 'Get an API key',
+          href: '/signup',
+          blank: false
         },
         {
           name: 'Documentation',
