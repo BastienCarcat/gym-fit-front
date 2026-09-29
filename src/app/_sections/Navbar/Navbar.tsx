@@ -16,7 +16,7 @@ import {
 import { KeyRoundIcon } from 'lucide-react'
 
 const navItems = [
-  { name: 'Pricing', href: siteConfig.plans_url, target: '_self' },
+  { name: 'Pricing', href: '/#pricing', target: '_self' },
   { name: 'Features', href: '#features', target: '_self' },
   {
     name: 'Documentation',

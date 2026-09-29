@@ -10,17 +10,22 @@ export default function FAQSection() {
       {
         question: 'Is my payment information secure?',
         answer:
-          'All payments are processed securely through RapidAPI, with credit card transactions handled by their PCI-compliant banking partners. Your financial information is never stored on our servers.'
+          'Payments are handled by Stripe, which acts as the merchant of record and processes your card on its PCI-compliant platform. Your card details never reach our servers.'
       },
       {
         question: 'What happens if I exceed my plan limits?',
         answer:
-          "If you exceed your plan's monthly request limit, RapidAPI will either charge you an overuse fee based on your plan's per-request rate or temporarily suspend access until the next billing cycle. We recommend monitoring your usage through the RapidAPI dashboard to avoid unexpected charges."
+          "On the Free plan, requests beyond the monthly quota are refused until the next month. On paid plans, your API keeps working: each extra request is billed at your plan's rate at the end of the month. You can follow your usage in real time from your dashboard."
       },
       {
         question: 'Can I cancel my subscription at any time?',
         answer:
-          'Yes, you can cancel your subscription plan at any time directly from your RapidAPI dashboard. There are no long-term commitments or cancellation fees. Your access will continue until the end of your current billing period.'
+          'Yes, from Manage billing in your dashboard, with no commitment or cancellation fee. Your plan stays active until the end of the current billing period.'
+      },
+      {
+        question: 'I subscribed through RapidAPI. Does anything change?',
+        answer:
+          'No. Your RapidAPI subscription keeps working as before, and its billing stays with RapidAPI.'
       },
       {
         question: 'How often is the exercise database updated?',

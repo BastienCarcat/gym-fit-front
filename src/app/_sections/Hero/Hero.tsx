@@ -78,8 +78,7 @@ export default function HeroSection() {
             </Link>
             <Link
               className="inline-flex h-12 animate-shimmer items-center justify-center rounded-lg border border-sky-700 bg-[linear-gradient(110deg,#0ea5e9,45%,#7dd3fc,55%,#0ea5e9)] bg-[length:200%_100%] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-              href={siteConfig.rapid_playground_url}
-              target="_blank"
+              href="/signup"
             >
               Try for Free
               <ArrowRight className="ml-2" />
