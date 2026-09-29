@@ -18,15 +18,9 @@ export default function MentionsLegalesPage() {
           Le site et le service GymFit API (gymfit-api.com) sont édités par :
         </p>
         <List>
-          <li>
-            {legal.publisher}, exerçant sous le nom commercial {legal.tradeName}
-            , entrepreneur individuel (micro-entreprise)
-          </li>
+          <li>{legal.publisher} (entrepreneur individuel)</li>
           <li>Adresse : {legal.address}</li>
-          <li>
-            SIREN : {legal.siren} · SIRET : {legal.siret} · Code APE :{' '}
-            {legal.ape}
-          </li>
+          <li>SIREN : {legal.siren}</li>
           <li>Numéro de TVA intracommunautaire : {legal.vat}</li>
           <li>
             E-mail : <ContactEmail />

@@ -22,7 +22,7 @@ export default function CguPage() {
       <Section title="Qui sommes-nous et acceptation">
         <p>
           L’API GymFit (« GymFit », « nous ») est exploitée par{' '}
-          {legal.publisher} ({legal.tradeName}), {legal.address}. Voir les{' '}
+          {legal.publisher}. Voir les{' '}
           <TextLink href="/fr/mentions-legales">mentions légales</TextLink>.
         </p>
         <p>

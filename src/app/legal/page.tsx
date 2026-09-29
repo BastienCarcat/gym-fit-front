@@ -18,13 +18,9 @@ export default function LegalNoticePage() {
           The GymFit API website and service (gymfit-api.com) are published by:
         </p>
         <List>
-          <li>
-            {legal.publisher}, trading as {legal.tradeName}, {legal.status}
-          </li>
+          <li>{legal.publisher} (individual entrepreneur)</li>
           <li>Address: {legal.address}</li>
-          <li>
-            SIREN: {legal.siren} · SIRET: {legal.siret} · APE code: {legal.ape}
-          </li>
+          <li>SIREN: {legal.siren}</li>
           <li>VAT number: {legal.vat}</li>
           <li>
             Email: <ContactEmail />

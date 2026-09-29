@@ -15,9 +15,8 @@ export default function PrivacyPolicyPage() {
     <LegalPage title="Privacy policy" alternate="/fr/confidentialite">
       <Section title="Who we are">
         <p>
-          The data controller is {legal.publisher} ({legal.tradeName}),{' '}
-          {legal.address}, who operates the GymFit API. Contact:{' '}
-          <ContactEmail />.
+          The data controller is {legal.publisher}, who operates the GymFit API.
+          Contact: <ContactEmail />.
         </p>
         <p>
           This policy covers the website gymfit-api.com, your dashboard account
