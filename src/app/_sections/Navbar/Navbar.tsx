@@ -3,11 +3,20 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { IconUser, IconChartBar, IconLogout } from '@tabler/icons-react'
 
 import { siteConfig } from '@/config/site'
+import { authClient } from '@/lib/auth-client'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from '@/components/ui/popover'
+import { KeyRoundIcon } from 'lucide-react'
 
 const navItems = [
-  { name: 'Pricing', href: siteConfig.rapid_plans_url, target: '_blank' },
+  { name: 'Pricing', href: '/#pricing', target: '_self' },
   { name: 'Features', href: '#features', target: '_self' },
   {
     name: 'Documentation',
@@ -20,7 +29,19 @@ export default function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [backgroundStyles, setBackgroundStyles] = useState({})
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { data: session } = authClient.useSession()
+  const user = session?.user ?? null
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const handleSignOut = async () => {
+    await authClient.signOut()
+    setIsPopoverOpen(false)
+    router.push('/')
+    router.refresh()
+  }
 
   useEffect(() => {
     if (hoveredIndex !== null && navRef.current) {
@@ -36,6 +57,11 @@ export default function Navbar() {
       })
     }
   }, [hoveredIndex])
+
+  // The dashboard has its own header
+  if (pathname?.startsWith('/dashboard')) {
+    return null
+  }
 
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 bg-white bg-opacity-70 backdrop-blur-xl">
@@ -93,14 +119,61 @@ export default function Navbar() {
             </svg>
           </button>
 
-          {/* Try For Free button - Desktop */}
-          <Link
-            className="rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-600"
-            href={siteConfig.rapid_playground_url}
-            target="_blank"
-          >
-            Try For Free
-          </Link>
+          {/* Auth + Try For Free buttons - Desktop */}
+          <div className="flex items-center gap-3">
+            {user ? (
+              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                <PopoverTrigger asChild>
+                  <button className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100">
+                    <IconUser className="h-4 w-4" />
+                    <span className="hidden sm:inline">
+                      {user.email?.split('@')[0]}
+                    </span>
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-48 p-2" align="end">
+                  <div className="flex flex-col">
+                    <div className="mb-1 border-b border-gray-100 px-3 py-2">
+                      <p className="text-xs text-gray-500">Signed in as</p>
+                      <p className="truncate text-sm font-medium text-gray-900">
+                        {user.email}
+                      </p>
+                    </div>
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setIsPopoverOpen(false)}
+                      className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+                    >
+                      <KeyRoundIcon className="h-4 w-4" />
+                      API key
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-red-600 transition-colors hover:bg-red-50"
+                    >
+                      <IconLogout className="h-4 w-4" />
+                      Sign out
+                    </button>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            ) : (
+              <Link
+                className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100"
+                href="/login"
+              >
+                Sign in
+              </Link>
+            )}
+            {!user && (
+              <Link
+                className="rounded-md bg-sky-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-600"
+                href="/signup"
+              >
+                Try For Free
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
@@ -126,6 +199,44 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
+              <div className="border-t border-gray-200 pt-2">
+                {user ? (
+                  <>
+                    <div className="px-3 py-2">
+                      <p className="text-xs text-gray-500">Signed in as</p>
+                      <p className="truncate text-sm font-medium text-gray-900">
+                        {user.email}
+                      </p>
+                    </div>
+                    <Link
+                      className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-200"
+                      href="/dashboard"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <IconChartBar className="h-4 w-4" />
+                      Usage
+                    </Link>
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false)
+                        handleSignOut()
+                      }}
+                      className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-red-600 hover:bg-red-50"
+                    >
+                      <IconLogout className="h-4 w-4" />
+                      Sign out
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-200"
+                    href="/login"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Sign in
+                  </Link>
+                )}
+              </div>
             </div>
           </motion.div>
         )}

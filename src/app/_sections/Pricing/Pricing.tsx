@@ -3,9 +3,12 @@ import React, { useCallback, useMemo } from 'react'
 import { CheckIcon, XIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { siteConfig } from '@/config/site'
+import { PLAN_ORDER, PLANS } from '@/config/plans'
 import { Button } from '@/components/ui/button'
+import { authClient } from '@/lib/auth-client'
 import { TextAnimate } from '@/components/ui/text-animate'
 
 // enum Billing {
@@ -15,11 +18,15 @@ import { TextAnimate } from '@/components/ui/text-animate'
 
 export default function PricingSection() {
   // const [billing, setBilling] = useState(Billing.Yearly)
+  const router = useRouter()
+  const { data: session } = authClient.useSession()
+  // Visitors create an account first; signed-in users pick their plan
+  const ctaHref = session ? siteConfig.plans_url : '/signup'
 
   const plans = useMemo(
     () => [
       {
-        title: 'Basic',
+        title: 'Free',
         featured: false,
         free: true,
         priceMonthly: 0,
@@ -30,22 +37,22 @@ export default function PricingSection() {
         title: 'Pro',
         featured: false,
         free: false,
-        priceMonthly: 5,
-        buttonText: 'Try For Free'
-      },
-      {
-        title: 'Ultra',
-        featured: true,
-        free: false,
-        priceMonthly: 9,
-        buttonText: 'Try For Free'
+        priceMonthly: PLANS.pro.monthlyPrice,
+        buttonText: 'Get started'
       },
       {
         title: 'Mega',
+        featured: true,
+        free: false,
+        priceMonthly: PLANS.mega.monthlyPrice,
+        buttonText: 'Get started'
+      },
+      {
+        title: 'Ultra',
         featured: false,
         free: false,
-        priceMonthly: 11,
-        buttonText: 'Try For Free'
+        priceMonthly: PLANS.ultra.monthlyPrice,
+        buttonText: 'Get started'
       }
     ],
     []
@@ -54,34 +61,32 @@ export default function PricingSection() {
   const features = useMemo(
     () => [
       {
-        title: 'Requests',
-        tiers: [
-          { value: '500' },
-          { value: '5,000' },
-          { featured: true, value: '10,000' },
-          { value: '20,000' }
-        ]
+        title: 'Requests / month',
+        tiers: PLAN_ORDER.map((id) => ({
+          featured: id === 'mega',
+          value: PLANS[id].quota.toLocaleString('en-US')
+        }))
       },
       {
-        title: 'Requests limit',
-        tiers: [
-          { value: 'Hard limit' },
-          { value: '$0.003 each' },
-          { featured: true, value: '$0.003 each' },
-          { value: '$0.001 each' }
-        ]
+        title: 'Requests / minute',
+        tiers: PLAN_ORDER.map((id) => ({
+          featured: id === 'mega',
+          value: String(PLANS[id].rateLimitPerMinute)
+        }))
       },
       {
-        title: 'Rate limit',
-        tiers: [
-          { value: '1,000 req/h' },
-          { value: '60 req/min' },
-          { featured: true, value: '60 req/min' },
-          { value: '120 req/min' }
-        ]
+        title: 'Extra requests',
+        tiers: PLAN_ORDER.map((id) => {
+          const price = PLANS[id].overagePrice
+
+          return {
+            featured: id === 'mega',
+            value: price === null ? 'Hard limit' : `$${price}/req`
+          }
+        })
       },
       {
-        title: 'Include calculators',
+        title: 'Calculators',
         tiers: [
           { value: true },
           { value: true },
@@ -102,7 +107,7 @@ export default function PricingSection() {
         title: 'Priority support',
         tiers: [
           { value: false },
-          { value: true },
+          { value: false },
           { featured: true, value: true },
           { value: true }
         ]
@@ -337,30 +342,18 @@ export default function PricingSection() {
                     <dt />
                     <dd className="flex w-full items-center sm:px-4">
                       {plan.featured ? (
-                        <>
-                          <Button
-                            className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
-                            variant="outline"
-                            onClick={() => {
-                              window.open(
-                                siteConfig.rapid_playground_url,
-                                '_blank'
-                              )
-                            }}
-                          >
-                            {plan.buttonText}
-                          </Button>
-                        </>
+                        <Button
+                          className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
+                          variant="outline"
+                          onClick={() => router.push(ctaHref)}
+                        >
+                          {plan.buttonText}
+                        </Button>
                       ) : (
                         <Button
                           className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                           variant="outline"
-                          onClick={() => {
-                            window.open(
-                              siteConfig.rapid_playground_url,
-                              '_blank'
-                            )
-                          }}
+                          onClick={() => router.push(ctaHref)}
                         >
                           {plan.buttonText}
                         </Button>
@@ -620,30 +613,18 @@ export default function PricingSection() {
                     >
                       <div className="mx-3">
                         {plan.featured ? (
-                          <>
-                            <Button
-                              className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
-                              variant="outline"
-                              onClick={() => {
-                                window.open(
-                                  siteConfig.rapid_playground_url,
-                                  '_blank'
-                                )
-                              }}
-                            >
-                              {plan.buttonText}
-                            </Button>
-                          </>
+                          <Button
+                            className="w-full bg-sky-500 text-white hover:bg-sky-500/80 hover:text-white"
+                            variant="outline"
+                            onClick={() => router.push(ctaHref)}
+                          >
+                            {plan.buttonText}
+                          </Button>
                         ) : (
                           <Button
                             className="w-full border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
                             variant="outline"
-                            onClick={() => {
-                              window.open(
-                                siteConfig.rapid_playground_url,
-                                '_blank'
-                              )
-                            }}
+                            onClick={() => router.push(ctaHref)}
                           >
                             {plan.buttonText}
                           </Button>
@@ -778,13 +759,8 @@ export default function PricingSection() {
         <div>
           <p className="text-18 sm:text-20 mb-2">
             Not sure what plan you need?
-            <Link
-              className="pl-2 font-bold underline"
-              href={siteConfig.rapid_playground_url}
-              rel="noreferrer"
-              target="_blank"
-            >
-              Try for free in Basic plan
+            <Link className="pl-2 font-bold underline" href="/signup">
+              Try for free
             </Link>
           </p>
           <p className="text-16 sm:text-18 text-gray-500">
