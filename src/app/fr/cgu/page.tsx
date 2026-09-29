@@ -69,8 +69,8 @@ export default function CguPage() {
           <li>
             Chaque offre comprend un nombre de requêtes par mois et une limite
             de débit par minute, indiqués sur la{' '}
-            <TextLink href="/#pricing">page des offres</TextLink>. Seules
-            les requêtes réussies comptent dans le quota et la facture.
+            <TextLink href="/#pricing">page des offres</TextLink>. Seules les
+            requêtes réussies comptent dans le quota et la facture.
           </li>
           <li>
             Avec l’offre Free, les requêtes au-delà du quota mensuel sont

@@ -58,8 +58,8 @@ export default function TermsOfUsePage() {
           <li>
             Each plan includes a number of requests per month and a rate limit
             per minute, shown on the{' '}
-            <TextLink href="/#pricing">pricing page</TextLink>. Only
-            successful requests count towards the quota and the bill.
+            <TextLink href="/#pricing">pricing page</TextLink>. Only successful
+            requests count towards the quota and the bill.
           </li>
           <li>
             On the Free plan, requests beyond the monthly quota are refused
