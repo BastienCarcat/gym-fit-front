@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import {
   ContactEmail,
   LegalPage,
@@ -7,15 +8,19 @@ import {
   TextLink
 } from '@/components/legal/LegalPage'
 import { legal } from '@/config/legal'
+import { legalAlternates } from '@/lib/seo/alternates'
 
-export const metadata: Metadata = { title: 'Politique de confidentialité' }
+export const metadata: Metadata = {
+  title: 'Politique de confidentialité',
+  alternates: legalAlternates('/fr/confidentialite')
+}
 
 export default function ConfidentialitePage() {
   return (
     <LegalPage
-      title="Politique de confidentialité"
-      lang="fr"
       alternate="/privacy"
+      lang="fr"
+      title="Politique de confidentialité"
     >
       <Section title="Qui sommes-nous">
         <p>

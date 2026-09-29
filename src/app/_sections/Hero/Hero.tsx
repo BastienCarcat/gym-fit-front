@@ -40,9 +40,8 @@ export default function HeroSection() {
             initial="hidden"
             variants={fadeInUp(0)}
           >
-            Start building your next
-            <br className="hidden sm:block" />
-            <strong className="font-extrabold"> fitness App</strong> today
+            The <strong className="font-extrabold">exercise API</strong>
+            <br className="hidden sm:block" /> for your fitness app
           </motion.h1>
 
           <motion.p
@@ -53,8 +52,7 @@ export default function HeroSection() {
           >
             Access to all detailed{' '}
             <strong className="font-bold text-sky-500">gym exercises</strong>{' '}
-            and
-            <br className="hidden sm:block" />
+            and <br className="hidden sm:block" />
             all the{' '}
             <strong className="font-bold text-sky-500">
               fitness calculators

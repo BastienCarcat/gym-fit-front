@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import {
   ContactEmail,
   LegalPage,
@@ -7,12 +8,16 @@ import {
   TextLink
 } from '@/components/legal/LegalPage'
 import { legal } from '@/config/legal'
+import { legalAlternates } from '@/lib/seo/alternates'
 
-export const metadata: Metadata = { title: 'Mentions légales' }
+export const metadata: Metadata = {
+  title: 'Mentions légales',
+  alternates: legalAlternates('/fr/mentions-legales')
+}
 
 export default function MentionsLegalesPage() {
   return (
-    <LegalPage title="Mentions légales" lang="fr" alternate="/legal">
+    <LegalPage alternate="/legal" lang="fr" title="Mentions légales">
       <Section title="Éditeur">
         <p>
           Le site et le service GymFit API (gymfit-api.com) sont édités par :

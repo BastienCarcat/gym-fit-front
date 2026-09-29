@@ -42,3 +42,13 @@ export const PLANS: Record<PlanId, PlanDetails> = {
 }
 
 export const PLAN_ORDER: PlanId[] = ['free', 'pro', 'mega', 'ultra']
+
+/** "5,000 requests per month, 60 requests per minute, then $0.003 per extra request" */
+export function planSummary(plan: PlanDetails): string {
+  const beyondQuota =
+    plan.overagePrice === null
+      ? 'requests beyond the quota are refused'
+      : `then $${plan.overagePrice} per extra request`
+
+  return `${plan.quota.toLocaleString('en-US')} requests per month, ${plan.rateLimitPerMinute} requests per minute, ${beyondQuota}`
+}

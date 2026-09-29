@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import {
   ContactEmail,
   LegalPage,
@@ -7,12 +8,16 @@ import {
   TextLink
 } from '@/components/legal/LegalPage'
 import { legal } from '@/config/legal'
+import { legalAlternates } from '@/lib/seo/alternates'
 
-export const metadata: Metadata = { title: 'Privacy policy' }
+export const metadata: Metadata = {
+  title: 'Privacy policy',
+  alternates: legalAlternates('/privacy')
+}
 
 export default function PrivacyPolicyPage() {
   return (
-    <LegalPage title="Privacy policy" alternate="/fr/confidentialite">
+    <LegalPage alternate="/fr/confidentialite" title="Privacy policy">
       <Section title="Who we are">
         <p>
           The data controller is {legal.publisher}, who operates the GymFit API.
