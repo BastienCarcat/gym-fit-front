@@ -93,6 +93,7 @@ export default function FeaturesSection() {
         <TextAnimate
           once
           animation="fadeIn"
+          as="h2"
           className="mx-auto max-w-2xl px-4 text-center text-4xl font-extrabold tracking-tight text-gray-900 sm:px-6 sm:text-6xl lg:max-w-7xl lg:px-8"
           delay={0.2}
           duration={0.4}

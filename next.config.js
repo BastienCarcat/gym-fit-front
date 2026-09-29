@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Image optimizer URLs got indexed as if they were pages
+  async headers() {
+    return [
+      {
+        source: '/_next/image',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex' }]
+      }
+    ]
+  },
   // Auth goes through this site's domain so the session cookie is first-party
   async rewrites() {
     return [

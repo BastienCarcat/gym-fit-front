@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import {
   ContactEmail,
   LegalPage,
@@ -7,17 +8,19 @@ import {
   TextLink
 } from '@/components/legal/LegalPage'
 import { legal } from '@/config/legal'
+import { legalAlternates } from '@/lib/seo/alternates'
 
 export const metadata: Metadata = {
-  title: 'Conditions générales d’utilisation'
+  title: 'Conditions générales d’utilisation',
+  alternates: legalAlternates('/fr/cgu')
 }
 
 export default function CguPage() {
   return (
     <LegalPage
-      title="GymFit API — Conditions générales d’utilisation"
-      lang="fr"
       alternate="/terms"
+      lang="fr"
+      title="GymFit API — Conditions générales d’utilisation"
     >
       <Section title="Qui sommes-nous et acceptation">
         <p>

@@ -12,35 +12,27 @@ import Navbar from '@/app/_sections/Navbar/Navbar'
 import Footer from '@/app/_sections/Footer/Footer'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.landing_url),
   title: {
     default: siteConfig.default_title,
     template: `%s | ${siteConfig.name}`
   },
   description: siteConfig.description,
+  applicationName: siteConfig.name,
   icons: {
     icon: '/favicon.ico'
   },
-  keywords: [
-    'fitness',
-    'exercise',
-    'database',
-    'exercise database',
-    'calculators',
-    'bmi',
-    'bmr',
-    'tdee',
-    'muscle'
-  ],
   openGraph: {
+    type: 'website',
+    siteName: siteConfig.name,
     title: siteConfig.default_title,
     description: siteConfig.description,
-    url: siteConfig.landing_url,
     images: [
       {
         url: '/logo.png',
         width: 800,
         height: 600,
-        alt: 'Gym Fit API logo'
+        alt: 'GymFit API logo'
       }
     ]
   },

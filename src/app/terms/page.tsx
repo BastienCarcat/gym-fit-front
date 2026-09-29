@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+
 import {
   ContactEmail,
   LegalPage,
@@ -7,12 +8,16 @@ import {
   TextLink
 } from '@/components/legal/LegalPage'
 import { legal } from '@/config/legal'
+import { legalAlternates } from '@/lib/seo/alternates'
 
-export const metadata: Metadata = { title: 'Terms of use' }
+export const metadata: Metadata = {
+  title: 'Terms of use',
+  alternates: legalAlternates('/terms')
+}
 
 export default function TermsOfUsePage() {
   return (
-    <LegalPage title="GymFit API — Terms of Use" alternate="/fr/cgu">
+    <LegalPage alternate="/fr/cgu" title="GymFit API — Terms of Use">
       <Section title="Who we are and acceptance">
         <p>
           The GymFit API (“GymFit”, “we”) is operated by {legal.publisher}. See
