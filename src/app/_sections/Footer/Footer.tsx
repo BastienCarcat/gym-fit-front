@@ -27,6 +27,16 @@ export default function Footer() {
           name: 'Terms of use',
           href: '/terms',
           blank: false
+        },
+        {
+          name: 'Privacy policy',
+          href: '/privacy',
+          blank: false
+        },
+        {
+          name: 'Legal notice',
+          href: '/legal',
+          blank: false
         }
       ],
       social: [
