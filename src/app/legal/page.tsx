@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: 'Legal notice' }
 
 export default function LegalNoticePage() {
   return (
-    <LegalPage title="Legal notice">
+    <LegalPage title="Legal notice" alternate="/fr/mentions-legales">
       <Section title="Publisher">
         <p>
           The GymFit API website and service (gymfit-api.com) are published by:
@@ -27,7 +27,8 @@ export default function LegalNoticePage() {
           </li>
           <li>VAT number: {legal.vat}</li>
           <li>
-            Email: <ContactEmail /> · Phone: {legal.phone}
+            Email: <ContactEmail />
+            {legal.phone && ` · Phone: ${legal.phone}`}
           </li>
           <li>Publication director: {legal.director}</li>
         </List>
