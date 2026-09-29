@@ -15,9 +15,8 @@ export default function TermsOfUsePage() {
     <LegalPage title="GymFit API — Terms of Use" alternate="/fr/cgu">
       <Section title="Who we are and acceptance">
         <p>
-          The GymFit API (“GymFit”, “we”) is operated by {legal.publisher} (
-          {legal.tradeName}), {legal.address}. See the{' '}
-          <TextLink href="/legal">legal notice</TextLink>.
+          The GymFit API (“GymFit”, “we”) is operated by {legal.publisher}. See
+          the <TextLink href="/legal">legal notice</TextLink>.
         </p>
         <p>
           By creating an account, using an API key or subscribing to a plan, you
@@ -58,8 +57,8 @@ export default function TermsOfUsePage() {
           <li>
             Each plan includes a number of requests per month and a rate limit
             per minute, shown on the{' '}
-            <TextLink href="/dashboard/plans">pricing page</TextLink>. Only
-            successful requests count towards the quota and the bill.
+            <TextLink href="/#pricing">pricing page</TextLink>. Only successful
+            requests count towards the quota and the bill.
           </li>
           <li>
             On the Free plan, requests beyond the monthly quota are refused

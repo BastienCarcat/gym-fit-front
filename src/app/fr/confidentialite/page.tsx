@@ -19,9 +19,8 @@ export default function ConfidentialitePage() {
     >
       <Section title="Qui sommes-nous">
         <p>
-          Le responsable du traitement est {legal.publisher} ({legal.tradeName}
-          ), {legal.address}, qui exploite l’API GymFit. Contact :{' '}
-          <ContactEmail />.
+          Le responsable du traitement est {legal.publisher}, qui exploite l’API
+          GymFit. Contact : <ContactEmail />.
         </p>
         <p>
           Cette politique couvre le site gymfit-api.com, votre compte sur le
