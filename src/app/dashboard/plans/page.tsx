@@ -13,6 +13,10 @@ import { formatDate, formatNumber } from '@/lib/format'
 export default async function PlansPage() {
   const current = await apiFetch<CurrentUsage>('/v1/me/usage/current')
   const subscribed = current.status !== null
+  // A customer on a plan that is no longer sold still sees it, as current
+  const ids = PLAN_ORDER.includes(current.plan)
+    ? PLAN_ORDER
+    : [current.plan, ...PLAN_ORDER]
 
   return (
     <main className="mx-auto max-w-6xl p-6">
@@ -34,8 +38,12 @@ export default async function PlansPage() {
         </p>
       )}
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {PLAN_ORDER.map((id) => {
+      <div
+        className={`mt-8 grid gap-6 sm:grid-cols-2 ${
+          ids.length > 3 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
+        }`}
+      >
+        {ids.map((id) => {
           const plan = PLANS[id]
           const isCurrent = id === current.plan
 
@@ -66,6 +74,15 @@ export default async function PlansPage() {
               </p>
               <ul className="mt-6 space-y-2 text-sm text-gray-600">
                 <Feature>{formatNumber(plan.quota)} requests / month</Feature>
+                <Feature>
+                  {plan.commercialUse
+                    ? 'Commercial use'
+                    : 'Prototypes, non commercial'}
+                </Feature>
+                <Feature>
+                  {plan.maxApiKeys} active API{' '}
+                  {plan.maxApiKeys === 1 ? 'key' : 'keys'}
+                </Feature>
                 <Feature>
                   {plan.overagePrice === null
                     ? 'Requests refused beyond the quota'

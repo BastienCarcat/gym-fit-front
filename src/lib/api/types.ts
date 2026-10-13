@@ -1,4 +1,5 @@
-export type PlanId = 'free' | 'pro' | 'mega' | 'ultra'
+/** The plans sold, then the older ones that only keep their subscribers */
+export type PlanId = 'free' | 'starter' | 'scale' | 'pro' | 'mega' | 'ultra'
 
 export interface Me {
   id: string
