@@ -6,6 +6,7 @@ import { QuotaCard } from '@/components/dashboard/QuotaCard'
 import { UsageCard } from '@/components/dashboard/UsageCard'
 import { Notice } from '@/components/ui/notice'
 import { PLANS } from '@/config/plans'
+import { siteConfig } from '@/config/site'
 import { apiFetch } from '@/lib/api/server'
 import { ApiKeySummary, CurrentUsage, UsageReport } from '@/lib/api/types'
 
@@ -44,7 +45,8 @@ export default async function DashboardPage({
       <UsageCard
         daily={daily}
         endpoints={endpoints}
-        apiUrl={process.env.GYM_FIT_BASE_URL ?? ''}
+        // The public URL: the server's base URL can be an internal one
+        apiUrl={siteConfig.api_url}
       />
     </div>
   )
