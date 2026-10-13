@@ -7,9 +7,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Providers } from './providers'
 
 import { siteConfig } from '@/config/site'
-import { fontSans } from '@/config/fonts'
+import { fontBrand, fontCode, fontSans } from '@/config/fonts'
 import Navbar from '@/app/_sections/Navbar/Navbar'
 import Footer from '@/app/_sections/Footer/Footer'
+import { MainFrame, SiteChrome } from '@/components/SiteChrome'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.landing_url),
@@ -20,8 +21,13 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   icons: {
-    icon: '/favicon.ico'
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    apple: '/apple-touch-icon.png'
   },
+  manifest: '/site.webmanifest',
   openGraph: {
     type: 'website',
     siteName: siteConfig.name,
@@ -29,10 +35,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: '/logo.png',
-        width: 800,
-        height: 600,
-        alt: 'GymFit API logo'
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'GymFit API, the exercise API for fitness apps'
       }
     ]
   },
@@ -41,7 +47,7 @@ export const metadata: Metadata = {
     site: '@BastienCrct',
     title: siteConfig.default_title,
     description: siteConfig.description,
-    images: ['/logo.png']
+    images: ['/og-image.png']
   }
 }
 
@@ -64,14 +70,20 @@ export default function RootLayout({
       <body
         className={clsx(
           'min-h-screen bg-background font-sans antialiased',
-          fontSans.variable
+          fontSans.variable,
+          fontBrand.variable,
+          fontCode.variable
         )}
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
-          <Navbar />
-          {/*className="bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-slate-900 from-30% via-indigo-600 to-slate-900 to-80%"*/}
-          <main>{children}</main>
-          <Footer />
+          {/* The landing has its own navigation and footer */}
+          <SiteChrome>
+            <Navbar />
+          </SiteChrome>
+          <MainFrame>{children}</MainFrame>
+          <SiteChrome>
+            <Footer />
+          </SiteChrome>
         </Providers>
         <Analytics />
         <SpeedInsights />

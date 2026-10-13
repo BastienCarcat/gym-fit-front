@@ -13,6 +13,16 @@ module.exports = {
   			],
   			mono: [
   				'var(--font-geist-mono)'
+  			],
+  			brand: [
+  				'var(--font-brand)',
+  				'system-ui',
+  				'sans-serif'
+  			],
+  			code: [
+  				'var(--font-code)',
+  				'ui-monospace',
+  				'monospace'
   			]
   		},
   		borderRadius: {
@@ -21,6 +31,18 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+  			// The brand (brand/logo/kit/brand-guidelines.md): ink and volt
+  			ink: {
+  				DEFAULT: '#0E1116',
+  				900: '#161A21',
+  				800: '#1E232C',
+  				700: '#2A303B'
+  			},
+  			volt: '#D4F53C',
+  			steel: {
+  				DEFAULT: '#8B93A1',
+  				light: '#C9CED6'
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

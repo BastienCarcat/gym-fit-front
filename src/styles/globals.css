@@ -66,3 +66,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* The landing is dark: scrollbars and form controls follow */
+html:has(.landing-dark) {
+  color-scheme: dark;
+  background: #0e1116;
+}
