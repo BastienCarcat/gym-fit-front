@@ -1,19 +1,10 @@
 import {
-  Fira_Code as FontMono,
-  Inter as FontSans,
   JetBrains_Mono as FontCode,
   Plus_Jakarta_Sans as FontBrand
 } from 'next/font/google'
 
-export const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans'
-})
-
-export const fontMono = FontMono({
-  subsets: ['latin'],
-  variable: '--font-mono'
-})
+// Every font declared here is preloaded on every page: declare only the
+// fonts the pages draw with
 
 /** The landing: headings and text. Close to Satoshi, which the brand names. */
 export const fontBrand = FontBrand({

@@ -8,6 +8,13 @@ import { LEGAL_PAIRS } from '@/lib/seo/alternates'
 const absolute = (path: string) =>
   new URL(path, siteConfig.landing_url).toString()
 
+/**
+ * The day the content of these pages last changed: update it with the page.
+ * Google stops reading a lastmod that moves at every deploy.
+ */
+const HOME_UPDATED = '2026-10-13'
+const DATA_PACK_UPDATED = '2026-10-13'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const legalPages = LEGAL_PAIRS.flatMap((pair) => {
     const languages = {
@@ -23,10 +30,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   })
 
-  // Built at each deploy, which is when the home page changes
   return [
-    { url: absolute('/'), lastModified: new Date() },
-    { url: absolute(DATA_PACK.path), lastModified: new Date() },
+    { url: absolute('/'), lastModified: HOME_UPDATED },
+    { url: absolute(DATA_PACK.path), lastModified: DATA_PACK_UPDATED },
     ...legalPages
   ]
 }

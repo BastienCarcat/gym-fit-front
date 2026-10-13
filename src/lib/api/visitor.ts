@@ -6,7 +6,7 @@ export const FRONTEND_PROXY_SECRET_HEADER = 'x-gymfit-proxy-secret'
  * Vercel: without them, every visitor would share Vercel's IP and the API
  * rate limits would apply to all of them at once. Vercel sets x-real-ip and
  * x-forwarded-for itself and overwrites any value sent by the browser; the
- * shared secret lets the API trust the IP. Runs on the edge (middleware).
+ * shared secret lets the API trust the IP. Runs in the proxy too.
  */
 export function visitorHeaders(incoming: Headers): Record<string, string> {
   const ip =

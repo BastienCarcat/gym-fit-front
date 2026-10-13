@@ -6,6 +6,7 @@ import { QuotaCard } from '@/components/dashboard/QuotaCard'
 import { UsageCard } from '@/components/dashboard/UsageCard'
 import { Notice } from '@/components/ui/notice'
 import { PLANS } from '@/config/plans'
+import { siteConfig } from '@/config/site'
 import { apiFetch } from '@/lib/api/server'
 import { ApiKeySummary, CurrentUsage, UsageReport } from '@/lib/api/types'
 
@@ -14,9 +15,10 @@ export const metadata: Metadata = { title: 'Dashboard' }
 export default async function DashboardPage({
   searchParams
 }: {
-  searchParams: { checkout?: string }
+  searchParams: Promise<{ checkout?: string }>
 }) {
-  const [keys, current, daily, endpoints] = await Promise.all([
+  const [{ checkout }, keys, current, daily, endpoints] = await Promise.all([
+    searchParams,
     apiFetch<ApiKeySummary[]>('/v1/me/api-keys'),
     apiFetch<CurrentUsage>('/v1/me/usage/current'),
     apiFetch<UsageReport>('/v1/me/usage?groupBy=day'),
@@ -29,7 +31,7 @@ export default async function DashboardPage({
         title="Overview"
         description="Your API keys, your plan and this month's requests."
       />
-      {searchParams.checkout === 'success' && (
+      {checkout === 'success' && (
         <Notice role="status" tone="success">
           Thanks for subscribing! Your plan is activated within a few seconds:
           refresh the page if it still shows the previous one.
@@ -44,7 +46,8 @@ export default async function DashboardPage({
       <UsageCard
         daily={daily}
         endpoints={endpoints}
-        apiUrl={process.env.GYM_FIT_BASE_URL ?? ''}
+        // The public URL: the server's base URL can be an internal one
+        apiUrl={siteConfig.api_url}
       />
     </div>
   )

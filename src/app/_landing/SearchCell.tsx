@@ -30,7 +30,7 @@ const QUERIES = ['rdl', 'bech press', 'quads']
 /** A search field with real examples: hovering types the first one */
 export function SearchCell() {
   const [query, setQuery] = useState('')
-  const timer = useRef<ReturnType<typeof setTimeout>>()
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
   const reduced = useRef(false)
 
   useEffect(() => {
