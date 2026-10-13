@@ -27,6 +27,7 @@ Responses are JSON, in English. Requests are authenticated with an API key sent 
 
 - [Sign up](${absolute('/signup')}): free plan, no credit card
 - [API reference](${siteConfig.api_url}/docs)
+- [API reference as Markdown](${siteConfig.api_url}/docs.md): every endpoint with its parameters, an example request and an example response
 - [OpenAPI specification](${siteConfig.api_url}/openapi.json)
 - [Pricing](${absolute('/#pricing')})
 

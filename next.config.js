@@ -5,6 +5,7 @@ const HOME_LINKS = [
   '</.well-known/api-catalog>; rel="api-catalog"',
   `<${API_URL}/openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json"`,
   `<${API_URL}/docs>; rel="service-doc"; type="text/html"`,
+  `<${API_URL}/docs.md>; rel="service-doc"; type="text/markdown"`,
   '</llms.txt>; rel="describedby"; type="text/plain"'
 ]
 
