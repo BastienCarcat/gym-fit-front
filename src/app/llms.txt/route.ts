@@ -18,7 +18,7 @@ export function GET() {
 
   const body = `# ${siteConfig.name}
 
-> REST API of gym exercises for fitness app developers. Each exercise comes with its target and secondary muscles, step-by-step instructions, equipment, image, variations and alternative exercises. Muscles come with their heads and front and back images. The API also provides fitness calculators: BMI, BMR, TDEE and ideal body weight.
+> REST API of gym exercises for fitness app developers. 5,800 exercises, each with its target and secondary muscles on three levels (group, muscle, head), step-by-step instructions, tips, difficulty, equipment, variations, alternatives and easier and harder progressions. A search reads typos, abbreviations and muscle names. Each exercise has a muscle heatmap as an SVG. The API also provides fitness calculators: BMI, BMR, TDEE and ideal body weight. There are no exercise photos or animations.
 
 Responses are JSON, in English. Requests are authenticated with an API key sent in the \`X-API-Key\` header.
 
@@ -31,12 +31,18 @@ Responses are JSON, in English. Requests are authenticated with an API key sent 
 
 ## Endpoints
 
-- \`GET /v1/exercises/search\`: search exercises by name, body part, equipment or type
-- \`GET /v1/exercises/{id}\`: an exercise with its muscles, instructions, image and variations
-- \`GET /v1/exercises/{id}/alternatives\`: alternative exercises
-- \`GET /v1/muscles/search\` and \`GET /v1/muscles/{id}\`: muscles with their body part, group, heads and images
-- \`GET /v1/calculator/bmi\`, \`/bmr\`, \`/tdee\` and \`/ibw\`: fitness calculators
+- \`GET /v2/exercises/search\`: search by text (typos, abbreviations, muscles) with filters for muscle, equipment, category, difficulty, tier, family and more; \`suggest=true\` adds a suggested spelling, \`facets=true\` adds counts per filter
+- \`GET /v2/exercises/suggest\`: exercises to offer while a person types
+- \`GET /v2/exercises/{idOrSlug}\`: an exercise with its muscles, steps, tips, variations, alternatives and progressions
+- \`GET /v2/exercises/{idOrSlug}/alternatives\`: alternative exercises
+- \`GET /v2/exercises/{idOrSlug}/heatmap\`: the muscles of the exercise as an SVG, front and back
+- \`GET /v2/muscles/search\`, \`GET /v2/muscles/{id}\` and \`GET /v2/muscles/{id}/exercises\`: muscles with their common name, aliases, group and heads, and the exercises that work them
+- \`GET /v2/muscle-groups\`: the 21 groups with their muscles
+- \`GET /v2/equipment\`, \`/v2/categories\`, \`/v2/families\` and \`/v2/meta\`: the values the filters take
+- \`GET /v2/calculator/bmi\`, \`/bmr\`, \`/tdee\` and \`/ibw\`: fitness calculators
 - \`GET /v1/usage\`: your usage and remaining quota
+
+The v1 stays available for existing integrations.
 
 ## Pricing
 
@@ -46,6 +52,7 @@ ${plans.join('\n')}
 
 ## Other
 
+- A data pack to own the catalog is open to early access requests: ${siteConfig.contact_email}
 - Also available on [RapidAPI](${siteConfig.rapid_listing_url}) for existing RapidAPI customers
 - [Terms of use](${absolute('/terms')}) and [privacy policy](${absolute('/privacy')})
 - Contact: ${siteConfig.contact_email}

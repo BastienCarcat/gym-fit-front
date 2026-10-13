@@ -1,30 +1,43 @@
 import React from 'react'
 import { Metadata } from 'next'
 
-import Features from './_sections/Features/Features'
-import FAQ from './_sections/FAQ/FAQ'
+import { Alternative } from './_landing/Alternative'
+import { Bento } from './_landing/Bento'
+import { Faq } from './_landing/Faq'
+import { FinalCta } from './_landing/FinalCta'
+import { Footer } from './_landing/Footer'
+import { Hero } from './_landing/Hero'
+import { Nav } from './_landing/Nav'
+import { Pricing } from './_landing/Pricing'
+import { Proof } from './_landing/Proof'
+import { Quickstart } from './_landing/Quickstart'
+import { UseCases } from './_landing/UseCases'
 
-import Pricing from '@/app/_sections/Pricing/Pricing'
-import HeroSection from '@/app/_sections/Hero/Hero'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { homeStructuredData } from '@/lib/seo/structured-data'
-// import FAQSection from '@/app/_sections/FAQ/FAQSection'
-// import RapidAPISection from '@/app/_sections/RapidAPI/RapidAPISection'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' }
 }
 
+/** The landing is one dark page, with its own navigation and footer */
 export default function HomePage() {
   return (
-    <>
+    <div className="landing-dark bg-ink font-brand text-white">
       <JsonLd data={homeStructuredData()} />
-      <HeroSection />
-      <Features />
-      {/* <ExercisesSection searchParams={searchParams} />
-      <RapidAPISection /> */}
-      <Pricing />
-      <FAQ />
-    </>
+      <Nav />
+      <main>
+        <Hero />
+        <Proof />
+        <Bento />
+        <Quickstart />
+        <UseCases />
+        <Alternative />
+        <Pricing />
+        <Faq />
+        <FinalCta />
+      </main>
+      <Footer />
+    </div>
   )
 }

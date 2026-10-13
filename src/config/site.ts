@@ -4,9 +4,9 @@ const API_URL = 'https://api.gymfit-api.com'
 
 export const siteConfig = {
   name: 'GymFit API',
-  default_title: 'Exercise Database API with Muscle Data | GymFit API',
+  default_title: 'Exercise API for Fitness Apps with Muscle Data | GymFit API',
   description:
-    'Exercise database API for fitness apps: target and secondary muscles, instructions, variations and alternatives for each exercise. Free plan, no credit card.',
+    'Exercise API for fitness apps: 5,800 exercises with target and secondary muscles, steps, variations, alternatives, a muscle heatmap and a smart search. Free plan, no credit card.',
   landing_url: 'https://www.gymfit-api.com/',
   api_url: API_URL,
   contact_email: 'contact@gymfit-api.com',
