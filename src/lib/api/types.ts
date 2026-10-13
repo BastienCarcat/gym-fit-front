@@ -1,4 +1,4 @@
-export type PlanId = 'free' | 'pro' | 'mega' | 'ultra'
+export type PlanId = 'free' | 'starter' | 'scale'
 
 export interface Me {
   id: string

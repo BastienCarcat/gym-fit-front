@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { FormEvent, useState, useTransition } from 'react'
 import {
   IconCheck,
@@ -8,6 +9,8 @@ import {
   IconRefresh,
   IconTrash
 } from '@tabler/icons-react'
+import { textLink } from '@/components/auth/AuthCard'
+import { Panel } from '@/components/dashboard/Panel'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -17,13 +20,19 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
+import { Notice } from '@/components/ui/notice'
 import { ApiKeySummary, CreatedApiKey } from '@/lib/api/types'
 import { createApiKey, revokeApiKey, rollApiKey } from '@/lib/api-keys/actions'
 import { formatDate, formatDateTime } from '@/lib/format'
 
-const MAX_ACTIVE_KEYS = 5
-
-export function ApiKeysCard({ keys }: { keys: ApiKeySummary[] }) {
+export function ApiKeysCard({
+  keys,
+  maxKeys
+}: {
+  keys: ApiKeySummary[]
+  /** Active keys the plan allows: one key, one app */
+  maxKeys: number
+}) {
   const [name, setName] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [revealed, setRevealed] = useState<{
@@ -31,7 +40,7 @@ export function ApiKeysCard({ keys }: { keys: ApiKeySummary[] }) {
     rolled: boolean
   } | null>(null)
   const [pending, startTransition] = useTransition()
-  const limitReached = keys.length >= MAX_ACTIVE_KEYS
+  const limitReached = keys.length >= maxKeys
 
   const create = (event: FormEvent) => {
     event.preventDefault()
@@ -91,52 +100,49 @@ export function ApiKeysCard({ keys }: { keys: ApiKeySummary[] }) {
   }
 
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-6">
-      <h2 className="text-lg font-semibold text-gray-900">API keys</h2>
-      <p className="mt-1 text-sm text-gray-500">
-        Send your key in the{' '}
-        <code className="rounded bg-gray-100 px-1 py-0.5 text-gray-700">
-          X-API-Key
-        </code>{' '}
-        header. A key is only shown once, when it is created.
-      </p>
-
+    <Panel
+      title="API keys"
+      description={
+        <>
+          Send your key in the{' '}
+          <code className="rounded-[6px] bg-ink-800 px-1.5 py-0.5 font-code text-xs text-white">
+            X-API-Key
+          </code>{' '}
+          header. A key is only shown once, when it is created.
+        </>
+      }
+    >
       {error && (
-        <div
-          role="alert"
-          className="mt-4 rounded-md bg-red-50 p-3 text-sm text-red-600"
-        >
+        <Notice className="mt-4" role="alert" tone="error">
           {error}
-        </div>
+        </Notice>
       )}
 
       {keys.length === 0 ? (
-        <div className="mt-6 flex flex-col items-center rounded-lg border border-dashed border-gray-300 p-6 text-center">
-          <IconKey className="h-6 w-6 text-gray-400" />
-          <p className="mt-2 text-sm font-medium text-gray-700">
-            No API key yet
-          </p>
-          <p className="mt-1 text-xs text-gray-500">
+        <div className="mt-6 flex flex-col items-center rounded-[10px] border border-dashed border-ink-700 p-6 text-center">
+          <IconKey aria-hidden className="h-6 w-6 text-volt" />
+          <p className="mt-2 text-sm font-bold text-white">No API key yet</p>
+          <p className="mt-1 text-xs text-steel">
             Create one to start calling the API.
           </p>
         </div>
       ) : (
-        <ul className="mt-4 divide-y divide-gray-100">
+        <ul className="mt-5 divide-y divide-ink-700 rounded-[10px] border border-ink-700">
           {keys.map((key) => (
             <li
               key={key.id}
-              className="flex flex-wrap items-center justify-between gap-3 py-3"
+              className="flex flex-wrap items-center justify-between gap-3 px-4 py-3"
             >
               <div className="min-w-0">
-                <p className="font-medium text-gray-900">{key.name}</p>
-                <p className="font-mono text-sm text-gray-500">
+                <p className="font-bold text-white">{key.name}</p>
+                <p className="mt-0.5 font-code text-sm text-steel-light">
                   {key.prefix}
                   {'•'.repeat(12)}
                 </p>
-                <p className="mt-0.5 text-xs text-gray-400">
+                <p className="mt-1 text-xs text-steel">
                   Created {formatDate(key.createdAt)}
                   {key.expiresAt && (
-                    <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-amber-700">
+                    <span className="ml-2 rounded-[6px] border border-amber-300/30 bg-amber-300/10 px-1.5 py-0.5 text-amber-100">
                       Replaced, stops working {formatDateTime(key.expiresAt)}
                     </span>
                   )}
@@ -150,7 +156,7 @@ export function ApiKeysCard({ keys }: { keys: ApiKeySummary[] }) {
                     disabled={pending}
                     onClick={() => roll(key)}
                   >
-                    <IconRefresh className="mr-1 h-4 w-4" />
+                    <IconRefresh aria-hidden />
                     Roll
                   </Button>
                 )}
@@ -159,9 +165,9 @@ export function ApiKeysCard({ keys }: { keys: ApiKeySummary[] }) {
                   size="sm"
                   disabled={pending}
                   onClick={() => revoke(key)}
-                  className="text-red-600 hover:text-red-700"
+                  className="text-red-300 hover:border-red-400/60"
                 >
-                  <IconTrash className="mr-1 h-4 w-4" />
+                  <IconTrash aria-hidden />
                   Revoke
                 </Button>
               </div>
@@ -172,7 +178,7 @@ export function ApiKeysCard({ keys }: { keys: ApiKeySummary[] }) {
 
       <form
         onSubmit={create}
-        className="mt-6 flex flex-wrap gap-2 border-t border-gray-100 pt-6"
+        className="mt-6 flex flex-wrap gap-2 border-t border-ink-700 pt-6"
       >
         <label htmlFor="key-name" className="sr-only">
           Key name
@@ -184,19 +190,23 @@ export function ApiKeysCard({ keys }: { keys: ApiKeySummary[] }) {
           maxLength={50}
           placeholder="Key name, e.g. Production"
           disabled={limitReached}
-          className="min-w-0 flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:bg-gray-50"
+          className="h-10 w-full min-w-0 rounded-[10px] border border-ink-700 bg-ink px-3 text-sm text-white transition-colors placeholder:text-steel hover:border-steel focus:border-volt focus:outline-none focus:ring-1 focus:ring-volt disabled:opacity-50 sm:w-auto sm:flex-1"
         />
         <Button
+          className="w-full sm:w-auto"
           type="submit"
           disabled={pending || limitReached}
-          className="bg-sky-500 hover:bg-sky-600"
         >
           {pending ? 'Working…' : 'Create key'}
         </Button>
         {limitReached && (
-          <p className="w-full text-xs text-gray-500">
-            You can have up to {MAX_ACTIVE_KEYS} active keys. Revoke one to
-            create another.
+          <p className="w-full text-xs text-steel-light">
+            Your plan allows {maxKeys} active {maxKeys === 1 ? 'key' : 'keys'}.
+            Revoke one to create another, or{' '}
+            <Link className={textLink} href="/dashboard/plans">
+              compare the plans
+            </Link>
+            .
           </p>
         )}
       </form>
@@ -218,16 +228,11 @@ export function ApiKeysCard({ keys }: { keys: ApiKeySummary[] }) {
           </DialogHeader>
           {revealed && <SecretField value={revealed.key.key} />}
           <DialogFooter>
-            <Button
-              onClick={() => setRevealed(null)}
-              className="bg-sky-500 hover:bg-sky-600"
-            >
-              I have copied it
-            </Button>
+            <Button onClick={() => setRevealed(null)}>I have copied it</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </section>
+    </Panel>
   )
 }
 
@@ -241,8 +246,8 @@ function SecretField({ value }: { value: string }) {
   }
 
   return (
-    <div className="flex items-center gap-2 rounded-md border border-gray-200 bg-gray-50 p-3">
-      <code className="min-w-0 flex-1 break-all font-mono text-sm text-gray-900">
+    <div className="flex items-center gap-2 rounded-[10px] border border-ink-700 bg-ink p-3">
+      <code className="min-w-0 flex-1 break-all font-code text-sm text-white">
         {value}
       </code>
       <Button
@@ -252,9 +257,9 @@ function SecretField({ value }: { value: string }) {
         aria-label="Copy the key"
       >
         {copied ? (
-          <IconCheck className="h-4 w-4 text-green-600" />
+          <IconCheck aria-hidden className="text-volt" />
         ) : (
-          <IconCopy className="h-4 w-4" />
+          <IconCopy aria-hidden />
         )}
       </Button>
     </div>

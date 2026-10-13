@@ -15,22 +15,22 @@ export function LegalPage({
   children: ReactNode
 }) {
   return (
-    <div lang={lang} className="bg-white px-4 py-32 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-4xl">
-        <p className="mb-6 text-sm">
+    <div lang={lang} className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div className="mx-auto max-w-3xl">
+        <p className="mb-8 text-sm">
           <TextLink href={alternate}>
             {lang === 'fr' ? 'English version' : 'Version française'}
           </TextLink>
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
           {title}
         </h1>
-        <p className="mt-6 text-lg text-gray-500">
+        <p className="mt-5 font-code text-xs uppercase tracking-wide text-steel">
           {lang === 'fr'
             ? `Dernière mise à jour : ${legal.updatedFr}`
             : `Last updated: ${legal.updated}`}
         </p>
-        <div className="mt-10 space-y-10 text-base leading-7 text-gray-700">
+        <div className="mt-12 space-y-12 text-base leading-7 text-steel-light [&_strong]:text-white">
           {children}
         </div>
       </div>
@@ -46,15 +46,19 @@ export function Section({
   children: ReactNode
 }) {
   return (
-    <section>
-      <h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
+    <section className="border-t border-ink-700 pt-10">
+      <h2 className="text-2xl font-extrabold tracking-tight text-white">
+        {title}
+      </h2>
       <div className="mt-4 space-y-4">{children}</div>
     </section>
   )
 }
 
 export function List({ children }: { children: ReactNode }) {
-  return <ul className="list-disc space-y-2 pl-6">{children}</ul>
+  return (
+    <ul className="list-disc space-y-2 pl-6 marker:text-volt">{children}</ul>
+  )
 }
 
 export function TextLink({
@@ -67,7 +71,7 @@ export function TextLink({
   return (
     <Link
       href={href}
-      className="font-medium text-blue-600 hover:text-blue-800"
+      className="font-medium text-white underline decoration-volt decoration-2 underline-offset-4 transition-colors hover:text-volt focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-volt"
       {...(href.startsWith('http') && { target: '_blank', rel: 'noreferrer' })}
     >
       {children}

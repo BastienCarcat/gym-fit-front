@@ -1,4 +1,5 @@
 import { FAQS } from '@/app/_sections/FAQ/faqs'
+import { DATA_PACK } from '@/config/dataPack'
 import { PLAN_ORDER, PLANS, planSummary } from '@/config/plans'
 import { siteConfig } from '@/config/site'
 
@@ -17,7 +18,7 @@ export function homeStructuredData() {
         '@id': organizationId,
         name: siteConfig.name,
         url: absolute('/'),
-        logo: absolute('/logo.png'),
+        logo: absolute('/icon-512.png'),
         email: siteConfig.contact_email,
         sameAs: [siteConfig.rapid_listing_url]
       },
@@ -54,6 +55,31 @@ export function homeStructuredData() {
           acceptedAnswer: { '@type': 'Answer', text: answer }
         }))
       }
+    ]
+  }
+}
+
+/** The data pack as a dataset, for Google Dataset Search */
+export function dataPackStructuredData(description: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: 'GymFit exercise dataset',
+    description,
+    url: absolute(DATA_PACK.path),
+    creator: {
+      '@type': 'Organization',
+      '@id': absolute('/#organization'),
+      name: siteConfig.name,
+      url: absolute('/')
+    },
+    isAccessibleForFree: false,
+    keywords: [
+      'exercise dataset',
+      'exercise database',
+      'gym exercises',
+      'muscles worked',
+      'fitness'
     ]
   }
 }
