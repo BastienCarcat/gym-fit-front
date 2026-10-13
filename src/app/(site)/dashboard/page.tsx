@@ -15,9 +15,10 @@ export const metadata: Metadata = { title: 'Dashboard' }
 export default async function DashboardPage({
   searchParams
 }: {
-  searchParams: { checkout?: string }
+  searchParams: Promise<{ checkout?: string }>
 }) {
-  const [keys, current, daily, endpoints] = await Promise.all([
+  const [{ checkout }, keys, current, daily, endpoints] = await Promise.all([
+    searchParams,
     apiFetch<ApiKeySummary[]>('/v1/me/api-keys'),
     apiFetch<CurrentUsage>('/v1/me/usage/current'),
     apiFetch<UsageReport>('/v1/me/usage?groupBy=day'),
@@ -30,7 +31,7 @@ export default async function DashboardPage({
         title="Overview"
         description="Your API keys, your plan and this month's requests."
       />
-      {searchParams.checkout === 'success' && (
+      {checkout === 'success' && (
         <Notice role="status" tone="success">
           Thanks for subscribing! Your plan is activated within a few seconds:
           refresh the page if it still shows the previous one.

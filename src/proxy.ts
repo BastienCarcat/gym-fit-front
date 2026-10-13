@@ -9,7 +9,7 @@ import { safeRedirect } from '@/lib/redirect'
 
 const GUEST_ONLY_PATHS = ['/login', '/signup']
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (pathname.startsWith('/api/auth/')) {

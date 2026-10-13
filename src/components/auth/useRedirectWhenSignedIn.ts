@@ -6,7 +6,7 @@ import { authClient } from '@/lib/auth-client'
 
 /**
  * Sends signed-in visitors away from the sign-in and sign-up pages. The
- * middleware covers page loads; this covers the back button and a session
+ * proxy covers page loads; this covers the back button and a session
  * opened in another tab (email confirmed from the inbox).
  */
 export function useRedirectWhenSignedIn(target: string) {
