@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { Providers } from '@/components/Providers'
+import { SignedInHint } from '@/components/auth/SignedInHint'
 
 import { siteConfig } from '@/config/site'
 import { fontBrand, fontCode } from '@/config/fonts'
@@ -77,6 +78,7 @@ export function RootDocument({
             <Footer />
           </SiteChrome>
         </Providers>
+        <SignedInHint />
         <Analytics />
         <SpeedInsights />
       </body>
