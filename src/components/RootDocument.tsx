@@ -8,6 +8,7 @@ import { Providers } from '@/components/Providers'
 
 import { siteConfig } from '@/config/site'
 import { fontBrand, fontCode } from '@/config/fonts'
+import { AnnouncementBar } from '@/app/_landing/AnnouncementBar'
 import { Footer } from '@/app/_landing/Footer'
 import { Nav } from '@/app/_landing/Nav'
 import { MainFrame, SiteChrome } from '@/components/SiteChrome'
@@ -68,6 +69,7 @@ export function RootDocument({
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
           {/* The sign-in pages and the dashboard draw their own */}
           <SiteChrome>
+            <AnnouncementBar />
             <Nav />
           </SiteChrome>
           <MainFrame>{children}</MainFrame>
