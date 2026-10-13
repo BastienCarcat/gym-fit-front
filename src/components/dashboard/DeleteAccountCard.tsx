@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react'
 import { Field, FormMessage } from '@/components/auth/AuthCard'
 import { ManageBillingButton } from '@/components/dashboard/BillingButtons'
+import { Panel } from '@/components/dashboard/Panel'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -12,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
+import { Notice } from '@/components/ui/notice'
 import { PLANS } from '@/config/plans'
 import { PlanId } from '@/lib/api/types'
 import { authClient } from '@/lib/auth-client'
@@ -60,28 +62,26 @@ export function DeleteAccountCard({
   }
 
   return (
-    <section className="rounded-xl border border-red-200 bg-white p-6">
-      <h2 className="text-lg font-semibold text-gray-900">Delete account</h2>
-      <p className="mt-1 text-sm text-gray-500">
-        Permanently deletes your account and your API keys: requests using them
-        are refused immediately. This cannot be undone.
-      </p>
-
+    <Panel
+      danger
+      title="Delete account"
+      description="Permanently deletes your account and your API keys: requests using them are refused immediately. This cannot be undone."
+    >
       {subscribed && (
-        <div className="mt-4 space-y-3 rounded-md bg-amber-50 p-3 text-sm text-amber-700">
+        <Notice className="mt-4 space-y-3" tone="warning">
           <p>
             Your {PLANS[plan].name} subscription is cancelled at once, without
             refund for the current month. Requests beyond your quota are billed
             on a final invoice. Download your invoices first if you need them.
           </p>
           <ManageBillingButton label="See my invoices" />
-        </div>
+        </Notice>
       )}
 
       <Button
         variant="outline"
         onClick={() => toggle(true)}
-        className="mt-4 border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+        className="mt-4 border-red-400/40 text-red-300 hover:border-red-400"
       >
         Delete my account
       </Button>
@@ -116,17 +116,13 @@ export function DeleteAccountCard({
               >
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                disabled={pending}
-                className="bg-red-600 text-white hover:bg-red-700"
-              >
+              <Button type="submit" disabled={pending} variant="destructive">
                 {pending ? 'Deleting…' : 'Delete permanently'}
               </Button>
             </DialogFooter>
           </form>
         </DialogContent>
       </Dialog>
-    </section>
+    </Panel>
   )
 }

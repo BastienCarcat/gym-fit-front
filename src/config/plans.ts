@@ -41,34 +41,6 @@ export const PLANS: Record<PlanId, PlanDetails> = {
     overagePrice: 0.001,
     maxApiKeys: 5,
     commercialUse: true
-  },
-  // Sold before: shown only to the customers who subscribed to them
-  pro: {
-    name: 'Pro (legacy)',
-    monthlyPrice: 5,
-    quota: 5000,
-    rateLimitPerMinute: 60,
-    overagePrice: 0.003,
-    maxApiKeys: 5,
-    commercialUse: true
-  },
-  mega: {
-    name: 'Mega (legacy)',
-    monthlyPrice: 9,
-    quota: 10000,
-    rateLimitPerMinute: 120,
-    overagePrice: 0.003,
-    maxApiKeys: 5,
-    commercialUse: true
-  },
-  ultra: {
-    name: 'Ultra (legacy)',
-    monthlyPrice: 11,
-    quota: 20000,
-    rateLimitPerMinute: 300,
-    overagePrice: 0.001,
-    maxApiKeys: 5,
-    commercialUse: true
   }
 }
 

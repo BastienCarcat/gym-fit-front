@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
-import { Field, FormMessage } from '@/components/auth/AuthCard'
+import { Field, FormMessage, textLink } from '@/components/auth/AuthCard'
+import { Panel } from '@/components/dashboard/Panel'
 import { Button } from '@/components/ui/button'
 import { siteConfig } from '@/config/site'
 import { Me } from '@/lib/api/types'
@@ -39,9 +40,7 @@ export function ProfileCard({ me }: { me: Me }) {
   }
 
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-6">
-      <h2 className="text-lg font-semibold text-gray-900">Profile</h2>
-
+    <Panel title="Profile">
       <form onSubmit={onSubmit} className="mt-4 space-y-4">
         {message && (
           <FormMessage tone={message.tone}>{message.text}</FormMessage>
@@ -56,14 +55,11 @@ export function ProfileCard({ me }: { me: Me }) {
           onChange={(event) => setName(event.target.value)}
         />
         <div>
-          <p className="text-sm font-medium text-gray-700">Email</p>
-          <p className="mt-1 text-gray-900">{me.email}</p>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="text-sm font-medium text-steel-light">Email</p>
+          <p className="mt-1.5 text-white">{me.email}</p>
+          <p className="mt-1 text-xs text-steel">
             To change it,{' '}
-            <a
-              href={`mailto:${siteConfig.contact_email}`}
-              className="text-sky-600 hover:underline"
-            >
+            <a href={`mailto:${siteConfig.contact_email}`} className={textLink}>
               contact us
             </a>
             .
@@ -72,11 +68,10 @@ export function ProfileCard({ me }: { me: Me }) {
         <Button
           type="submit"
           disabled={pending || !trimmed || trimmed === me.name}
-          className="bg-sky-500 hover:bg-sky-600"
         >
           {pending ? 'Saving…' : 'Save'}
         </Button>
       </form>
-    </section>
+    </Panel>
   )
 }

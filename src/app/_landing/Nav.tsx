@@ -7,8 +7,8 @@ import { siteConfig } from '@/config/site'
 
 const LINKS = [
   { label: 'Docs', href: siteConfig.documentation_url, external: true },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'FAQ', href: '#faq' }
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'FAQ', href: '/#faq' }
 ]
 
 export function Nav() {
@@ -42,12 +42,15 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <Link
-            className="hidden text-sm font-medium text-steel-light transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-volt sm:inline"
-            href={signedIn ? '/dashboard' : '/login'}
-          >
-            {signedIn ? 'Dashboard' : 'Sign in'}
-          </Link>
+          {/* Signed in, the button alone leads to the dashboard */}
+          {!signedIn && (
+            <Link
+              className="hidden text-sm font-medium text-steel-light transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-volt sm:inline"
+              href="/login"
+            >
+              Sign in
+            </Link>
+          )}
           <Link
             className="inline-flex h-10 items-center whitespace-nowrap rounded-[10px] bg-volt px-4 text-sm font-bold text-ink transition-transform hover:-translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-px"
             href={signedIn ? '/dashboard' : '/signup'}

@@ -1,4 +1,5 @@
 import { PLAN_ORDER, PLANS, planSummary } from '@/config/plans'
+import { DATA_PACK } from '@/config/dataPack'
 import { siteConfig } from '@/config/site'
 
 export const dynamic = 'force-static'
@@ -40,7 +41,7 @@ Responses are JSON, in English. Requests are authenticated with an API key sent 
 - \`GET /v2/muscle-groups\`: the 21 groups with their muscles
 - \`GET /v2/equipment\`, \`/v2/categories\`, \`/v2/families\` and \`/v2/meta\`: the values the filters take
 - \`GET /v2/calculator/bmi\`, \`/bmr\`, \`/tdee\` and \`/ibw\`: fitness calculators
-- \`GET /v1/usage\`: your usage and remaining quota
+- \`GET /v2/usage\`: your usage and remaining quota, free and not counted in it
 
 The v1 stays available for existing integrations.
 
@@ -52,7 +53,7 @@ ${plans.join('\n')}
 
 ## Other
 
-- A data pack to own the catalog is open to early access requests: ${siteConfig.contact_email}
+- [Data pack](${absolute(DATA_PACK.path)}): the catalog as files to keep, $${DATA_PACK.price} once with ${DATA_PACK.updatesMonths} months of updates, open to early access requests at ${siteConfig.contact_email}
 - Also available on [RapidAPI](${siteConfig.rapid_listing_url}) for existing RapidAPI customers
 - [Terms of use](${absolute('/terms')}) and [privacy policy](${absolute('/privacy')})
 - Contact: ${siteConfig.contact_email}

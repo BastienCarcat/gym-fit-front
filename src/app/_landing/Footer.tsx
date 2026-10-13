@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { DATA_PACK } from '@/config/dataPack'
 import { siteConfig } from '@/config/site'
 
 const COLUMNS = [
@@ -8,6 +9,7 @@ const COLUMNS = [
     links: [
       { label: 'Docs', href: siteConfig.documentation_url, external: true },
       { label: 'Pricing', href: '/#pricing' },
+      { label: 'Data pack', href: DATA_PACK.path },
       { label: 'Get an API key', href: '/signup' }
     ]
   },
@@ -65,7 +67,7 @@ export function Footer() {
           </div>
           {COLUMNS.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <h2 className="text-sm font-bold text-white">{column.title}</h2>
+              <p className="text-sm font-bold text-white">{column.title}</p>
               <ul className="mt-4 space-y-2">
                 {column.links.map((link) => (
                   <li key={link.label}>

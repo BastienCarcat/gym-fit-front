@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next'
 
+import { DATA_PACK } from '@/config/dataPack'
+import { legal } from '@/config/legal'
 import { siteConfig } from '@/config/site'
 import { LEGAL_PAIRS } from '@/lib/seo/alternates'
 
@@ -16,9 +18,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return [pair.en, pair.fr].map((path) => ({
       url: absolute(path),
+      lastModified: legal.updatedIso,
       alternates: { languages }
     }))
   })
 
-  return [{ url: absolute('/') }, ...legalPages]
+  // Built at each deploy, which is when the home page changes
+  return [
+    { url: absolute('/'), lastModified: new Date() },
+    { url: absolute(DATA_PACK.path), lastModified: new Date() },
+    ...legalPages
+  ]
 }

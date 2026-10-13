@@ -20,7 +20,7 @@ const EXAMPLES: Record<string, { name: string; equipment: string }[]> = {
   ],
   quads: [
     { name: 'Squat (Barbell)', equipment: 'Barbell' },
-    { name: 'Air Squat', equipment: 'Bodyweight' },
+    { name: 'Leg Press', equipment: 'Machine' },
     { name: 'Lunge', equipment: 'Bodyweight' }
   ]
 }

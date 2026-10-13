@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 
+import { DATA_PACK } from '@/config/dataPack'
 import { PLAN_ORDER, PLANS } from '@/config/plans'
 import { siteConfig } from '@/config/site'
 import { authClient } from '@/lib/auth-client'
@@ -15,10 +16,6 @@ const BUTTONS: Record<string, string> = {
   starter: 'Choose Starter',
   scale: 'Choose Pro'
 }
-
-const PACK_MAILTO = `mailto:${siteConfig.contact_email}?subject=${encodeURIComponent(
-  'GymFit API data pack'
-)}`
 
 const card =
   'flex min-w-[17rem] shrink-0 snap-start flex-col rounded-[14px] border p-6 sm:min-w-0'
@@ -105,18 +102,26 @@ export function Pricing() {
           <div className={`${card} border-ink-700 bg-ink`}>
             <h3 className="text-lg font-bold text-white">Data pack</h3>
             <p className="mt-4">
-              <span className="text-4xl font-extrabold text-white">$399</span>
+              <span className="text-4xl font-extrabold text-white">
+                ${DATA_PACK.price}
+              </span>
               <span className="text-steel"> once</span>
             </p>
             <ul className="mt-6 space-y-2 text-sm text-steel-light">
               <li>The whole catalog, as files you own</li>
               <li>A durable copy for your app, offline included</li>
-              <li>12 months of updates</li>
+              <li>{DATA_PACK.updatesMonths} months of updates</li>
               <li>The only offer to store the data yourself</li>
             </ul>
+            <Link
+              className="mt-4 text-sm font-bold text-volt hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-volt"
+              href={DATA_PACK.path}
+            >
+              What is in the data pack
+            </Link>
             <a
               className="mt-8 inline-flex h-11 items-center justify-center whitespace-nowrap rounded-[10px] border border-ink-700 px-4 text-sm font-bold text-white transition-transform hover:-translate-y-px hover:border-steel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-volt active:translate-y-px"
-              href={PACK_MAILTO}
+              href={DATA_PACK.mailto}
             >
               Ask for early access
             </a>

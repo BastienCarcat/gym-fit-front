@@ -101,6 +101,8 @@ export function Hero() {
               height={288}
               src={exercise.heatmap}
               width={360}
+              // The largest image of the first screen on a phone
+              fetchPriority="high"
             />
             <figcaption className="mt-3 border-t border-ink-700 pt-3 text-xs text-steel-light">
               <span className="font-bold text-volt">Target</span>:{' '}
