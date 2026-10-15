@@ -8,6 +8,9 @@ export const MCP_OAUTH_URL = 'https://mcp.gymfit-api.com/mcp'
 
 export const MCP_SERVER_NAME = 'gymfit'
 
+/** The page of the site that presents the MCP server */
+export const MCP_PAGE_PATH = '/mcp'
+
 export const KEY_PLACEHOLDER = 'YOUR_API_KEY'
 
 /** What an assistant can do with the server, one line per group of tools */

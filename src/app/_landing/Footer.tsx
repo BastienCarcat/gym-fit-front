@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { DATA_PACK } from '@/config/dataPack'
+import { MCP_PAGE_PATH } from '@/config/mcp'
 import { siteConfig } from '@/config/site'
 
 const COLUMNS = [
@@ -10,6 +11,7 @@ const COLUMNS = [
       { label: 'Docs', href: siteConfig.documentation_url, external: true },
       { label: 'Pricing', href: '/#pricing' },
       { label: 'Data pack', href: DATA_PACK.path },
+      { label: 'MCP server', href: MCP_PAGE_PATH },
       { label: 'Get an API key', href: '/signup' }
     ]
   },

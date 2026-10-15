@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 
 import { DATA_PACK } from '@/config/dataPack'
 import { legal } from '@/config/legal'
+import { MCP_PAGE_PATH } from '@/config/mcp'
 import { siteConfig } from '@/config/site'
 import { LEGAL_PAIRS } from '@/lib/seo/alternates'
 
@@ -14,6 +15,7 @@ const absolute = (path: string) =>
  */
 const HOME_UPDATED = '2026-10-13'
 const DATA_PACK_UPDATED = '2026-10-13'
+const MCP_UPDATED = '2026-10-15'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const legalPages = LEGAL_PAIRS.flatMap((pair) => {
@@ -33,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: absolute('/'), lastModified: HOME_UPDATED },
     { url: absolute(DATA_PACK.path), lastModified: DATA_PACK_UPDATED },
+    { url: absolute(MCP_PAGE_PATH), lastModified: MCP_UPDATED },
     ...legalPages
   ]
 }
