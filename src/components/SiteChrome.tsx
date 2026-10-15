@@ -3,7 +3,13 @@
 import { usePathname } from 'next/navigation'
 
 /** The pages that draw their own navigation and footer */
-const OWN_CHROME = ['/login', '/signup', '/forgot-password', '/reset-password']
+const OWN_CHROME = [
+  '/login',
+  '/signup',
+  '/forgot-password',
+  '/reset-password',
+  '/consent'
+]
 
 function drawsOwnChrome(pathname: string | null): boolean {
   return (

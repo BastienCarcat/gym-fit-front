@@ -39,7 +39,7 @@ export const FAQS: Faq[] = [
     question:
       'Can I use the exercise API from Claude, Cursor or another AI assistant?',
     answer:
-      'Yes. GymFit is also an MCP server: add it to Claude Code, Cursor, VS Code, Windsurf or any MCP client with your API key, and your assistant searches the exercises, finds alternatives and runs the calculators for you. Each tool call counts as one request of your plan, the free plan included.'
+      'Yes. GymFit is also an MCP server. In Claude or ChatGPT, add it as a custom connector and sign in with your GymFit account; in Claude Code, Cursor, VS Code or Windsurf, add it with your API key. Your assistant then searches the exercises, finds alternatives and runs the calculators for you. Each tool call counts as one request of your plan, the free plan included.'
   },
   {
     question: 'Can I use GymFit API in a commercial app?',

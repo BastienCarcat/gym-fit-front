@@ -8,6 +8,16 @@ export interface Me {
   createdAt: string
 }
 
+/** An AI assistant connected with OAuth (gym-fit-api: src/mcp) */
+export interface ConnectedApp {
+  clientId: string
+  name: string | null
+  uri: string | null
+  icon: string | null
+  scopes: string[]
+  connectedAt: string
+}
+
 export interface ApiKeySummary {
   id: string
   name: string

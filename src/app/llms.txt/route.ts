@@ -1,6 +1,6 @@
 import { PLAN_ORDER, PLANS, planSummary } from '@/config/plans'
 import { DATA_PACK } from '@/config/dataPack'
-import { MCP_URL } from '@/config/mcp'
+import { MCP_OAUTH_URL, MCP_URL } from '@/config/mcp'
 import { siteConfig } from '@/config/site'
 
 export const dynamic = 'force-static'
@@ -49,7 +49,7 @@ The v1 stays available for existing integrations.
 
 ## AI assistants (MCP)
 
-The API is also an MCP server, at \`${MCP_URL}\` (Streamable HTTP), with the same API key in the \`X-API-Key\` header (or \`Authorization: Bearer\`). Its read-only tools search and read the exercises, find alternatives, draw the muscle heatmap, search the muscles, run the calculators and read the usage. Each tool call counts as one request of the quota, on every plan. Claude Code: \`claude mcp add --transport http gymfit ${MCP_URL} --header "X-API-Key: YOUR_API_KEY"\`. Configurations for Cursor, VS Code and the other clients are in the [API reference](${siteConfig.api_url}/docs.md).
+The API is also an MCP server. Claude, ChatGPT and the apps that sign in with OAuth use \`${MCP_OAUTH_URL}\` with the GymFit account, without a key. Claude Code, Cursor and the clients that take a key use \`${MCP_URL}\` (Streamable HTTP) with the API key in the \`X-API-Key\` header (or \`Authorization: Bearer\`). Its read-only tools search and read the exercises, find alternatives, draw the muscle heatmap, search the muscles, run the calculators and read the usage. Each tool call counts as one request of the quota, on every plan. Claude Code: \`claude mcp add --transport http gymfit ${MCP_URL} --header "X-API-Key: YOUR_API_KEY"\`. Configurations for Cursor, VS Code and the other clients are in the [API reference](${siteConfig.api_url}/docs.md).
 
 ## Pricing
 

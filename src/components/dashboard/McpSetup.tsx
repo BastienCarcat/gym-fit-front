@@ -36,8 +36,8 @@ export function McpSetup({ hasKey }: { hasKey: boolean }) {
   return (
     <div className="space-y-6">
       <Panel
-        description="Streamable HTTP, for any MCP client. It answers with the same data as the API."
-        title="Server"
+        description="For Claude Code, Cursor, VS Code and the other clients that take an API key. Same data as the API."
+        title="With an API key"
       >
         <CopyRow className="mt-5" label="Copy the URL" value={MCP_URL} />
         <ul className="mt-5 grid gap-2 text-sm text-steel-light sm:grid-cols-2">
@@ -174,11 +174,6 @@ export function McpSetup({ hasKey }: { hasKey: boolean }) {
           .
         </p>
       </Panel>
-
-      <p className="text-sm text-steel">
-        Claude and ChatGPT apps: coming soon. They will connect with your GymFit
-        account, without a key.
-      </p>
     </div>
   )
 }

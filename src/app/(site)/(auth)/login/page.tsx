@@ -12,6 +12,7 @@ import {
 } from '@/components/auth/AuthCard'
 import { useRedirectWhenSignedIn } from '@/components/auth/useRedirectWhenSignedIn'
 import { authClient } from '@/lib/auth-client'
+import { followOAuthRedirect, isOAuthRequest } from '@/lib/oauth'
 import { safeRedirect } from '@/lib/redirect'
 
 function LoginForm() {
@@ -25,8 +26,10 @@ function LoginForm() {
   )
   const [needsVerification, setNeedsVerification] = useState(false)
   const [pending, setPending] = useState(false)
+  // Sent here by an AI assistant: the sign-in continues to its consent
+  const oauth = isOAuthRequest(searchParams)
 
-  useRedirectWhenSignedIn(safeRedirect(searchParams.get('redirect')))
+  useRedirectWhenSignedIn(safeRedirect(searchParams.get('redirect')), !oauth)
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -34,7 +37,11 @@ function LoginForm() {
     setError(null)
     setInfo(null)
 
-    const { error } = await authClient.signIn.email({ email, password })
+    const { data, error } = await authClient.signIn.email({ email, password })
+
+    if (!error && followOAuthRedirect(data)) {
+      return
+    }
 
     setPending(false)
 
@@ -62,7 +69,11 @@ function LoginForm() {
   return (
     <AuthCard
       title="Welcome back"
-      subtitle="Sign in to manage your API keys and usage"
+      subtitle={
+        oauth
+          ? 'Sign in to connect your AI assistant to GymFit'
+          : 'Sign in to manage your API keys and usage'
+      }
       footer={
         <>
           Don&apos;t have an account?{' '}

@@ -9,13 +9,13 @@ import { authClient } from '@/lib/auth-client'
  * proxy covers page loads; this covers the back button and a session
  * opened in another tab (email confirmed from the inbox).
  */
-export function useRedirectWhenSignedIn(target: string) {
+export function useRedirectWhenSignedIn(target: string, enabled = true) {
   const router = useRouter()
   const { data: session } = authClient.useSession()
 
   useEffect(() => {
-    if (session) {
+    if (enabled && session) {
       router.replace(target)
     }
-  }, [session, router, target])
+  }, [enabled, session, router, target])
 }

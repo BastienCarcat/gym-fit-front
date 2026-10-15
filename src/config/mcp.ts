@@ -3,6 +3,9 @@ import { siteConfig } from '@/config/site'
 /** The MCP server of the API (gym-fit-api: src/mcp) */
 export const MCP_URL = `${siteConfig.api_url}/mcp`
 
+/** The same server for the assistants that sign in with OAuth (Claude, ChatGPT) */
+export const MCP_OAUTH_URL = 'https://mcp.gymfit-api.com/mcp'
+
 export const MCP_SERVER_NAME = 'gymfit'
 
 export const KEY_PLACEHOLDER = 'YOUR_API_KEY'
