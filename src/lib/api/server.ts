@@ -21,12 +21,13 @@ export async function apiFetch<T>(
   init: RequestInit = {}
 ): Promise<T> {
   const baseUrl = (process.env.GYM_FIT_BASE_URL ?? '').replace(/\/$/, '')
+  const [cookieStore, headerStore] = await Promise.all([cookies(), headers()])
   const response = await fetch(`${baseUrl}${path}`, {
     ...init,
     headers: {
       'Content-Type': 'application/json',
-      cookie: cookies().toString(),
-      ...visitorHeaders(headers()),
+      cookie: cookieStore.toString(),
+      ...visitorHeaders(headerStore),
       ...init.headers
     },
     cache: 'no-store'

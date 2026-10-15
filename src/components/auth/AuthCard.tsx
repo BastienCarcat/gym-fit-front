@@ -1,5 +1,12 @@
 import { InputHTMLAttributes, ReactNode } from 'react'
 
+import { Notice } from '@/components/ui/notice'
+
+/** A link inside a sentence, on the dark pages */
+export const textLink =
+  'font-bold text-white underline decoration-volt decoration-2 underline-offset-4 transition-colors hover:text-volt focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-volt'
+
+/** The form column of the sign-in pages; the layout draws the rest */
 export function AuthCard({
   title,
   subtitle,
@@ -12,17 +19,13 @@ export function AuthCard({
   footer?: ReactNode
 }) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md space-y-8 rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
-          {subtitle && <p className="mt-2 text-sm text-gray-500">{subtitle}</p>}
-        </div>
-        {children}
-        {footer && (
-          <div className="text-center text-sm text-gray-500">{footer}</div>
-        )}
-      </div>
+    <div>
+      <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        {title}
+      </h1>
+      {subtitle && <p className="mt-3 text-steel-light">{subtitle}</p>}
+      <div className="mt-8 space-y-5">{children}</div>
+      {footer && <p className="mt-8 text-sm text-steel-light">{footer}</p>}
     </div>
   )
 }
@@ -35,13 +38,13 @@ export function Field({
     <div>
       <label
         htmlFor={props.id}
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-steel-light"
       >
         {label}
       </label>
       <input
         {...props}
-        className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+        className="mt-1.5 block h-11 w-full rounded-[10px] border border-ink-700 bg-ink px-3 text-white transition-colors placeholder:text-steel hover:border-steel focus:border-volt focus:outline-none focus:ring-1 focus:ring-volt disabled:opacity-50"
       />
     </div>
   )
@@ -55,15 +58,8 @@ export function FormMessage({
   children: ReactNode
 }) {
   return (
-    <div
-      role={tone === 'error' ? 'alert' : 'status'}
-      className={
-        tone === 'error'
-          ? 'rounded-md bg-red-50 p-3 text-sm text-red-600'
-          : 'rounded-md bg-green-50 p-3 text-sm text-green-700'
-      }
-    >
+    <Notice role={tone === 'error' ? 'alert' : 'status'} tone={tone}>
       {children}
-    </div>
+    </Notice>
   )
 }

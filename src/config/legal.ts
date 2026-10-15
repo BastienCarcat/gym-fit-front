@@ -13,6 +13,8 @@ export const legal = {
   phone: null as string | null,
   email: siteConfig.contact_email,
   director: 'Bastien Carcat',
-  updated: 'September 29, 2026',
-  updatedFr: '29 septembre 2026'
+  updated: 'October 15, 2026',
+  updatedFr: '15 octobre 2026',
+  /** The same date, for the sitemap */
+  updatedIso: '2026-10-15'
 }

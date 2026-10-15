@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react'
 import { Field, FormMessage } from '@/components/auth/AuthCard'
+import { Panel } from '@/components/dashboard/Panel'
 import { Button } from '@/components/ui/button'
 import { authClient } from '@/lib/auth-client'
 
@@ -54,12 +55,10 @@ export function PasswordCard() {
   }
 
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-6">
-      <h2 className="text-lg font-semibold text-gray-900">Password</h2>
-      <p className="mt-1 text-sm text-gray-500">
-        Changing it signs you out of your other devices.
-      </p>
-
+    <Panel
+      title="Password"
+      description="Changing it signs you out of your other devices."
+    >
       <form onSubmit={onSubmit} className="mt-4 space-y-4">
         {message && (
           <FormMessage tone={message.tone}>{message.text}</FormMessage>
@@ -93,14 +92,10 @@ export function PasswordCard() {
           value={confirmation}
           onChange={(event) => setConfirmation(event.target.value)}
         />
-        <Button
-          type="submit"
-          disabled={pending}
-          className="bg-sky-500 hover:bg-sky-600"
-        >
+        <Button type="submit" disabled={pending}>
           {pending ? 'Updating…' : 'Update password'}
         </Button>
       </form>
-    </section>
+    </Panel>
   )
 }

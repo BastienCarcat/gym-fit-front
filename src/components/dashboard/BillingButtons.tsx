@@ -53,18 +53,14 @@ export function PlanButton({
 
   return (
     <div>
-      <Button
-        className="w-full bg-sky-500 hover:bg-sky-600"
-        disabled={pending}
-        onClick={onClick}
-      >
+      <Button className="w-full" disabled={pending} onClick={onClick}>
         {pending
           ? 'Please wait…'
           : mode === 'subscribe'
             ? `Subscribe to ${name}`
             : `Switch to ${name}`}
       </Button>
-      {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+      {error && <p className="mt-2 text-xs text-red-300">{error}</p>}
     </div>
   )
 }
@@ -88,7 +84,7 @@ export function ManageBillingButton({
       >
         {pending ? 'Opening…' : label}
       </Button>
-      {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+      {error && <p className="mt-2 text-xs text-red-300">{error}</p>}
     </div>
   )
 }
