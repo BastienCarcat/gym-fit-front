@@ -36,6 +36,12 @@ export const FAQS: Faq[] = [
       'BMI, BMR (Mifflin-St Jeor), TDEE by activity level and ideal body weight (Devine formula), one request each.'
   },
   {
+    question:
+      'Can I use the exercise API from Claude, Cursor or another AI assistant?',
+    answer:
+      'Yes. GymFit is also an MCP server: add it to Claude Code, Cursor, VS Code, Windsurf or any MCP client with your API key, and your assistant searches the exercises, finds alternatives and runs the calculators for you. Each tool call counts as one request of your plan, the free plan included.'
+  },
+  {
     question: 'Can I use GymFit API in a commercial app?',
     answer:
       'Yes on the Starter and Pro plans: one API key for one app on Starter, up to five on Pro. The free plan is for prototypes and non commercial projects. Reselling the data or building a competing database is not allowed (see the terms of use).'
