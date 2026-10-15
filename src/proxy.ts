@@ -9,10 +9,17 @@ import { safeRedirect } from '@/lib/redirect'
 
 const GUEST_ONLY_PATHS = ['/login', '/signup']
 
+/** Paths rewritten to the API's Better Auth (next.config.js) */
+const AUTH_PREFIXES = [
+  '/api/auth/',
+  '/.well-known/oauth-authorization-server/',
+  '/.well-known/openid-configuration/'
+]
+
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  if (pathname.startsWith('/api/auth/')) {
+  if (AUTH_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
     return withVisitorHeaders(request)
   }
 
@@ -91,6 +98,8 @@ export const config = {
     '/dashboard/:path*',
     '/consent',
     '/api/auth/:path*',
+    '/.well-known/oauth-authorization-server/:path*',
+    '/.well-known/openid-configuration/:path*',
     '/login',
     '/signup'
   ]
