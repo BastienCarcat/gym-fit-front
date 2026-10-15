@@ -24,7 +24,7 @@ export default async function PlansPage() {
     <div>
       <PageHeader
         title="Plans"
-        description="Prices in USD, excluding taxes, calculated at checkout for your country. Payments are handled by Stripe."
+        description="Prices in USD, taxes included: you pay the price shown. Payments are handled by Stripe."
         action={subscribed && <ManageBillingButton />}
       />
 
