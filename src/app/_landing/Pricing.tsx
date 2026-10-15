@@ -39,8 +39,8 @@ export function Pricing() {
           Exercise API pricing
         </h2>
         <p className="mt-3 text-steel-light">
-          Start free, upgrade when your app grows. Prices in USD, excluding
-          taxes.
+          Start free, upgrade when your app grows. Prices in USD, taxes
+          included.
         </p>
 
         <div className="-mx-4 mt-10 flex snap-x scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
@@ -119,12 +119,12 @@ export function Pricing() {
             >
               What is in the data pack
             </Link>
-            <a
+            <Link
               className="mt-8 inline-flex h-11 items-center justify-center whitespace-nowrap rounded-[10px] border border-ink-700 px-4 text-sm font-bold text-white transition-transform hover:-translate-y-px hover:border-steel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-volt active:translate-y-px"
-              href={DATA_PACK.mailto}
+              href={DATA_PACK.dashboardPath}
             >
-              Ask for early access
-            </a>
+              Buy the data pack
+            </Link>
           </div>
         </div>
 

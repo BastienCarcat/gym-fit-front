@@ -41,11 +41,13 @@ export default function CguPage() {
 
       <Section title="Le service">
         <p>
-          L’API GymFit fournit des données structurées sur les exercices, des
-          informations sur les muscles, des médias (comme des images
-          d’exercices) et des calculateurs de fitness. Vous pouvez l’utiliser
-          gratuitement dans les limites de l’offre Free, ou souscrire à une
-          offre payante pour des limites plus élevées.
+          L’API GymFit fournit des données structurées sur les exercices
+          (muscles, étapes, alternatives et progressions), une recherche, des
+          cartes des muscles (heatmaps) et des calculateurs de fitness. Vous
+          pouvez l’utiliser gratuitement dans les limites de l’offre Free, ou
+          souscrire à une offre payante pour des limites plus élevées et un
+          usage commercial. Le data pack, le catalogue en fichiers acheté une
+          fois, a sa propre licence (voir « Le data pack » ci-dessous).
         </p>
       </Section>
 
@@ -72,6 +74,16 @@ export default function CguPage() {
 
       <Section title="Offres, quotas et limites de débit">
         <List>
+          <li>
+            L’offre Free est réservée aux prototypes, aux tests et aux projets
+            personnels. Utiliser l’API dans un produit qui rapporte de l’argent
+            demande une offre payante.
+          </li>
+          <li>
+            Une clé d’API sert une seule application ou un seul service. Votre
+            offre fixe le nombre de clés actives que vous pouvez détenir :
+            n’utilisez pas une même clé pour plusieurs produits.
+          </li>
           <li>
             Chaque offre comprend un nombre de requêtes par mois et une limite
             de débit par minute, indiqués sur la{' '}
@@ -106,9 +118,10 @@ export default function CguPage() {
             l’achat.
           </li>
           <li>
-            Les prix sont indiqués hors taxes. L’abonnement mensuel est payé
-            d’avance ; les requêtes supplémentaires sont facturées à la fin de
-            chaque période.
+            Les prix sont indiqués toutes taxes comprises : la TVA ou la taxe
+            sur les ventes applicable est incluse dans le prix affiché.
+            L’abonnement mensuel est payé d’avance ; les requêtes
+            supplémentaires sont facturées à la fin de chaque période.
           </li>
           <li>
             Votre abonnement est renouvelé chaque mois jusqu’à sa résiliation.
@@ -170,14 +183,44 @@ export default function CguPage() {
         </p>
       </Section>
 
-      <Section title="Contenus et médias">
+      <Section title="Le data pack">
         <p>
-          Les médias sont fournis par des URL signées qui expirent après un
-          délai limité (en général 24 heures). Ces URL ne doivent pas être
-          conservées, redistribuées ni réutilisées après leur expiration. Nous
-          pouvons mettre à jour ou retirer des données ou des médias à tout
-          moment.
+          Le data pack est vendu une fois, pour un usage professionnel
+          uniquement, et régi par sa propre licence, présentée avant l’achat sur
+          la page{' '}
+          <TextLink href="/exercise-dataset/license">
+            de la licence du data pack
+          </TextLink>{' '}
+          et livrée avec chaque copie. Chaque copie est marquée à sa licence.
+          Les présentes conditions s’appliquent aussi à son achat : compte,
+          facturation par Stripe, données personnelles et droit applicable.
         </p>
+      </Section>
+
+      <Section title="Cache et stockage">
+        <List>
+          <li>
+            Vous pouvez garder les réponses de l’API dans un cache technique
+            pendant 1 heure au plus, pour accélérer votre application, ou
+            pendant la durée qu’une réponse indique dans son en-tête
+            Cache-Control (les heatmaps). Un cache sert une seule application :
+            il ne doit pas devenir une copie du catalogue.
+          </li>
+          <li>
+            Vous pouvez conserver dans le contenu de vos utilisateurs, comme
+            leur historique de séances, les identifiants et les noms des
+            exercices auxquels il renvoie.
+          </li>
+          <li>Toute autre copie durable des données demande le data pack.</li>
+          <li>
+            À la fin de votre offre ou de votre compte, cessez d’utiliser les
+            données conservées, sauf les identifiants et les noms présents dans
+            le contenu de vos utilisateurs.
+          </li>
+          <li>
+            Nous pouvons mettre à jour ou retirer des données à tout moment.
+          </li>
+        </List>
       </Section>
 
       <Section title="Usages interdits">
@@ -187,20 +230,28 @@ export default function CguPage() {
         </p>
         <List>
           <li>
-            utiliser l’API ou ses données pour créer une base de données, un
-            service ou une API concurrents ;
+            utiliser l’API ou ses données pour créer une base de données, un jeu
+            de données, un service ou une API concurrents ;
           </li>
           <li>
-            redistribuer, revendre ou concéder en sous-licence des données ou
-            des médias obtenus par l’API ;
+            redistribuer, revendre ou concéder en sous-licence des données
+            obtenues par l’API, ou les mettre à disposition de tiers par votre
+            propre API, un téléchargement, un export ou un flux ;
           </li>
           <li>
-            stocker, archiver ou mettre en cache des données de l’API, y compris
-            transformées ou dérivées : toutes les données doivent être
-            récupérées depuis l’API ;
+            extraire une partie substantielle du catalogue, y compris par des
+            requêtes répétées ou systématiques portant sur des parties plus
+            petites, par exemple en parcourant les exercices un par un ;
           </li>
           <li>
             dupliquer, aspirer ou télécharger en masse le contenu de l’API ;
+          </li>
+          <li>
+            utiliser les données pour entraîner, ajuster ou évaluer un modèle
+            d’apprentissage automatique, ou les inclure dans un jeu
+            d’entraînement. Un assistant ou un agent d’IA, y compris par notre
+            serveur MCP, peut répondre à vos utilisateurs avec les données,
+            chaque appel comptant comme une requête ;
           </li>
           <li>
             partager votre compte ou vos clés d’API pour contourner les limites
@@ -223,6 +274,27 @@ export default function CguPage() {
           prévenant lorsque c’est possible. Les sommes déjà dues restent
           exigibles.
         </p>
+        <p>
+          Si vous agissez en tant que professionnel, une extraction d’une partie
+          substantielle du catalogue en violation des présentes conditions vous
+          rend redevable du prix de la licence du data pack (399 $ US, toutes
+          taxes comprises), sans préjudice de dommages et intérêts
+          supplémentaires et de la fermeture de votre compte. Les réponses de
+          l’API peuvent porter des marques qui identifient le compte auquel
+          elles ont été servies : entre professionnels, la présence de ces
+          marques dans une copie prouve qu’elle provient de ce compte, sauf
+          preuve contraire.
+        </p>
+      </Section>
+
+      <Section title="Mention de GymFit sur l’offre Free">
+        <p>
+          Si vous utilisez l’offre Free dans une application ou un site visible
+          par d’autres, mentionnez « Exercise data by GymFit (gymfit-api.com) »,
+          avec un lien, sur une page accessible à vos utilisateurs, comme la
+          page à propos, crédits ou mentions légales. Les offres payantes ne
+          demandent aucune mention.
+        </p>
       </Section>
 
       <Section title="Évolutions de l’API">
@@ -238,12 +310,15 @@ export default function CguPage() {
       <Section title="Propriété intellectuelle">
         <p>
           Tous les droits sur l’API GymFit nous appartiennent : données sur les
-          exercices, descriptions, catégories et métadonnées, images et autres
-          médias, structures de données et formats de réponse, documentation,
-          logiciels, ainsi que le nom et le logo GymFit. Votre abonnement vous
-          accorde une licence non exclusive, non transférable et révocable pour
-          utiliser l’API et ses données dans le cadre de votre offre et des
-          présentes conditions. Il ne vous transfère aucun droit de propriété.
+          exercices, descriptions, catégories et métadonnées, heatmaps des
+          muscles, structures de données et formats de réponse, documentation,
+          logiciels, ainsi que le nom et le logo GymFit. Le catalogue est
+          protégé notamment par le droit du producteur de base de données
+          (articles L341-1 et suivants du Code de la propriété intellectuelle,
+          directive 96/9/CE). Votre abonnement vous accorde une licence non
+          exclusive, non transférable et révocable pour utiliser l’API et ses
+          données dans le cadre de votre offre et des présentes conditions. Il
+          ne vous transfère aucun droit de propriété.
         </p>
       </Section>
 
@@ -255,7 +330,9 @@ export default function CguPage() {
           d’information générale. Elles ne constituent pas un avis médical,
           nutritionnel ou de santé. Si vous les présentez à vos propres
           utilisateurs, il vous appartient de leur donner les avertissements
-          appropriés.
+          appropriés, et vous répondez des exercices que vous leur proposez et
+          de leur sécurité. Dans la mesure permise par la loi, nous ne sommes
+          pas responsables des blessures subies en réalisant un exercice.
         </p>
       </Section>
 
