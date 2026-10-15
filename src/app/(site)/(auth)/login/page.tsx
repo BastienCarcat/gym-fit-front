@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FormEvent, Suspense, useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import {
   AuthCard,
@@ -10,6 +11,7 @@ import {
   FormMessage,
   textLink
 } from '@/components/auth/AuthCard'
+import { useCaptcha } from '@/components/auth/useCaptcha'
 import { useRedirectWhenSignedIn } from '@/components/auth/useRedirectWhenSignedIn'
 import { authClient } from '@/lib/auth-client'
 import { safeRedirect } from '@/lib/redirect'
@@ -25,6 +27,7 @@ function LoginForm() {
   )
   const [needsVerification, setNeedsVerification] = useState(false)
   const [pending, setPending] = useState(false)
+  const captcha = useCaptcha()
 
   useRedirectWhenSignedIn(safeRedirect(searchParams.get('redirect')))
 
@@ -34,18 +37,25 @@ function LoginForm() {
     setError(null)
     setInfo(null)
 
-    const { error } = await authClient.signIn.email({ email, password })
+    const { error } = await authClient.signIn.email({
+      email,
+      password,
+      fetchOptions: { headers: captcha.headers }
+    })
 
     setPending(false)
+    captcha.reset()
 
     if (error) {
       const unverified = error.code === 'EMAIL_NOT_VERIFIED'
+
       setNeedsVerification(unverified)
       setError(
         unverified
           ? 'Please confirm your email address first.'
           : error.message || 'Invalid email or password'
       )
+
       return
     }
 
@@ -54,32 +64,43 @@ function LoginForm() {
   }
 
   const resendVerification = async () => {
-    await authClient.sendVerificationEmail({ email, callbackURL: '/dashboard' })
-    setError(null)
-    setInfo('A new confirmation email is on its way.')
+    const { error } = await authClient.sendVerificationEmail({
+      email,
+      callbackURL: '/dashboard',
+      fetchOptions: { headers: captcha.headers }
+    })
+
+    captcha.reset()
+    setError(
+      error
+        ? error.message || 'Could not send the email, please try again'
+        : null
+    )
+    setInfo(error ? null : 'A new confirmation email is on its way.')
   }
 
   return (
     <AuthCard
-      title="Welcome back"
-      subtitle="Sign in to manage your API keys and usage"
       footer={
         <>
           Don&apos;t have an account?{' '}
-          <Link href="/signup" className={textLink}>
+          <Link className={textLink} href="/signup">
             Sign up
           </Link>
         </>
       }
+      subtitle="Sign in to manage your API keys and usage"
+      title="Welcome back"
     >
       {error && (
         <FormMessage tone="error">
           {error}{' '}
           {needsVerification && (
             <button
+              className="font-medium underline disabled:opacity-50"
+              disabled={!captcha.ready}
               type="button"
               onClick={resendVerification}
-              className="font-medium underline"
             >
               Resend the email
             </button>
@@ -88,36 +109,42 @@ function LoginForm() {
       )}
       {info && <FormMessage tone="success">{info}</FormMessage>}
 
-      <form onSubmit={onSubmit} className="space-y-4">
+      <form className="space-y-4" onSubmit={onSubmit}>
         <Field
+          required
+          autoComplete="email"
           id="email"
           label="Email"
+          placeholder="you@example.com"
           type="email"
-          autoComplete="email"
-          required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="you@example.com"
         />
         <Field
+          required
+          autoComplete="current-password"
           id="password"
           label="Password"
+          placeholder="••••••••"
           type="password"
-          autoComplete="current-password"
-          required
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-          placeholder="••••••••"
         />
         <div className="text-right text-sm">
           <Link
-            href="/forgot-password"
             className="text-steel-light underline-offset-4 hover:text-white hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-volt"
+            href="/forgot-password"
           >
             Forgot your password?
           </Link>
         </div>
-        <Button type="submit" disabled={pending} className="w-full" size="lg">
+        {captcha.widget}
+        <Button
+          className="w-full"
+          disabled={pending || !captcha.ready}
+          size="lg"
+          type="submit"
+        >
           {pending ? 'Signing in…' : 'Sign in'}
         </Button>
       </form>
