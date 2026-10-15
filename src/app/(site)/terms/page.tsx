@@ -14,7 +14,7 @@ export const metadata: Metadata = legalMetadata({
   path: '/terms',
   title: 'Terms of use',
   description:
-    'Terms of use of the GymFit API: accounts and API keys, plans, quotas and billing, prohibited uses, intellectual property, liability and cancellation.'
+    'Terms of use of the GymFit API: accounts and API keys, plans, quotas and billing, caching, the data pack, prohibited uses, intellectual property, liability and cancellation.'
 })
 
 export default function TermsOfUsePage() {
@@ -34,10 +34,12 @@ export default function TermsOfUsePage() {
 
       <Section title="The service">
         <p>
-          The GymFit API provides structured exercise data, muscle information,
-          media assets (such as exercise images) and fitness calculators. You
-          can use it for free within the limits of the Free plan, or subscribe
-          to a paid plan for higher limits.
+          The GymFit API provides structured exercise data (muscles, steps,
+          alternatives and progressions), search, muscle heatmaps and fitness
+          calculators. You can use it for free within the limits of the Free
+          plan, or subscribe to a paid plan for higher limits and commercial
+          use. The data pack, the catalog as files bought once, has its own
+          license (see “The data pack” below).
         </p>
       </Section>
 
@@ -61,6 +63,14 @@ export default function TermsOfUsePage() {
 
       <Section title="Plans, quotas and rate limits">
         <List>
+          <li>
+            The Free plan is for prototypes, tests and personal projects. Using
+            the API in a product that earns money requires a paid plan.
+          </li>
+          <li>
+            An API key serves one app or service. Your plan sets how many active
+            keys you may hold: do not use one key for several products.
+          </li>
           <li>
             Each plan includes a number of requests per month and a rate limit
             per minute, shown on the{' '}
@@ -93,8 +103,9 @@ export default function TermsOfUsePage() {
             to the purchase.
           </li>
           <li>
-            Prices are shown excluding taxes. The monthly fee is charged in
-            advance; extra requests are charged at the end of each period.
+            Prices are shown including taxes: the applicable VAT or sales tax is
+            taken out of the price shown. The monthly fee is charged in advance;
+            extra requests are charged at the end of each period.
           </li>
           <li>Your subscription renews every month until you cancel it.</li>
           <li>
@@ -147,13 +158,38 @@ export default function TermsOfUsePage() {
         </p>
       </Section>
 
-      <Section title="Content and media">
+      <Section title="The data pack">
         <p>
-          Media files are provided through signed URLs that expire after a
-          limited time (typically 24 hours). These URLs must not be stored,
-          redistributed or reused after they expire. We may update or remove any
-          data or media at any time.
+          The data pack is sold once, for professional use only, and is governed
+          by its own license, shown before the purchase on the{' '}
+          <TextLink href="/exercise-dataset/license">
+            data pack license
+          </TextLink>{' '}
+          page and delivered with each copy. Each copy is marked to its license.
+          These terms also apply to its purchase: account, billing through
+          Stripe, personal data and governing law.
         </p>
+      </Section>
+
+      <Section title="Caching and storage">
+        <List>
+          <li>
+            You may keep API responses in a technical cache for up to 1 hour, to
+            make your app faster, or for the time a response gives in its
+            Cache-Control header (the muscle heatmaps). A cache serves one app:
+            it must not become a copy of the catalog.
+          </li>
+          <li>
+            You may store in the content of your users, such as their workout
+            history, the ids and names of the exercises it refers to.
+          </li>
+          <li>Any other durable copy of the data requires the data pack.</li>
+          <li>
+            When your plan or your account ends, stop using the data you kept,
+            except the ids and names held in your users’ content.
+          </li>
+          <li>We may update or remove any data at any time.</li>
+        </List>
       </Section>
 
       <Section title="Prohibited uses">
@@ -163,18 +199,26 @@ export default function TermsOfUsePage() {
         </p>
         <List>
           <li>
-            use the API or its data to build a competing database, service or
-            API;
+            use the API or its data to build a competing database, dataset,
+            service or API;
           </li>
           <li>
-            redistribute, resell or sublicense data or media obtained from the
-            API;
+            redistribute, resell or sublicense data obtained from the API, or
+            make it available to third parties through your own API, a download,
+            an export or a feed;
           </li>
           <li>
-            store, archive or cache API data, including transformed or derived
-            data: all data must be fetched from the API;
+            extract a substantial part of the catalog, including by repeated or
+            systematic requests for smaller parts, such as going through the
+            exercises one by one;
           </li>
           <li>mirror, scrape or bulk-download API content;</li>
+          <li>
+            use the data to train, fine-tune or evaluate a machine learning
+            model, or include it in a training set. An AI assistant or agent,
+            including through our MCP server, may answer your users with the
+            data, each call counting as a request;
+          </li>
           <li>
             share your account or API keys to get around the limits of your
             plan;
@@ -194,6 +238,24 @@ export default function TermsOfUsePage() {
           requests, attempts to overload or bypass the service, breach of these
           terms), with notice when possible. Amounts already due remain payable.
         </p>
+        <p>
+          If you act as a professional, an extraction of a substantial part of
+          the catalog in breach of these terms makes you owe the price of the
+          data pack license (US$399, taxes included), without prejudice to
+          further damages and to the closing of your account. The responses of
+          the API may carry marks that identify the account they were served to:
+          between professionals, the presence of these marks in a copy proves
+          that it comes from that account, unless proven otherwise.
+        </p>
+      </Section>
+
+      <Section title="Credit on the Free plan">
+        <p>
+          If you use the Free plan in an app or a site that others can see,
+          credit “Exercise data by GymFit (gymfit-api.com)”, with a link, on a
+          page your users can reach, such as the about, credits or legal page.
+          Paid plans need no credit.
+        </p>
       </Section>
 
       <Section title="Changes to the API">
@@ -208,11 +270,14 @@ export default function TermsOfUsePage() {
       <Section title="Intellectual property">
         <p>
           All rights in the GymFit API remain ours: exercise data, descriptions,
-          categories and metadata, images and other media, data structures and
-          response formats, documentation, software, and the GymFit name and
-          logo. Your subscription grants you a non-exclusive, non-transferable
-          and revocable license to use the API and its data within your plan and
-          these terms. It does not transfer any ownership.
+          categories and metadata, muscle heatmaps, data structures and response
+          formats, documentation, software, and the GymFit name and logo. The
+          catalog is protected in particular by the database producer’s right
+          (articles L341-1 and following of the French Intellectual Property
+          Code, Directive 96/9/EC). Your subscription grants you a
+          non-exclusive, non-transferable and revocable license to use the API
+          and its data within your plan and these terms. It does not transfer
+          any ownership.
         </p>
       </Section>
 
@@ -222,7 +287,9 @@ export default function TermsOfUsePage() {
           BMI and ideal body weight, is provided for general information only.
           It is not medical, nutritional or health advice. If you show it to
           your own users, you are responsible for giving them the appropriate
-          warnings.
+          warnings, for the exercises you offer them and for their safety. To
+          the extent permitted by law, we are not liable for injuries suffered
+          in doing an exercise.
         </p>
       </Section>
 

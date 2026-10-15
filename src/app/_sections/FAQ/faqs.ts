@@ -49,7 +49,7 @@ export const FAQS: Faq[] = [
   {
     question: 'Can I store the data in my own database?',
     answer:
-      'Not with an API plan: use the responses to serve your users, without keeping a durable copy of the catalog. The data pack is the offer to own the catalog, and it is open to early access requests.'
+      'Not with an API plan: use the responses to serve your users, without keeping a durable copy of the catalog. The data pack is the offer to own the catalog: bought once, from your dashboard.'
   },
   {
     question: 'What happens if I exceed my plan limits?',

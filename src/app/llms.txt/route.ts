@@ -53,13 +53,13 @@ The API is also an MCP server. Claude, ChatGPT and the apps that sign in with OA
 
 ## Pricing
 
-Monthly plans, cancel at any time. Taxes may apply depending on the customer's country.
+Monthly plans, cancel at any time. Prices include taxes.
 
 ${plans.join('\n')}
 
 ## Other
 
-- [Data pack](${absolute(DATA_PACK.path)}): the catalog as files to keep, $${DATA_PACK.price} once with ${DATA_PACK.updatesMonths} months of updates, open to early access requests at ${siteConfig.contact_email}
+- [Data pack](${absolute(DATA_PACK.path)}): the catalog as files to keep, $${DATA_PACK.price} once with ${DATA_PACK.updatesMonths} months of updates, bought and downloaded from the dashboard under its [license](${absolute(DATA_PACK.licensePath)})
 - Also available on [RapidAPI](${siteConfig.rapid_listing_url}) for existing RapidAPI customers
 - [Terms of use](${absolute('/terms')}) and [privacy policy](${absolute('/privacy')})
 - Contact: ${siteConfig.contact_email}

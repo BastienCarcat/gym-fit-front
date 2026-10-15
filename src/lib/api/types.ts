@@ -75,3 +75,21 @@ export interface UsageReport {
 export type ActionResult<T> =
   | { ok: true; data: T }
   | { ok: false; error: string }
+
+/** The data pack of the signed-in customer (GET /v1/me/data-pack) */
+export interface DataPackStatus {
+  license: {
+    id: string
+    purchasedAt: string
+    updatesUntil: string
+    termsVersion: string
+    revokedAt: string | null
+  } | null
+  releases: {
+    version: string
+    exercises: number
+    publishedAt: string
+    available: boolean
+  }[]
+  downloads: { version: string; createdAt: string }[]
+}

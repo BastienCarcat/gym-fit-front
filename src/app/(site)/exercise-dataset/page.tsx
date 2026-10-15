@@ -76,7 +76,14 @@ const FAQS = [
   },
   {
     question: 'Which file formats does the data pack come in?',
-    answer: 'Tell us the format your app needs when you ask for early access.'
+    answer:
+      'JSON and CSV, both in every pack: the whole catalog in one JSON file, and one CSV table per entity (exercises, muscles, steps, tips, links).'
+  },
+  {
+    question:
+      'Does the data pack include the heatmaps, search or the MCP server?',
+    answer:
+      'No. The data pack is the catalog as files. Search and suggestions, the muscle heatmaps, the MCP server and the calculators are services of the API, and stay in the API plans.'
   },
   {
     question: 'Does the dataset include images or videos?',
@@ -89,9 +96,9 @@ const FAQS = [
       'Your copy stays yours. The updates of the catalog made after that are not included.'
   },
   {
-    question: 'When can I get it?',
+    question: 'How do I get it?',
     answer:
-      'The data pack is open to early access requests. Write to us and we come back to you with the details.'
+      'Buy it from your dashboard: Stripe handles the payment, and the files are ready to download as soon as it is confirmed. The updates of the next 12 months appear there too.'
   }
 ]
 
@@ -118,16 +125,17 @@ export default function ExerciseDatasetPage() {
             </span>
             <span className="text-steel">
               {' '}
-              once, {DATA_PACK.updatesMonths} months of updates included
+              once, taxes and {DATA_PACK.updatesMonths} months of updates
+              included
             </span>
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
+            <Link
               className={buttonVariants({ size: 'lg' })}
-              href={DATA_PACK.mailto}
+              href={DATA_PACK.dashboardPath}
             >
-              Ask for early access
-            </a>
+              Buy the data pack
+            </Link>
             <Link
               className={buttonVariants({ size: 'lg', variant: 'outline' })}
               href="/signup"
@@ -255,12 +263,22 @@ export default function ExerciseDatasetPage() {
           >
             Keep the exercise catalog in your own app
           </h2>
-          <a
+          <Link
             className={buttonVariants({ size: 'lg', className: 'mt-8' })}
-            href={DATA_PACK.mailto}
+            href={DATA_PACK.dashboardPath}
           >
-            Ask for early access
-          </a>
+            Buy the data pack
+          </Link>
+          <p className="mt-4 text-sm text-steel">
+            Read the{' '}
+            <Link
+              className="font-medium text-white underline decoration-volt decoration-2 underline-offset-4 hover:text-volt"
+              href={DATA_PACK.licensePath}
+            >
+              data pack license
+            </Link>{' '}
+            before you buy.
+          </p>
         </div>
       </section>
     </>
