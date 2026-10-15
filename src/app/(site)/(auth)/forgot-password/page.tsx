@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { FormEvent, useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import {
   AuthCard,
@@ -9,34 +10,38 @@ import {
   FormMessage,
   textLink
 } from '@/components/auth/AuthCard'
+import { useCaptcha } from '@/components/auth/useCaptcha'
 import { authClient } from '@/lib/auth-client'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
   const [pending, setPending] = useState(false)
   const [sent, setSent] = useState(false)
+  const captcha = useCaptcha()
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setPending(true)
     await authClient.requestPasswordReset({
       email,
-      redirectTo: '/reset-password'
+      redirectTo: '/reset-password',
+      fetchOptions: { headers: captcha.headers }
     })
     setPending(false)
+    captcha.reset()
     // Same answer whether the account exists or not
     setSent(true)
   }
 
   return (
     <AuthCard
-      title="Forgot your password?"
-      subtitle="We will email you a link to choose a new one"
       footer={
-        <Link href="/login" className={textLink}>
+        <Link className={textLink} href="/login">
           Back to sign in
         </Link>
       }
+      subtitle="We will email you a link to choose a new one"
+      title="Forgot your password?"
     >
       {sent ? (
         <FormMessage tone="success">
@@ -44,18 +49,24 @@ export default function ForgotPasswordPage() {
           reset link in a few minutes.
         </FormMessage>
       ) : (
-        <form onSubmit={onSubmit} className="space-y-4">
+        <form className="space-y-4" onSubmit={onSubmit}>
           <Field
+            required
+            autoComplete="email"
             id="email"
             label="Email"
+            placeholder="you@example.com"
             type="email"
-            autoComplete="email"
-            required
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            placeholder="you@example.com"
           />
-          <Button type="submit" disabled={pending} className="w-full" size="lg">
+          {captcha.widget}
+          <Button
+            className="w-full"
+            disabled={pending || !captcha.ready}
+            size="lg"
+            type="submit"
+          >
             {pending ? 'Sending…' : 'Send the reset link'}
           </Button>
         </form>
