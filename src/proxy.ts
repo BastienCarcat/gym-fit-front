@@ -9,10 +9,17 @@ import { safeRedirect } from '@/lib/redirect'
 
 const GUEST_ONLY_PATHS = ['/login', '/signup']
 
+/** Paths rewritten to the API's Better Auth (next.config.js) */
+const AUTH_PREFIXES = [
+  '/api/auth/',
+  '/.well-known/oauth-authorization-server/',
+  '/.well-known/openid-configuration/'
+]
+
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  if (pathname.startsWith('/api/auth/')) {
+  if (AUTH_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
     return withVisitorHeaders(request)
   }
 
@@ -49,6 +56,11 @@ function withVisitorHeaders(request: NextRequest) {
 
 /** Signed-in visitors skip the sign-in and sign-up pages */
 async function redirectSignedIn(request: NextRequest) {
+  // An AI assistant asking to sign in again (prompt=login) keeps the page
+  if (request.nextUrl.searchParams.has('sig')) {
+    return NextResponse.next()
+  }
+
   if (getSessionCookie(request) && (await hasSession(request))) {
     const target = safeRedirect(request.nextUrl.searchParams.get('redirect'))
     return NextResponse.redirect(new URL(target, request.url))
@@ -82,5 +94,13 @@ async function hasSession(request: NextRequest): Promise<boolean> {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/api/auth/:path*', '/login', '/signup']
+  matcher: [
+    '/dashboard/:path*',
+    '/consent',
+    '/api/auth/:path*',
+    '/.well-known/oauth-authorization-server/:path*',
+    '/.well-known/openid-configuration/:path*',
+    '/login',
+    '/signup'
+  ]
 }

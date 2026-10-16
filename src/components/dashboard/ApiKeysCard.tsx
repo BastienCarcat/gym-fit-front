@@ -227,6 +227,14 @@ export function ApiKeysCard({
             </DialogDescription>
           </DialogHeader>
           {revealed && <SecretField value={revealed.key.key} />}
+          <p className="text-sm text-steel-light">
+            To use it from Claude Code, Cursor or another AI assistant, copy it
+            and open{' '}
+            <Link className={textLink} href="/dashboard/ai">
+              AI assistants
+            </Link>
+            .
+          </p>
           <DialogFooter>
             <Button onClick={() => setRevealed(null)}>I have copied it</Button>
           </DialogFooter>

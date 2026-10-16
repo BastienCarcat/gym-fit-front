@@ -31,6 +31,16 @@ const nextConfig = {
       {
         source: '/api/auth/:path*',
         destination: `${process.env.GYM_FIT_BASE_URL}/api/auth/:path*`
+      },
+      // OAuth discovery of the MCP clients (RFC 8414): the issuer is this
+      // site's /api/auth, its metadata is served by the API under that path
+      {
+        source: '/.well-known/oauth-authorization-server/api/auth',
+        destination: `${process.env.GYM_FIT_BASE_URL}/api/auth/.well-known/oauth-authorization-server`
+      },
+      {
+        source: '/.well-known/openid-configuration/api/auth',
+        destination: `${process.env.GYM_FIT_BASE_URL}/api/auth/.well-known/openid-configuration`
       }
     ]
   }

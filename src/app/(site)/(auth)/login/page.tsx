@@ -14,6 +14,7 @@ import {
 import { useCaptcha } from '@/components/auth/useCaptcha'
 import { useRedirectWhenSignedIn } from '@/components/auth/useRedirectWhenSignedIn'
 import { authClient } from '@/lib/auth-client'
+import { followOAuthRedirect, isOAuthRequest } from '@/lib/oauth'
 import { safeRedirect } from '@/lib/redirect'
 
 function LoginForm() {
@@ -27,9 +28,11 @@ function LoginForm() {
   )
   const [needsVerification, setNeedsVerification] = useState(false)
   const [pending, setPending] = useState(false)
+  // Sent here by an AI assistant: the sign-in continues to its consent
+  const oauth = isOAuthRequest(searchParams)
   const captcha = useCaptcha()
 
-  useRedirectWhenSignedIn(safeRedirect(searchParams.get('redirect')))
+  useRedirectWhenSignedIn(safeRedirect(searchParams.get('redirect')), !oauth)
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -37,11 +40,15 @@ function LoginForm() {
     setError(null)
     setInfo(null)
 
-    const { error } = await authClient.signIn.email({
+    const { data, error } = await authClient.signIn.email({
       email,
       password,
       fetchOptions: { headers: captcha.headers }
     })
+
+    if (!error && followOAuthRedirect(data)) {
+      return
+    }
 
     setPending(false)
     captcha.reset()
@@ -89,7 +96,11 @@ function LoginForm() {
           </Link>
         </>
       }
-      subtitle="Sign in to manage your API keys and usage"
+      subtitle={
+        oauth
+          ? 'Sign in to connect your AI assistant to GymFit'
+          : 'Sign in to manage your API keys and usage'
+      }
       title="Welcome back"
     >
       {error && (

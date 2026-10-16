@@ -60,7 +60,7 @@ const COMPARISON: [string, string | boolean, string | boolean][] = [
     'Continuous'
   ],
   ['Search, suggestions and muscle heatmaps', false, true],
-  ['MCP server for AI assistants', false, 'Coming soon'],
+  ['MCP server for AI assistants', false, true],
   ['Requests', 'No limit, it is your copy', 'A monthly quota']
 ]
 

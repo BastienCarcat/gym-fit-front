@@ -84,6 +84,7 @@ export function Pricing() {
                         }`
                       : 'Prototypes and non commercial projects'}
                   </li>
+                  <li>MCP server for AI assistants</li>
                 </ul>
                 <Link
                   className={`mt-auto inline-flex h-11 items-center justify-center whitespace-nowrap rounded-[10px] px-4 text-sm font-bold transition-transform hover:-translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-px ${
