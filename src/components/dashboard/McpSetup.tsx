@@ -127,7 +127,8 @@ export function McpSetup({ hasKey }: { hasKey: boolean }) {
             <p className="text-xs text-steel">{client.where}</p>
             <CopyButton value={snippet} />
           </div>
-          <pre className="overflow-x-auto px-5 pb-5 pt-3 font-code text-sm leading-relaxed text-white">
+          {/* The key stays out of the session recordings and the clicks */}
+          <pre className="ph-no-capture overflow-x-auto px-5 pb-5 pt-3 font-code text-sm leading-relaxed text-white">
             <code>{snippet}</code>
           </pre>
         </div>
@@ -135,7 +136,10 @@ export function McpSetup({ hasKey }: { hasKey: boolean }) {
         {client.installUrl && (
           <div className="mt-4 flex flex-wrap items-center gap-3">
             {valid ? (
-              <a className={buttonVariants()} href={client.installUrl(typed)}>
+              <a
+                className={`ph-no-capture ${buttonVariants()}`}
+                href={client.installUrl(typed)}
+              >
                 <IconExternalLink aria-hidden />
                 Install in {client.name}
               </a>

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton'
 import { siteConfig } from '@/config/site'
 
 const LINKS = [
@@ -33,6 +34,9 @@ export function CompactFooter({ className = '' }: { className?: string }) {
                 </Link>
               </li>
             ))}
+            <li>
+              <CookieSettingsButton className="transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-volt" />
+            </li>
           </ul>
         </nav>
       </div>

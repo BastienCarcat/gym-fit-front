@@ -5,6 +5,8 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { Providers } from '@/components/Providers'
+import { CookieBanner } from '@/components/analytics/CookieBanner'
+import { IdentifyUser } from '@/components/analytics/IdentifyUser'
 import { SignedInHint } from '@/components/auth/SignedInHint'
 
 import { siteConfig } from '@/config/site'
@@ -79,6 +81,8 @@ export function RootDocument({
           </SiteChrome>
         </Providers>
         <SignedInHint />
+        <CookieBanner lang={lang} />
+        <IdentifyUser />
         <Analytics />
         <SpeedInsights />
       </body>

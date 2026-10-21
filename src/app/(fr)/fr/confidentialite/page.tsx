@@ -75,6 +75,16 @@ export default function ConfidentialitePage() {
             performance anonymes, sans cookies (Vercel Web Analytics et Speed
             Insights).
           </li>
+          <li>
+            <strong>Analyse de l’usage</strong>, seulement si vous acceptez les
+            cookies (PostHog) : les pages que vous visitez, vos clics, un
+            enregistrement de votre session sur le site (ce que vous saisissez
+            dans les formulaires est masqué, les clés d’API en sont exclues),
+            votre navigateur, votre appareil et votre localisation
+            approximative, et quand vous êtes connecté, l’identifiant, le nom et
+            l’adresse e-mail de votre compte. Si vous refusez, PostHog compte
+            seulement des visites anonymes, sans cookies ni enregistrement.
+          </li>
         </List>
       </Section>
 
@@ -90,6 +100,13 @@ export default function ConfidentialitePage() {
             journaux), surveiller les erreurs et améliorer l’API à partir de
             statistiques agrégées : notre intérêt légitime à faire fonctionner
             un service fiable et sûr.
+          </li>
+          <li>
+            Comprendre comment le site et le tableau de bord sont utilisés, pour
+            les améliorer (analyse de l’usage et enregistrement des sessions) :
+            votre consentement, que vous pouvez retirer à tout moment depuis le
+            lien Cookie settings du pied de page. Compter les visites anonymes
+            sans cookies : notre intérêt légitime à mesurer l’audience du site.
           </li>
           <li>Tenir notre comptabilité : nos obligations légales.</li>
           <li>
@@ -118,6 +135,10 @@ export default function ConfidentialitePage() {
             maximum.
           </li>
           <li>
+            Analyse de l’usage : enregistrements de session 30 jours, événements
+            12 mois.
+          </li>
+          <li>
             Données de paiement : conservées par Stripe comme la loi l’impose.
             Nos propres pièces comptables sont conservées pendant la durée
             légale de 10 ans.
@@ -134,6 +155,11 @@ export default function ConfidentialitePage() {
           <li>
             Vercel Inc. (États-Unis) : hébergement du site et mesure d’audience
             anonyme.
+          </li>
+          <li>
+            PostHog, Inc. (États-Unis), avec des données hébergées dans l’Union
+            européenne (Francfort) : analyse de l’usage et enregistrement des
+            sessions.
           </li>
           <li>
             Railway Corporation (États-Unis) : hébergement de l’API, de la base
@@ -174,10 +200,18 @@ export default function ConfidentialitePage() {
 
       <Section title="Cookies">
         <p>
-          Nous utilisons uniquement un cookie strictement nécessaire, qui vous
-          garde connecté à votre tableau de bord. Il ne requiert pas de
-          consentement. Nous n’utilisons aucun cookie publicitaire ni de
-          traçage, et notre mesure d’audience fonctionne sans cookies.
+          Un cookie strictement nécessaire vous garde connecté à votre tableau
+          de bord. Il ne requiert pas de consentement. Nous n’utilisons aucun
+          cookie publicitaire.
+        </p>
+        <p>
+          Avec votre accord, PostHog conserve un cookie (12 mois au plus) et des
+          données dans le stockage de votre navigateur pour reconnaître vos
+          visites et enregistrer vos sessions. Votre réponse au bandeau est
+          conservée dans votre navigateur pour ne pas vous la redemander ; vous
+          pouvez la modifier à tout moment depuis le lien Cookie settings du
+          pied de page. Si vous refusez, PostHog ne stocke rien dans votre
+          navigateur, et la mesure d’audience de Vercel fonctionne sans cookies.
         </p>
       </Section>
 

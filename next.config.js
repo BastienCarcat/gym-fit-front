@@ -9,6 +9,9 @@ const HOME_LINKS = [
   '</llms.txt>; rel="describedby"; type="text/plain"'
 ]
 
+// PostHog (EU region) goes through this site, where ad blockers leave it alone
+const POSTHOG_RELAY = '/relay'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
@@ -25,9 +28,33 @@ const nextConfig = {
       }
     ]
   },
-  // Auth goes through this site's domain so the session cookie is first-party
+  // PostHog calls /e/, /flags/... with their trailing slash
+  skipTrailingSlashRedirect: true,
+  async redirects() {
+    return [
+      // The redirect Next skips now, kept for the pages
+      {
+        source: `/:path((?!${POSTHOG_RELAY.slice(1)}/).+)/`,
+        destination: '/:path',
+        permanent: true
+      }
+    ]
+  },
   async rewrites() {
     return [
+      {
+        source: `${POSTHOG_RELAY}/static/:path*`,
+        destination: 'https://eu-assets.i.posthog.com/static/:path*'
+      },
+      {
+        source: `${POSTHOG_RELAY}/array/:path*`,
+        destination: 'https://eu-assets.i.posthog.com/array/:path*'
+      },
+      {
+        source: `${POSTHOG_RELAY}/:path*`,
+        destination: 'https://eu.i.posthog.com/:path*'
+      },
+      // Auth goes through this site's domain so the session cookie is first-party
       {
         source: '/api/auth/:path*',
         destination: `${process.env.GYM_FIT_BASE_URL}/api/auth/:path*`
