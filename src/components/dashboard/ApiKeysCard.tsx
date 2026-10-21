@@ -255,7 +255,8 @@ function SecretField({ value }: { value: string }) {
 
   return (
     <div className="flex items-center gap-2 rounded-[10px] border border-ink-700 bg-ink p-3">
-      <code className="min-w-0 flex-1 break-all font-code text-sm text-white">
+      {/* Left out of the session recordings */}
+      <code className="ph-no-capture min-w-0 flex-1 break-all font-code text-sm text-white">
         {value}
       </code>
       <Button

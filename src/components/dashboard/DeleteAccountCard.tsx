@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dialog'
 import { Notice } from '@/components/ui/notice'
 import { PLANS } from '@/config/plans'
+import { forgetUser } from '@/lib/analytics'
 import { PlanId } from '@/lib/api/types'
 import { authClient } from '@/lib/auth-client'
 
@@ -57,6 +58,7 @@ export function DeleteAccountCard({
       return
     }
 
+    forgetUser()
     // Full reload: the session is gone, along with every page rendered for it
     window.location.assign('/login?deleted=1')
   }

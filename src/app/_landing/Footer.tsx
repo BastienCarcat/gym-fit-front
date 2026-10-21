@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton'
 import { DATA_PACK } from '@/config/dataPack'
 import { MCP_PAGE_PATH } from '@/config/mcp'
 import { siteConfig } from '@/config/site'
@@ -86,6 +87,11 @@ export function Footer() {
                     </Link>
                   </li>
                 ))}
+                {column.title === 'Legal' && (
+                  <li>
+                    <CookieSettingsButton className="text-sm text-steel-light hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-volt" />
+                  </li>
+                )}
               </ul>
             </nav>
           ))}

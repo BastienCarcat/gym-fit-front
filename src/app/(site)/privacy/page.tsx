@@ -66,6 +66,15 @@ export default function PrivacyPolicyPage() {
             performance measures, without cookies (Vercel Web Analytics and
             Speed Insights).
           </li>
+          <li>
+            <strong>Product analytics</strong>, only if you accept the cookies
+            (PostHog): the pages you visit, your clicks, a recording of your
+            session on the website (what you type in forms is hidden, API keys
+            are left out), your browser, device and approximate location, and
+            when you are signed in, the identifier, name and email address of
+            your account. If you decline, PostHog only counts anonymous visits,
+            without cookies or recording.
+          </li>
         </List>
       </Section>
 
@@ -79,6 +88,13 @@ export default function PrivacyPolicyPage() {
             Securing the service (rate limits, abuse prevention, logs),
             monitoring errors and improving the API from aggregated statistics:
             our legitimate interest in running a reliable and secure service.
+          </li>
+          <li>
+            Understanding how the website and the dashboard are used, to improve
+            them (product analytics and session recordings): your consent, which
+            you can withdraw at any time from the Cookie settings link in the
+            footer. Counting anonymous visits without cookies: our legitimate
+            interest in measuring the audience of the website.
           </li>
           <li>Keeping accounting records: our legal obligations.</li>
           <li>
@@ -103,6 +119,9 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>Technical logs: 7 days. Error reports: 90 days at most.</li>
           <li>
+            Product analytics: session recordings 30 days, events 12 months.
+          </li>
+          <li>
             Payment records: kept by Stripe as required by law. Our own
             accounting records are kept for the legal period of 10 years.
           </li>
@@ -116,6 +135,10 @@ export default function PrivacyPolicyPage() {
         </p>
         <List>
           <li>Vercel Inc. (USA): website hosting and anonymous analytics.</li>
+          <li>
+            PostHog, Inc. (USA), with the data hosted in the European Union
+            (Frankfurt): product analytics and session recordings.
+          </li>
           <li>
             Railway Corporation (USA): hosting of the API, the database and the
             technical logs.
@@ -148,9 +171,16 @@ export default function PrivacyPolicyPage() {
 
       <Section title="Cookies">
         <p>
-          We only use a strictly necessary cookie that keeps you signed in to
-          your dashboard. It requires no consent. We use no advertising or
-          tracking cookies, and our analytics work without cookies.
+          A strictly necessary cookie keeps you signed in to your dashboard. It
+          requires no consent. We use no advertising cookies.
+        </p>
+        <p>
+          With your consent, PostHog keeps a cookie (12 months at most) and data
+          in your browser’s storage to recognize your visits and record your
+          sessions. Your answer to the cookie banner is kept in your browser so
+          that we do not ask again; you can change it at any time from the
+          Cookie settings link in the footer. If you decline, PostHog stores
+          nothing in your browser, and Vercel’s analytics work without cookies.
         </p>
       </Section>
 

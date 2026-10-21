@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { forgetUser } from '@/lib/analytics'
 import { authClient } from '@/lib/auth-client'
 
 export function SignOutButton() {
@@ -9,6 +10,7 @@ export function SignOutButton() {
 
   const signOut = async () => {
     await authClient.signOut()
+    forgetUser()
     router.push('/')
     router.refresh()
   }
